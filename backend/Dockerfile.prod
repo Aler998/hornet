@@ -1,0 +1,37 @@
+# Step 1: Usa un'immagine di Node.js per il build
+FROM node:20 AS builder
+
+# Imposta la cartella di lavoro
+WORKDIR /app
+
+# Copia i file di configurazione package.json e package-lock.json
+COPY package*.json ./
+
+# Installa le dipendenze (incluso TypeScript e gli altri pacchetti di sviluppo)
+RUN npm install
+
+# Copia il codice sorgente del backend
+COPY . .
+
+# Compila il codice TypeScript in JavaScript
+RUN npm run build
+
+# Step 2: Usa un'immagine di Node.js più leggera per il runtime
+FROM node:20-alpine
+
+# Imposta la cartella di lavoro
+WORKDIR /app
+RUN mkdir -p /app/uploads/tmp
+
+# Copia solo i file necessari (package.json, dist/) per ridurre la dimensione dell'immagine
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/dist ./dist
+
+# Installa solo le dipendenze necessarie per la produzione
+RUN npm install --only=production
+
+# Espone la porta per il server
+EXPOSE 3000
+
+# Avvia il server (assumendo che il file di avvio si trovi in dist/index.js)
+CMD ["node", "dist/index.js"]

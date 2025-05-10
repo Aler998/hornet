@@ -1,0 +1,56 @@
+version: '3.9'
+services:
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: "npm run dev"
+
+  admin:
+    build: 
+      context: ./admin
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./admin:/app
+      - /app/node_modules
+    command: "npm run dev"
+
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./backend:/app
+      - /app/uploads
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongo:27017/hornet-db
+      - JWT_SECRET=secretto
+      - CORS_ORIGINS=http://localhost:3001,http://localhost:3000
+      - USERNAME=gattopio
+      - PASSWORD=gattopio
+
+  mongo:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

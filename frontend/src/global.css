@@ -1,0 +1,31 @@
+:root {
+    --navbar-height: 64px;
+    --honda: #ea3323
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.image-gallery-image {
+    max-height: calc(100vh - var(--navbar-height) - 118px) !important;
+}
+
+.my-masonry-grid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: -10px;
+    width: auto;
+}
+
+.my-masonry-grid_column {
+    padding-left: 10px;
+    background-clip: padding-box;
+}
+
+.my-masonry-grid_column>div {
+    margin-bottom: 10px;
+}
