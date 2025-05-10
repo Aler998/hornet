@@ -1,14 +1,14 @@
 import type { CardProps } from '@mui/material/Card';
-import type { ChartOptions } from '../../components/chart';
+import type { ChartOptions } from '../../theme/components/chart';
 
 import Card from '@mui/material/Card';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import CardHeader from '@mui/material/CardHeader';
 
-import { fNumber } from '../../utils/format-number';
+import { fNumber } from '../../theme/utils/format-number';
 
-import { Chart, useChart, ChartLegends } from '../../components/chart';
+import { Chart, useChart, ChartLegends } from '../../theme/components/chart';
 
 // ----------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ type Props = CardProps & {
   };
 };
 
-export function AnalyticsCurrentVisits({ title, subheader, chart, sx, ...other }: Props) {
+export function GraficoTorta({ title, subheader, chart, sx, ...other }: Props) {
   const theme = useTheme();
 
   const chartSeries = chart.series.map((item) => item.value);

@@ -14,7 +14,7 @@ import {
 import slugify from "slugify";
 import { DashboardContent } from "../../theme/layouts/dashboard";
 import Swal from "sweetalert2";
-import { APIError } from "../../utils/interfaces/ApiError";
+import { isAPIError } from "../../utils/interfaces/ApiError";
 import {
   useCreateTripMutation,
   useGetTripQuery,
@@ -52,8 +52,8 @@ export default function CreateEdit() {
     liters: 20,
     slug: "",
     category: "",
-    start: null,
-    end: null,
+    start: dayjs(),
+    end: dayjs(),
     images: [],
     tracks: [],
   });
@@ -133,8 +133,8 @@ export default function CreateEdit() {
         });
       }
       navigate(`/${import.meta.env.VITE_SUBFOLDER}/trips`);
-    } catch (error: APIError | any) {
-      if (error.status === 400) {
+    } catch (error: unknown) {
+      if (isAPIError(error) && error.status === 400) {
         Swal.fire(errorSwalOptions(error.data.message));
       }
     }

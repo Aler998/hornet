@@ -1,6 +1,6 @@
 import type { CardProps } from '@mui/material/Card';
-import type { PaletteColorKey } from '../../theme/core';
-import type { ChartOptions } from '../../components/chart';
+import type { PaletteColorKey } from '../../theme/theme/core';
+import type { ChartOptions } from '../../theme/components/chart';
 
 import { varAlpha } from 'minimal-shared/utils';
 
@@ -8,11 +8,11 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import { useTheme } from '@mui/material/styles';
 
-import { fNumber, fPercent, fShortenNumber } from '../../utils/format-number';
+import { fNumber, fPercent, fShortenNumber } from '../../theme/utils/format-number';
 
-import { Iconify } from '../../components/iconify';
-import { SvgColor } from '../../components/svg-color';
-import { Chart, useChart } from '../../components/chart';
+import { Iconify } from '../../theme/components/iconify';
+import { SvgColor } from '../../theme/components/svg-color';
+import { Chart, useChart } from '../../theme/components/chart';
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ type Props = CardProps & {
   };
 };
 
-export function AnalyticsWidgetSummary({
+export function WidgetSummary({
   sx,
   icon,
   title,
