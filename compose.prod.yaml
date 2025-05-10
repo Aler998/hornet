@@ -10,11 +10,11 @@ services:
       - "3000"
     environment:
       - NODE_ENV=production
-      - MONGO_URI=mongodb://mongo:27017/hornet-db
-      - JWT_SECRET=secretto
-      - CORS_ORIGINS=http://localhost
-      - USERNAME=gattopio
-      - PASSWORD=gattopio
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - CORS_ORIGINS=${CORS_ORIGINS}
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
     volumes:
       - uploads:/app/uploads
 
