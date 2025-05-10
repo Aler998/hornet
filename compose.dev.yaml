@@ -39,11 +39,11 @@ services:
       - mongo
     environment:
       - NODE_ENV=development
-      - MONGO_URI=mongodb://mongo:27017/hornet-db
-      - JWT_SECRET=secretto
-      - CORS_ORIGINS=http://localhost:3001,http://localhost:3000
-      - USERNAME=gattopio
-      - PASSWORD=gattopio
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - CORS_ORIGINS=${CORS_ORIGINS}
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
 
   mongo:
     image: mongo:6
