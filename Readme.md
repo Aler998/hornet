@@ -77,3 +77,5 @@ docker-compose -f docker-compose.prod.yml up --build -d
 - [ ] Popolare dati dashboard
 - [ ] Aggiungere più informazioni sul singolo viaggio
 - [ ] aggiungere le categorie nel frontend
+- [ ] aggiungere posti visitati sul viaggio
+- [ ] aggiungere lista di viaggi da fare

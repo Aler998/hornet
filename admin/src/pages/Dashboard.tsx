@@ -2,11 +2,8 @@ import { Grid, Typography } from "@mui/material";
 import { DashboardContent } from "../theme/layouts/dashboard";
 import { WidgetSummary } from "../components/widgets/WidgetSummary";
 import { AnalyticsCurrentSubject } from "../theme/sections/dashboard/analytics-current-subject";
-import { AnalyticsNews } from "../theme/sections/dashboard/analytics-news";
-import { AnalyticsOrderTimeline } from "../theme/sections/dashboard/analytics-order-timeline";
-import { AnalyticsTrafficBySite } from "../theme/sections/dashboard/analytics-traffic-by-site";
 import { AnalyticsTasks } from "../theme/sections/dashboard/analytics-tasks";
-import { _posts, _tasks, _traffic, _timeline } from "../theme/_mock";
+import { _tasks } from "../theme/_mock";
 import { useGetTripsQuery } from "../features/trips/tripsApi";
 import Loader from "../components/Loader";
 import Swal from "sweetalert2";
@@ -18,6 +15,7 @@ import NumericWidget, {
 } from "../components/stats/NumericWidget";
 import RatingChart from "../components/stats/RatingChart";
 import ViaggiPerMese from "../components/stats/ViaggiPerMese";
+import UltimiViaggi from "../components/stats/UltimiViaggi";
 
 export default function Dashboard() {
   const { data: trips, isLoading, isError } = useGetTripsQuery();
@@ -184,17 +182,12 @@ export default function Dashboard() {
             />
           </Grid>
 
-          <Grid size={{ xs: 12, md: 6, lg: 8 }}>
-            <AnalyticsNews title="News" list={_posts.slice(0, 5)} />
-          </Grid>
+
 
           <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-            <AnalyticsOrderTimeline title="Order timeline" list={_timeline} />
+              <UltimiViaggi trips={trips} />
           </Grid>
 
-          <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-            <AnalyticsTrafficBySite title="Traffic by site" list={_traffic} />
-          </Grid>
 
           <Grid size={{ xs: 12, md: 6, lg: 8 }}>
             <AnalyticsTasks title="Tasks" list={_tasks} />
