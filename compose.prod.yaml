@@ -35,7 +35,7 @@ services:
       - "80"
 
   nginx:
-    image: nginx:alpine
+    image: arm32v7/nginx
     container_name: nginx
     ports:
       - "80:80"
