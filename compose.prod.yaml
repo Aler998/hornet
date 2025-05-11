@@ -47,7 +47,7 @@ services:
       - admin
 
   mongo:
-    image: mongo:6
+    image: arm32v7/mongo
     ports:
       - "27017:27017"
     volumes:
