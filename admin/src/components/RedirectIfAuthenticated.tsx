@@ -5,7 +5,7 @@ import Loader from './Loader';
 
 export const RedirectIfAuthenticated = ({ children }: { children: JSX.Element }) => {
   const { data: user, isLoading } = useGetMeQuery();
-  const redirectTo = `/${import.meta.env.VITE_SUBFOLDER}`
+  const redirectTo = `/${import.meta.env.VITE_SUBFOLDER}/`
 
   if (isLoading) {
     return <Loader />

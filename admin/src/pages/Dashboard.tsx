@@ -1,18 +1,34 @@
-import { Grid, Typography } from '@mui/material';
-import { DashboardContent } from '../theme/layouts/dashboard';
-import { AnalyticsWidgetSummary } from '../theme/sections/dashboard/analytics-widget-summary';
-import { AnalyticsCurrentVisits } from '../theme/sections/dashboard/analytics-current-visits';
-import { AnalyticsWebsiteVisits } from '../theme/sections/dashboard/analytics-website-visits';
-import { AnalyticsConversionRates } from '../theme/sections/dashboard/analytics-conversion-rates';
-import { AnalyticsCurrentSubject } from '../theme/sections/dashboard/analytics-current-subject';
-import { AnalyticsNews } from '../theme/sections/dashboard/analytics-news';
-import { AnalyticsOrderTimeline } from '../theme/sections/dashboard/analytics-order-timeline';
-import { AnalyticsTrafficBySite } from '../theme/sections/dashboard/analytics-traffic-by-site';
-import { AnalyticsTasks } from '../theme/sections/dashboard/analytics-tasks';
-import { _posts, _tasks, _traffic, _timeline } from '../theme/_mock';
-
+import { Grid, Typography } from "@mui/material";
+import { DashboardContent } from "../theme/layouts/dashboard";
+import { WidgetSummary } from "../components/widgets/WidgetSummary";
+import { AnalyticsCurrentSubject } from "../theme/sections/dashboard/analytics-current-subject";
+import { AnalyticsTasks } from "../theme/sections/dashboard/analytics-tasks";
+import { _tasks } from "../theme/_mock";
+import { useGetTripsQuery } from "../features/trips/tripsApi";
+import Loader from "../components/Loader";
+import Swal from "sweetalert2";
+import { errorSwalOptions } from "../utils/SwalOptions";
+import { useGetCategoriesQuery } from "../features/categories/categoriesApi";
+import ViaggiPerCategoria from "../components/stats/ViaggiPerCategoria";
+import NumericWidget, {
+  NumericWidgetType,
+} from "../components/stats/NumericWidget";
+import RatingChart from "../components/stats/RatingChart";
+import ViaggiPerMese from "../components/stats/ViaggiPerMese";
+import UltimiViaggi from "../components/stats/UltimiViaggi";
 
 export default function Dashboard() {
+  const { data: trips, isLoading, isError } = useGetTripsQuery();
+  const {
+    data: categories,
+    isLoading: catIsLoading,
+    isError: catIsError,
+  } = useGetCategoriesQuery();
+
+  if (isLoading || catIsLoading) return <Loader />;
+
+  if (isError || catIsError) Swal.fire(errorSwalOptions("Errore Generico"));
+
   return (
     <>
       <title>Dashboard</title>
@@ -20,136 +36,158 @@ export default function Dashboard() {
         name="description"
         content="The starting point for your next project with Minimal UI Kit, built on the newest version of Material-UI ©, ready to be customized to your style"
       />
-      <meta name="keywords" content="react,material,kit,application,dashboard,admin,template" />
+      <meta
+        name="keywords"
+        content="react,material,kit,application,dashboard,admin,template"
+      />
 
       <DashboardContent maxWidth="xl">
         <Typography variant="h4" sx={{ mb: { xs: 3, md: 5 } }}>
-          Hi, Welcome back 👋
+          Bentornato 🏍️
         </Typography>
 
         <Grid container spacing={3}>
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <AnalyticsWidgetSummary
-              title="Weekly sales"
-              percent={2.6}
-              total={714000}
-              icon={<img alt="Weekly sales" src={"/" + import.meta.env.VITE_SUBFOLDER + "/assets/icons/glass/ic-glass-bag.svg"} />}
-              chart={{
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-                series: [22, 8, 35, 50, 82, 84, 77, 12],
-              }}
+            <NumericWidget
+              title="Kilometri"
+              color="primary"
+              trips={trips}
+              field={NumericWidgetType.km}
+              icon={
+                <img
+                  alt="Weekly sales"
+                  src={
+                    "/" +
+                    import.meta.env.VITE_SUBFOLDER +
+                    "/assets/icons/glass/ic-glass-bag.svg"
+                  }
+                />
+              }
             />
           </Grid>
 
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <AnalyticsWidgetSummary
-              title="New users"
-              percent={-0.1}
-              total={1352831}
+            <NumericWidget
+              title="Benzina Usata"
               color="secondary"
-              icon={<img alt="New users" src={"/" + import.meta.env.VITE_SUBFOLDER + "/assets/icons/glass/ic-glass-users.svg"} />}
-              chart={{
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-                series: [56, 47, 40, 62, 73, 30, 23, 54],
-              }}
+              trips={trips}
+              field={NumericWidgetType.liters}
+              icon={
+                <img
+                  alt="New users"
+                  src={
+                    "/" +
+                    import.meta.env.VITE_SUBFOLDER +
+                    "/assets/icons/glass/ic-glass-users.svg"
+                  }
+                />
+              }
             />
           </Grid>
 
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <AnalyticsWidgetSummary
+            <WidgetSummary
               title="Purchase orders"
               percent={2.8}
               total={1723315}
               color="warning"
-              icon={<img alt="Purchase orders" src={"/" + import.meta.env.VITE_SUBFOLDER + "/assets/icons/glass/ic-glass-buy.svg"} />}
+              icon={
+                <img
+                  alt="Purchase orders"
+                  src={
+                    "/" +
+                    import.meta.env.VITE_SUBFOLDER +
+                    "/assets/icons/glass/ic-glass-buy.svg"
+                  }
+                />
+              }
               chart={{
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                categories: [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                ],
                 series: [40, 70, 50, 28, 70, 75, 7, 64],
               }}
             />
           </Grid>
 
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <AnalyticsWidgetSummary
+            <WidgetSummary
               title="Messages"
               percent={3.6}
               total={234}
               color="error"
-              icon={<img alt="Messages" src={"/" + import.meta.env.VITE_SUBFOLDER + "/assets/icons/glass/ic-glass-message.svg"} />}
+              icon={
+                <img
+                  alt="Messages"
+                  src={
+                    "/" +
+                    import.meta.env.VITE_SUBFOLDER +
+                    "/assets/icons/glass/ic-glass-message.svg"
+                  }
+                />
+              }
               chart={{
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                categories: [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                ],
                 series: [56, 30, 23, 54, 47, 40, 62, 73],
               }}
             />
           </Grid>
 
           <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-            <AnalyticsCurrentVisits
-              title="Current visits"
-              chart={{
-                series: [
-                  { label: 'America', value: 3500 },
-                  { label: 'Asia', value: 2500 },
-                  { label: 'Europe', value: 1500 },
-                  { label: 'Africa', value: 500 },
-                ],
-              }}
-            />
+            <ViaggiPerCategoria trips={trips} categories={categories} />
           </Grid>
 
           <Grid size={{ xs: 12, md: 6, lg: 8 }}>
-            <AnalyticsWebsiteVisits
-              title="Website visits"
-              subheader="(+43%) than last year"
-              chart={{
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-                series: [
-                  { name: 'Team A', data: [43, 33, 22, 37, 67, 68, 37, 24, 55] },
-                  { name: 'Team B', data: [51, 70, 47, 67, 40, 37, 24, 70, 24] },
-                ],
-              }}
-            />
+            <ViaggiPerMese trips={trips} />
           </Grid>
 
           <Grid size={{ xs: 12, md: 6, lg: 8 }}>
-            <AnalyticsConversionRates
-              title="Conversion rates"
-              subheader="(+43%) than last year"
-              chart={{
-                categories: ['Italy', 'Japan', 'China', 'Canada', 'France'],
-                series: [
-                  { name: '2022', data: [44, 55, 41, 64, 22] },
-                  { name: '2023', data: [53, 32, 33, 52, 13] },
-                ],
-              }}
-            />
+            <RatingChart trips={trips} />
           </Grid>
 
           <Grid size={{ xs: 12, md: 6, lg: 4 }}>
             <AnalyticsCurrentSubject
               title="Current subject"
               chart={{
-                categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
+                categories: [
+                  "English",
+                  "History",
+                  "Physics",
+                  "Geography",
+                  "Chinese",
+                  "Math",
+                ],
                 series: [
-                  { name: 'Series 1', data: [80, 50, 30, 40, 100, 20] },
-                  { name: 'Series 2', data: [20, 30, 40, 80, 20, 80] },
-                  { name: 'Series 3', data: [44, 76, 78, 13, 43, 10] },
+                  { name: "Series 1", data: [80, 50, 30, 40, 100, 20] },
+                  { name: "Series 2", data: [20, 30, 40, 80, 20, 80] },
+                  { name: "Series 3", data: [44, 76, 78, 13, 43, 10] },
                 ],
               }}
             />
           </Grid>
 
-          <Grid size={{ xs: 12, md: 6, lg: 8 }}>
-            <AnalyticsNews title="News" list={_posts.slice(0, 5)} />
-          </Grid>
+
 
           <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-            <AnalyticsOrderTimeline title="Order timeline" list={_timeline} />
+              <UltimiViaggi trips={trips} />
           </Grid>
 
-          <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-            <AnalyticsTrafficBySite title="Traffic by site" list={_traffic} />
-          </Grid>
 
           <Grid size={{ xs: 12, md: 6, lg: 8 }}>
             <AnalyticsTasks title="Tasks" list={_tasks} />

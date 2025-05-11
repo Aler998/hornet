@@ -8,8 +8,8 @@ export interface Trip {
   km: number;
   liters: number;
   slug: string;
-  start: Dayjs | null;
-  end: Dayjs | null;
+  start: Dayjs;
+  end: Dayjs;
   category: string;
   images: UploadedFile[];
   tracks: UploadedFile[];
@@ -23,8 +23,8 @@ export interface CreateTripDto {
   km: number;
   liters: number;
   slug: string;
-  start: Dayjs | null;
-  end: Dayjs | null;
+  start: Dayjs;
+  end: Dayjs;
   category: string
   images: File[] | null;
   tracks: File[] | null;

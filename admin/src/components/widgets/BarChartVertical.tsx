@@ -1,11 +1,11 @@
 import type { CardProps } from '@mui/material/Card';
-import type { ChartOptions } from '../../components/chart';
+import type { ChartOptions } from '../../theme/components/chart';
 
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import { useTheme, alpha as hexAlpha } from '@mui/material/styles';
 
-import { Chart, useChart } from '../../components/chart';
+import { Chart, useChart } from '../../theme/components/chart';
 
 // ----------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ type Props = CardProps & {
   };
 };
 
-export function AnalyticsWebsiteVisits({ title, subheader, chart, sx, ...other }: Props) {
+export function BarChartVertical({ title, subheader, chart, sx, ...other }: Props) {
   const theme = useTheme();
 
   const chartColors = chart.colors ?? [

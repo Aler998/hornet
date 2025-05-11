@@ -11,8 +11,6 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
 
-import { fDateTime } from '../../utils/format-time';
-
 // ----------------------------------------------------------------------
 
 type Props = CardProps & {
@@ -26,7 +24,7 @@ type Props = CardProps & {
   }[];
 };
 
-export function AnalyticsOrderTimeline({ title, subheader, list, sx, ...other }: Props) {
+export function TimelineWidget({ title, subheader, list, sx, ...other }: Props) {
   return (
     <Card sx={sx} {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -69,7 +67,7 @@ function Item({ item, lastItem, ...other }: ItemProps) {
         <Typography variant="subtitle2">{item.title}</Typography>
 
         <Typography variant="caption" sx={{ color: 'text.disabled' }}>
-          {fDateTime(item.time)}
+          {item.time}
         </Typography>
       </TimelineContent>
     </TimelineItem>
