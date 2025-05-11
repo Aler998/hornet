@@ -35,7 +35,7 @@ services:
       - "80"
 
   nginx:
-    image: arm32v7/nginx
+    image: nginx:alpine
     container_name: nginx
     ports:
       - "80:80"
@@ -47,7 +47,7 @@ services:
       - admin
 
   mongo:
-    image: arm32v7/mongo
+    image: mongo:6
     ports:
       - "27017:27017"
     volumes:
