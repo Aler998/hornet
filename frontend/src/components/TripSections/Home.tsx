@@ -3,7 +3,6 @@ import Logo from '../Logo'
 import Rating from '../Rating'
 import StatsBox from '../StatsBox'
 import { Trip } from '../../features/trips/types'
-import dayjs from 'dayjs'
 import { MdSpaceDashboard } from 'react-icons/md'
 
 export const homeNav = {
@@ -21,7 +20,7 @@ export function HomeContent({ trip }: { trip: Trip }) {
             <h1 className="font-oswald text-6xl my-4 dark:text-honda">{trip.title}</h1>
             <Rating voto={trip.rating} placeItems="place-items-center" dimensions="w-8 h-8" />
             <p className="font-oswald font-semibold p-2">{trip.description}</p>
-            <StatsBox time={dayjs(trip.end).diff(trip.start, 'hour', false)} liters={trip.liters} km={trip.km}/>
+            <StatsBox start={trip.start} end={trip.end} liters={trip.liters} km={trip.km} velocity={trip.velocity}/>
         </>
     )
 }

@@ -23,7 +23,7 @@ export const createTripValidator = [
   body('km')
     .notEmpty()
     .isNumeric(),
-  body('liters')
+  body('velocity')
     .notEmpty()
     .isNumeric(),
 
@@ -58,12 +58,10 @@ export const updateTripValidator = [
     .notEmpty()
     .isNumeric()
     .withMessage("Il numero inserito per i kilometri non è valido"),
-
-  body('liters')
+  body('velocity')
     .notEmpty()
     .isNumeric()
-    .withMessage("Il numero inserito per i litri non è valido"),
-
+    .withMessage("La velocità inserita non è valida"),
   body('start')
     .isISO8601().withMessage('La data di partenza non è valida'),
   body('end')

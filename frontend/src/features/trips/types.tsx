@@ -7,6 +7,7 @@ export interface Trip {
   rating: number;
   liters: number;
   km: number;
+  velocity: number;
   slug: string;
   start: Dayjs | null;
   end: Dayjs | null;

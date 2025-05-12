@@ -1,6 +1,6 @@
 .env
 .env.dev
 .env.prod
-.env.staging
+.env.development
 .env.production
 .DS_Store
