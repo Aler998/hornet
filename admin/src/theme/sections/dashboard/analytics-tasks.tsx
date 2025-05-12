@@ -17,7 +17,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import MenuItem, { menuItemClasses } from "@mui/material/MenuItem";
 
 import { Iconify } from "../../components/iconify";
-import { Scrollbar } from "react-scrollbars-custom";
 
 // ----------------------------------------------------------------------
 
