@@ -1,7 +1,7 @@
 import { Box, Button, Card, Table, TableBody, TableCell, TableContainer, TablePagination, Typography } from '@mui/material';
 import { DashboardContent } from '../../theme/layouts/dashboard';
 import { Iconify } from '../../theme/components/iconify';
-import { Scrollbar } from '../../theme/components/scrollbar';
+import { Scrollbar } from 'react-scrollbars-custom';
 import { useState } from 'react';
 import { applyFilter, emptyRows, getComparator } from '../../theme/components/table/utils';
 import { TableNoData } from '../../theme/components/table/table-no-data';
@@ -91,7 +91,7 @@ export default function Index() {
                   }}
                 />
 
-                <Scrollbar>
+                <Scrollbar style={{ width: "100%", minHeight:"100%", height: 420 }}>
                   <TableContainer sx={{ overflow: 'unset' }}>
                     <Table sx={{ minWidth: 800 }}>
                       <DefaultTableHead

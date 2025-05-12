@@ -14,7 +14,7 @@ import { usePathname } from '../../routes/hooks';
 import { RouterLink } from '../../routes/components';
 
 import { Logo } from '../../components/logo';
-import { Scrollbar } from '../../components/scrollbar';
+import { Scrollbar } from 'react-scrollbars-custom';
 
 import { NavUpgrade } from '../components/nav-upgrade';
 
@@ -114,7 +114,7 @@ export function NavContent({ data, slots, sx }: NavContentProps) {
 
       <Divider />
 
-      <Scrollbar fillContent>
+      <Scrollbar>
         <Box
           component="nav"
           sx={[

@@ -2,7 +2,7 @@ import { Box, Button, Card, Table, TableBody, TableCell, TableContainer, TablePa
 import { useDeleteCategoryMutation, useGetCategoriesQuery } from '../../features/categories/categoriesApi';
 import { DashboardContent } from '../../theme/layouts/dashboard';
 import { Iconify } from '../../theme/components/iconify';
-import { Scrollbar } from '../../theme/components/scrollbar';
+import { Scrollbar } from 'react-scrollbars-custom';
 import { TableEmptyRows } from '../../theme/components/table/table-empty-rows';
 import { useState } from 'react';
 import { applyFilter, emptyRows, getComparator } from '../../theme/components/table/utils';
@@ -90,7 +90,7 @@ export default function Index() {
                   }}
                 />
 
-                <Scrollbar>
+                <Scrollbar style={{ width: "100%", minHeight:"100%", height: 420 }}>
                   <TableContainer sx={{ overflow: 'unset' }}>
                     <Table sx={{ minWidth: 800 }}>
                       <DefaultTableHead
