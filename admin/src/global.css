@@ -12,8 +12,6 @@
 /** **************************************
 * Plugins
 *************************************** */
-/* scrollbar */
-@import './theme/components/scrollbar/styles.css';
 
 /* chart */
 @import './theme/components/chart/styles.css';
