@@ -17,6 +17,13 @@ services:
       - PASSWORD=${PASSWORD}
     volumes:
       - uploads:/app/uploads
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 128M
+    memswap_limit: 2G
 
   frontend:
     build:
@@ -25,6 +32,13 @@ services:
     container_name: frontend
     expose:
       - "80"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 128M
+    memswap_limit: 2G
 
   admin:
     build:
@@ -33,6 +47,13 @@ services:
     container_name: admin
     expose:
       - "80"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 128M
+    memswap_limit: 2G
 
   nginx:
     image: nginx:alpine
