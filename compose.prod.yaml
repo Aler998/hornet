@@ -8,6 +8,8 @@ services:
     container_name: backend
     expose:
       - "3000"
+    networks:
+      - app-network
     environment:
       - NODE_ENV=production
       - MONGO_URI=${MONGO_URI}
@@ -32,6 +34,8 @@ services:
     container_name: frontend
     expose:
       - "80"
+    networks:
+      - app-network
     deploy:
       resources:
         limits:
@@ -47,6 +51,8 @@ services:
     container_name: admin
     expose:
       - "80"
+    networks:
+      - app-network
     deploy:
       resources:
         limits:
@@ -66,14 +72,22 @@ services:
       - backend
       - frontend
       - admin
+    networks:
+      - app-network
 
+# FOR RASPBERRY mongodb-raspberrypi4-unofficial-r7.0.14
   mongo:
     image: mongo:6
     ports:
       - "27017:27017"
     volumes:
       - mongo-data-prod:/data/db
+    networks:
+      - app-network
 
 volumes:
   mongo-data-prod:
   uploads:
+
+networks:
+  app-network:
