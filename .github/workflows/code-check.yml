@@ -1,0 +1,40 @@
+name: Format & Lint on Pull Request
+
+on:
+  pull_request:
+
+jobs:
+  format-and-lint:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        project: [admin, frontend, backend]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install and run Prettier + ESLint in ${{ matrix.project }}
+        working-directory: ${{ matrix.project }}
+        run: |
+          npm ci
+          npm run format
+          npm run lint
+
+      - name: Commit formatted code (if any)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --cached --quiet || git commit -m "chore: auto-format code"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
