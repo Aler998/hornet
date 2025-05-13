@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
-
 const authRoutes: Router = express.Router();
 
 // Login
@@ -34,12 +33,8 @@ authRoutes.post("/logout", (_req: Request, res: Response) => {
   res.json({ message: "Logout riuscito" });
 });
 
-authRoutes.get(
-  "/me",
-  authMiddleware,
-  (req: Request, res: Response) => {
-    res.json({ email: req.user?.username });
-  }
-);
+authRoutes.get("/me", authMiddleware, (req: Request, res: Response) => {
+  res.json({ email: req.user?.username });
+});
 
 export default authRoutes;

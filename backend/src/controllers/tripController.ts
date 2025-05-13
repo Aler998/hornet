@@ -12,12 +12,12 @@ import { NotFoundError } from "../errors/NotFoundError";
 
 export const getAllTrips = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trips = await Trip.find().sort({ createdAt: -1 });
     res.json(trips);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     res.status(500).json({ message: "Errore del server" });
   }
@@ -25,7 +25,7 @@ export const getAllTrips = async (
 
 export const getTripBySlug = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trip = await Trip.findOneWithDecodedTracks(req.params.slug);
@@ -44,7 +44,7 @@ export const getTripBySlug = async (
 
 export const createTrip = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trip = new Trip({
@@ -76,7 +76,7 @@ export const createTrip = async (
     });
 
     res.status(201).json(trip);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     res.status(500).json({ message: "Errore del server" });
   }
@@ -84,7 +84,7 @@ export const createTrip = async (
 
 export const updateTrip = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trip = await Trip.findOne({ slug: req.params.slug });
@@ -121,7 +121,7 @@ export const updateTrip = async (
     await trip.save();
 
     res.json(trip);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     if (err.code === 11000) {
       res.status(400).json({
@@ -141,7 +141,7 @@ export const updateTrip = async (
 
 export const deleteTrip = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trip = await Trip.findOneBySlug(req.params.slug);
@@ -154,13 +154,13 @@ export const deleteTrip = async (
           return console.error("Errore:", err);
         }
         console.log("Cartella eliminata");
-      }
+      },
     );
-    
+
     const deleted = await trip?.deleteOne();
     if (!deleted) res.status(404).json({ error: "Trip not found" });
     res.status(204).send();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     res.status(500).json({ message: "Errore del server" });
   }
@@ -168,7 +168,7 @@ export const deleteTrip = async (
 
 export const deleteTripImage = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trip = await Trip.findOne({ slug: req.params.slug });
@@ -203,7 +203,7 @@ export const deleteTripImage = async (
 
     await trip.save();
     res.status(200).json({ message: "Immagine eliminata con successo" });
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     res.status(500).json({ message: "Errore del server" });
   }
@@ -211,7 +211,7 @@ export const deleteTripImage = async (
 
 export const deleteTripTrack = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trip = await Trip.findOne({ slug: req.params.slug });
@@ -248,7 +248,7 @@ export const deleteTripTrack = async (
 
     await trip.save();
     res.status(200).json({ message: "Track eliminata con successo" });
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     res.status(500).json({ message: "Errore del server" });
   }
