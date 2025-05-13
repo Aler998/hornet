@@ -5,9 +5,9 @@ import { AnimatePresence } from "motion/react";
 import * as motion from "motion/react-client";
 import { useEffect, useState } from "react";
 import { Trip as ITrip } from "../features/trips/types";
-import { HomeContent, homeNav } from "../components/TripSections.tsx/Home";
-import { GalleryContent, galleryNav } from "../components/TripSections.tsx/Gallery";
-import { MapsContent, mapsNav } from "../components/TripSections.tsx/Maps";
+import { HomeContent, homeNav } from "../components/TripSections/Home";
+import { GalleryContent, galleryNav } from "../components/TripSections/Gallery";
+import { MapsContent, mapsNav } from "../components/TripSections/Maps";
 import Layout, { templates } from "../components/Layout/Layout";
 
 

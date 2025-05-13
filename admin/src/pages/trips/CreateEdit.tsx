@@ -49,7 +49,7 @@ export default function CreateEdit() {
     description: "",
     rating: 3,
     km: 50,
-    liters: 20,
+    velocity: 50,
     slug: "",
     category: "",
     start: dayjs(),
@@ -65,7 +65,7 @@ export default function CreateEdit() {
         description: existingTrip.description,
         rating: existingTrip.rating ?? 0,
         km: existingTrip.km ?? 50,
-        liters: existingTrip.liters ?? 50,
+        velocity: existingTrip.velocity ?? 50,
         slug: existingTrip.slug,
         category: existingTrip.category,
         start: dayjs(existingTrip.start),
@@ -85,7 +85,7 @@ export default function CreateEdit() {
     ) {
       navigate(`/${import.meta.env.VITE_SUBFOLDER}/404`);
     }
-  }, [tripIsError, error, navigate]);
+  }, [tripIsError, error, navigate, tripError]);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
@@ -263,15 +263,15 @@ export default function CreateEdit() {
                   />
                 </Stack>
                 <Stack spacing={2}>
-                  <Label>Benzina Usata</Label>
+                  <Label>Velocità Media</Label>
                   <Slider
-                    value={form.liters}
+                    value={form.velocity}
                     onChange={(_e, value) =>
-                      handleFormNumberChange(value, "liters")
+                      handleFormNumberChange(value, "velocity")
                     }
                     defaultValue={50}
                     min={0}
-                    max={100}
+                    max={150}
                     aria-label="Default"
                     valueLabelDisplay="auto"
                   />

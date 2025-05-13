@@ -39,7 +39,7 @@ export const tripsApi = createApi({
         formData.append("description", trip.description);
         formData.append("rating", trip.rating.toString());
         formData.append("km", trip.km.toString());
-        formData.append("liters", trip.liters.toString());
+        formData.append("velocity", trip.velocity.toString());
 
         return ({
           url: 'trips',
@@ -74,7 +74,7 @@ export const tripsApi = createApi({
         formData.append("description", rest.description);
         formData.append("rating", rest.rating.toString());
         formData.append("km", rest.km.toString());
-        formData.append("liters", rest.liters.toString());
+        formData.append("velocity", rest.velocity.toString());
 
         return ({
           url: `trips/${slug}`,

@@ -52,7 +52,8 @@ export const createTrip = async (
       description: req.body.description,
       rating: req.body.rating,
       km: req.body.km,
-      liters: req.body.liters,
+      velocity: req.body.velocity,
+      liters: (req.body.km / 28.6).toString(),
       start: req.body.start,
       end: req.body.end,
       category: req.body.category,
@@ -98,7 +99,8 @@ export const updateTrip = async (
     trip.description = req.body.description;
     trip.rating = req.body.rating;
     trip.km = req.body.km;
-    trip.liters = req.body.liters;
+    trip.velocity = req.body.velocity;
+    trip.liters = (req.body.km / 28.6).toString();
     trip.category = req.body.category;
 
     const files = req.files as {

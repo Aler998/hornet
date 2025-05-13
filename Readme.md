@@ -59,18 +59,19 @@ Include gli stessi servizi dell’ambiente di sviluppo più un nginx che redirec
 
 ```bash
 git clone https://github.com/Aler998/hornet.git
-docker-compose -f docker-compose.prod.yml up --build -d
 ```
 
-Copiare i file .env.example in .env e popolarli
+Copiare i file .env.example in .env.development e popolarli
 - `./frontend/.env`
 - `./admin/.env`
+
+Copiare il file .env in .env.dev
 - `./.env`
 
 Avviare il docker compose
 ```bash
 cd hornet
-docker-compose -f docker-compose.prod.yml up --build -d
+make dev
 ```
 
 ### TODO
@@ -79,3 +80,5 @@ docker-compose -f docker-compose.prod.yml up --build -d
 - [ ] aggiungere le categorie nel frontend
 - [ ] aggiungere posti visitati sul viaggio
 - [ ] aggiungere lista di viaggi da fare
+- [X] velocità media sul viaggio + calcolo automatico litri
+- [ ] velocità massima
