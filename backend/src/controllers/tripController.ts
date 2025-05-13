@@ -17,6 +17,7 @@ export const getAllTrips = async (
   try {
     const trips = await Trip.find().sort({ createdAt: -1 });
     res.json(trips);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     res.status(500).json({ message: "Errore del server" });
   }
@@ -75,7 +76,8 @@ export const createTrip = async (
     });
 
     res.status(201).json(trip);
-  } catch (err: any) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (err) {
     res.status(500).json({ message: "Errore del server" });
   }
 };
@@ -119,6 +121,7 @@ export const updateTrip = async (
     await trip.save();
 
     res.json(trip);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     if (err.code === 11000) {
       res.status(400).json({
@@ -157,6 +160,7 @@ export const deleteTrip = async (
     const deleted = await trip?.deleteOne();
     if (!deleted) res.status(404).json({ error: "Trip not found" });
     res.status(204).send();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     res.status(500).json({ message: "Errore del server" });
   }
@@ -199,6 +203,7 @@ export const deleteTripImage = async (
 
     await trip.save();
     res.status(200).json({ message: "Immagine eliminata con successo" });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     res.status(500).json({ message: "Errore del server" });
   }
@@ -243,6 +248,7 @@ export const deleteTripTrack = async (
 
     await trip.save();
     res.status(200).json({ message: "Track eliminata con successo" });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     res.status(500).json({ message: "Errore del server" });
   }

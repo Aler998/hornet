@@ -23,6 +23,7 @@ function authMiddleware(req: Request, res: Response, next: NextFunction): void {
     const decoded = jwt.verify(token, SECRET) as UserPayload;    
     req.user = decoded;
     next();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     
     res.status(403).json({ error: 'Token non valido' });

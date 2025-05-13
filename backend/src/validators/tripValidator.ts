@@ -1,4 +1,4 @@
-import { body, param } from 'express-validator';
+import { body } from 'express-validator';
 import Trip from '../models/Trip';
 
 export const createTripValidator = [

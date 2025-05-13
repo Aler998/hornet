@@ -1,4 +1,4 @@
-import path, { dirname } from "path";
+import path from "path";
 import fs, { readFileSync } from "fs";
 import { v4 as uuidv4 } from "uuid";
 import { ImageUploaded, ITrip } from "../models/Trip";

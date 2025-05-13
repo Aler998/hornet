@@ -5,6 +5,7 @@ export const getAllCategories = async (req: Request, res: Response): Promise<voi
   try {
     const categories: ICategory[] = await Category.find();
     res.json(categories);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     res.status(500).json({ message: 'Errore del server' });
   }
@@ -19,6 +20,7 @@ export const getCategoryBySlug = async (req: Request, res: Response): Promise<vo
     }
 
     res.json(category);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
     res.status(500).json({ message: 'Errore del server' });
   }
@@ -77,7 +79,8 @@ export const deleteCategory = async (req: Request, res: Response): Promise<void>
     }
 
     res.status(204).send();
-  } catch (err) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_err) {
     res.status(500).json({ message: 'Errore del server' });
   }
 };

@@ -1,4 +1,4 @@
-import mongoose, { Document, HydratedDocument, Model, Schema } from 'mongoose';
+import mongoose, { Document, Model, Schema } from 'mongoose';
 import path from 'path';
 import fs from 'fs/promises'
 import { NotFoundError } from '../errors/NotFoundError';
@@ -54,7 +54,7 @@ interface ITripMethods {
 }
 
 
-interface TripModel extends Model<ITrip, {}, ITripMethods> {
+interface TripModel extends Model<ITrip, object, ITripMethods> {
   findOneWithDecodedTracks(slug: string): Promise<TripWithDecodedTracks | null>;
   findOneBySlug(slug: string): Promise<ITrip | null>;
 }
@@ -89,6 +89,7 @@ tripSchema.method("getDecodedTracks", async function (): Promise<string[]> {
       try {
         const data = await fs.readFile(fullPath, "utf8");
         return data;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         return null;
       }
