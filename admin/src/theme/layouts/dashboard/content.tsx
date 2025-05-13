@@ -1,11 +1,11 @@
-import type { Breakpoint } from '@mui/material/styles';
-import type { ContainerProps } from '@mui/material/Container';
+import type { Breakpoint } from "@mui/material/styles";
+import type { ContainerProps } from "@mui/material/Container";
 
-import { mergeClasses } from 'minimal-shared/utils';
+import { mergeClasses } from "minimal-shared/utils";
 
-import Container from '@mui/material/Container';
+import Container from "@mui/material/Container";
 
-import { layoutClasses } from '../core/classes';
+import { layoutClasses } from "../core/classes";
 
 // ----------------------------------------------------------------------
 
@@ -19,8 +19,8 @@ export function DashboardContent({
   children,
   className,
   disablePadding,
-  maxWidth = 'lg',
-  layoutQuery = 'lg',
+  maxWidth = "lg",
+  layoutQuery = "lg",
   ...other
 }: DashboardContentProps) {
   return (
@@ -29,13 +29,13 @@ export function DashboardContent({
       maxWidth={maxWidth}
       sx={[
         (theme) => ({
-          display: 'flex',
-          flex: '1 1 auto',
-          flexDirection: 'column',
-          pt: 'var(--layout-dashboard-content-pt)',
-          pb: 'var(--layout-dashboard-content-pb)',
+          display: "flex",
+          flex: "1 1 auto",
+          flexDirection: "column",
+          pt: "var(--layout-dashboard-content-pt)",
+          pb: "var(--layout-dashboard-content-pb)",
           [theme.breakpoints.up(layoutQuery)]: {
-            px: 'var(--layout-dashboard-content-px)',
+            px: "var(--layout-dashboard-content-px)",
           },
           ...(disablePadding && {
             p: {

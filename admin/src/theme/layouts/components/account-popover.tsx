@@ -47,7 +47,7 @@ export function AccountPopover({
   const pathname = usePathname();
 
   const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(
-    null
+    null,
   );
 
   const [logout, { isLoading }] = useLogoutMutation();
@@ -60,14 +60,16 @@ export function AccountPopover({
       dispatch(authApi.util.resetApiState());
       navigate(`/${import.meta.env.VITE_SUBFOLDER}/404`);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) { /* empty */ }
+    } catch (error) {
+      /* empty */
+    }
   };
 
   const handleOpenPopover = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       setOpenPopover(event.currentTarget);
     },
-    []
+    [],
   );
 
   const handleClosePopover = useCallback(() => {
@@ -79,7 +81,7 @@ export function AccountPopover({
       handleClosePopover();
       router.push(path);
     },
-    [handleClosePopover, router]
+    [handleClosePopover, router],
   );
 
   return (

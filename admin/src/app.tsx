@@ -1,41 +1,40 @@
-import './global.css';
+import "./global.css";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-import { usePathname } from './theme/routes/hooks';
+import { usePathname } from "./theme/routes/hooks";
 
-import { ThemeProvider } from './theme/theme/theme-provider';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import 'dayjs/locale/it';
+import { ThemeProvider } from "./theme/theme/theme-provider";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import "dayjs/locale/it";
 
 // ----------------------------------------------------------------------
 
 type AppProps = {
-    children: React.ReactNode;
+  children: React.ReactNode;
 };
 
 export default function App({ children }: AppProps) {
-    useScrollToTop();
+  useScrollToTop();
 
-
-    return (
-        <ThemeProvider>
-            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='it'>
-                {children}
-            </LocalizationProvider>
-        </ThemeProvider>
-    );
+  return (
+    <ThemeProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="it">
+        {children}
+      </LocalizationProvider>
+    </ThemeProvider>
+  );
 }
 
 // ----------------------------------------------------------------------
 
 function useScrollToTop() {
-    const pathname = usePathname();
+  const pathname = usePathname();
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
-    return null;
+  return null;
 }

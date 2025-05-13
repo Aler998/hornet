@@ -1,13 +1,13 @@
-import type { CardProps } from '@mui/material/Card';
-import type { ChartOptions } from '../../theme/components/chart';
+import type { CardProps } from "@mui/material/Card";
+import type { ChartOptions } from "../../theme/components/chart";
 
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import { useTheme, alpha as hexAlpha } from '@mui/material/styles';
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import { useTheme, alpha as hexAlpha } from "@mui/material/styles";
 
-import { fNumber } from '../../theme/utils/format-number';
+import { fNumber } from "../../theme/utils/format-number";
 
-import { Chart, useChart } from '../../theme/components/chart';
+import { Chart, useChart } from "../../theme/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ export function BarChart({ title, subheader, chart, sx, ...other }: Props) {
 
   const chartOptions = useChart({
     colors: chartColors,
-    stroke: { width: 2, colors: ['transparent'] },
+    stroke: { width: 2, colors: ["transparent"] },
     tooltip: {
       shared: true,
       intersect: false,
@@ -48,14 +48,17 @@ export function BarChart({ title, subheader, chart, sx, ...other }: Props) {
     dataLabels: {
       enabled: true,
       offsetX: -6,
-      style: { fontSize: '10px', colors: ['#FFFFFF', theme.palette.text.primary] },
+      style: {
+        fontSize: "10px",
+        colors: ["#FFFFFF", theme.palette.text.primary],
+      },
     },
     plotOptions: {
       bar: {
         horizontal: true,
         borderRadius: 2,
-        barHeight: '48%',
-        dataLabels: { position: 'top' },
+        barHeight: "48%",
+        dataLabels: { position: "top" },
       },
     },
     ...chart.options,

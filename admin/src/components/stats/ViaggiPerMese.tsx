@@ -54,7 +54,7 @@ function ViaggiPerMese({ trips }: { trips?: Trip[] }) {
   return (
     <BarChartVertical
       title="Viaggi per mese"
-      subheader={`+${totalCurrent-totalLast} rispetto allo scorso anno`}
+      subheader={`+${totalCurrent - totalLast} rispetto allo scorso anno`}
       chart={result}
     />
   );

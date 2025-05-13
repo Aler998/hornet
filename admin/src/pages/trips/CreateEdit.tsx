@@ -105,7 +105,7 @@ export default function CreateEdit() {
 
   const handleFormNumberChange = (
     value: number | number[] | null,
-    field: string
+    field: string,
   ) => {
     setForm({ ...form, [field]: value ? value : 0 });
   };

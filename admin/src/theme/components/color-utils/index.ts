@@ -1,5 +1,5 @@
-export * from './classes';
+export * from "./classes";
 
-export * from './color-picker';
+export * from "./color-picker";
 
-export * from './color-preview';
+export * from "./color-preview";

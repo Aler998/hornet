@@ -131,11 +131,9 @@ export default function Dashboard() {
             <RatingChart trips={trips} />
           </Grid>
 
-
           <Grid size={{ xs: 12, md: 6, lg: 4 }}>
             <UltimiViaggi trips={trips} />
           </Grid>
-
         </Grid>
       </DashboardContent>
     </>

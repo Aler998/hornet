@@ -52,7 +52,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       filesArray.map((file) => ({
         uuid: uuidv4(),
         url: URL.createObjectURL(file),
-      }))
+      })),
     );
   };
 

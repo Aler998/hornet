@@ -1,10 +1,10 @@
-import { upperFirst } from 'es-toolkit';
-import { mergeClasses } from 'minimal-shared/utils';
+import { upperFirst } from "es-toolkit";
+import { mergeClasses } from "minimal-shared/utils";
 
-import { labelClasses } from './classes';
-import { LabelRoot, LabelIcon } from './styles';
+import { labelClasses } from "./classes";
+import { LabelRoot, LabelIcon } from "./styles";
 
-import type { LabelProps } from './types';
+import type { LabelProps } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -15,8 +15,8 @@ export function Label({
   startIcon,
   className,
   disabled,
-  variant = 'soft',
-  color = 'default',
+  variant = "soft",
+  color = "default",
   ...other
 }: LabelProps) {
   return (
@@ -28,11 +28,15 @@ export function Label({
       sx={sx}
       {...other}
     >
-      {startIcon && <LabelIcon className={labelClasses.icon}>{startIcon}</LabelIcon>}
+      {startIcon && (
+        <LabelIcon className={labelClasses.icon}>{startIcon}</LabelIcon>
+      )}
 
-      {typeof children === 'string' ? upperFirst(children) : children}
+      {typeof children === "string" ? upperFirst(children) : children}
 
-      {endIcon && <LabelIcon className={labelClasses.icon}>{endIcon}</LabelIcon>}
+      {endIcon && (
+        <LabelIcon className={labelClasses.icon}>{endIcon}</LabelIcon>
+      )}
     </LabelRoot>
   );
 }

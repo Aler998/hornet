@@ -1,7 +1,7 @@
-import { createClasses } from '../../theme/create-classes';
+import { createClasses } from "../../theme/create-classes";
 
 // ----------------------------------------------------------------------
 
 export const svgColorClasses = {
-  root: createClasses('svg__color__root'),
+  root: createClasses("svg__color__root"),
 };

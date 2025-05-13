@@ -14,7 +14,7 @@ export interface Trip {
   category: string;
   images: UploadedFile[];
   tracks: UploadedFile[];
-  decodedTracks?: string[]
+  decodedTracks?: string[];
 }
 
 export interface CreateTripDto {
@@ -26,7 +26,7 @@ export interface CreateTripDto {
   slug: string;
   start: Dayjs;
   end: Dayjs;
-  category: string
+  category: string;
   images: File[] | null;
   tracks: File[] | null;
 }

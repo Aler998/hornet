@@ -2,8 +2,13 @@ import { Category } from "../../features/categories/types";
 import { Trip } from "../../features/trips/types";
 import { GraficoTorta } from "../widgets/GraficoTorta";
 
-
-const ViaggiPerCategoria = ({ trips, categories }: { trips?: Trip[], categories?: Category[] }) => {
+const ViaggiPerCategoria = ({
+  trips,
+  categories,
+}: {
+  trips?: Trip[];
+  categories?: Category[];
+}) => {
   const viaggiPerCategoria = categories
     ? categories?.map((category) => {
         return {
