@@ -1,20 +1,9 @@
-import { defineConfig, presetMini, presetWebFonts, presetWind3 } from 'unocss'
+import { defineConfig, presetMini, presetWind3 } from 'unocss'
 
 export default defineConfig({
     presets: [
         presetMini,
-        presetWind3,
-        presetWebFonts({
-            provider: 'google',
-            fonts: {
-                sans: 'Roboto',
-                mono: ['Fira Code', 'Fira Mono:400,700'],
-                oswald: [{
-                    name: 'Oswald',
-                    weights: ['200', '700'],
-                },],
-            },
-        })
+        presetWind3
     ],
     theme: {
         colors: {
