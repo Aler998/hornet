@@ -1,12 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { tripsApi } from './features/trips/tripsApi';
-import themeReducer from './features/themeSlice';
-
+import { configureStore } from "@reduxjs/toolkit";
+import { tripsApi } from "./features/trips/tripsApi";
+import themeReducer from "./features/themeSlice";
 
 export const store = configureStore({
   reducer: {
     [tripsApi.reducerPath]: tripsApi.reducer,
-    theme: themeReducer
+    theme: themeReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(tripsApi.middleware),
