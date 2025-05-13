@@ -1,4 +1,4 @@
-import path, { dirname } from "path";
+import path from "path";
 import fs, { readFileSync } from "fs";
 import { v4 as uuidv4 } from "uuid";
 import { ImageUploaded, ITrip } from "../models/Trip";
@@ -14,7 +14,7 @@ interface File {
 export const moveFilesIfExists = (
   images: File[] | null,
   tracks: File[] | null,
-  trip: ITrip
+  trip: ITrip,
 ): ITrip => {
   if (images && images.length > 0) {
     const finalPath = path.join(
@@ -23,7 +23,7 @@ export const moveFilesIfExists = (
       "..",
       "uploads",
       trip.slug,
-      "images"
+      "images",
     );
     fs.mkdirSync(finalPath, { recursive: true });
 
@@ -33,7 +33,7 @@ export const moveFilesIfExists = (
         const ext = path.extname(file.originalname);
         const finalName = `${path.basename(
           file.originalname,
-          ext
+          ext,
         )}-${Date.now()}${ext}`;
         const destPath = path.join(finalPath, finalName);
 
@@ -60,7 +60,7 @@ export const moveFilesIfExists = (
       "..",
       "uploads",
       trip.slug,
-      "tracks"
+      "tracks",
     );
     fs.mkdirSync(finalPath, { recursive: true });
 
@@ -69,7 +69,7 @@ export const moveFilesIfExists = (
       ...tracks.map((file) => {
         const ext = path.extname(file.originalname);
         const finalName = `${slugify(
-          path.basename(file.originalname, ext)
+          path.basename(file.originalname, ext),
         )}-${Date.now()}${ext}`;
         const destPath = path.join(finalPath, finalName);
 
@@ -121,13 +121,13 @@ export const CloneImage = async (image: ImageUploaded, type: CloneType) => {
         "..",
         image.folder,
         type == CloneType.thumbnail ? "thumbnail" : "hd",
-        image.filename
-      )
+        image.filename,
+      ),
     );
 };
 
 export const removeImage = (
-  image: ImageUploaded
+  image: ImageUploaded,
 ): NodeJS.ErrnoException | null => {
   fs.unlink(image.path, (err) => {
     if (err) {
@@ -140,7 +140,7 @@ export const removeImage = (
       if (err) {
         return err;
       }
-    }
+    },
   );
   fs.unlink(
     path.join(__dirname, "..", "..", image.folder, "hd", image.filename),
@@ -148,8 +148,8 @@ export const removeImage = (
       if (err) {
         return err;
       }
-    }
+    },
   );
 
-  return null
+  return null;
 };

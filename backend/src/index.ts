@@ -20,7 +20,7 @@ app.use(
   cors({
     origin: corsArray,
     credentials: true,
-  })
+  }),
 );
 
 app.use(bodyParser.json());
