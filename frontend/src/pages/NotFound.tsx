@@ -1,9 +1,7 @@
-import Layout, { templates } from '../components/Layout/Layout'
+import Layout, { templates } from "../components/Layout/Layout";
 
 function NotFound() {
-    return (
-        <Layout template={templates.noLoader} title='404' ></Layout>
-    )
+  return <Layout template={templates.noLoader} title="404"></Layout>;
 }
 
-export default NotFound
+export default NotFound;

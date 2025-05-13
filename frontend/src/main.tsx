@@ -1,16 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import 'virtual:uno.css'
-import { Provider } from 'react-redux'
-import { store } from './store.ts'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "virtual:uno.css";
+import { Provider } from "react-redux";
+import { store } from "./store.ts";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Index from './pages/Index.tsx'
+import Index from "./pages/Index.tsx";
 
-import "./global.css"
-import Trip from './pages/Trip.tsx'
-import NotFound from './pages/NotFound.tsx'
+import "./global.css";
+import Trip from "./pages/Trip.tsx";
+import NotFound from "./pages/NotFound.tsx";
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <Router>
@@ -22,4 +22,4 @@ createRoot(document.getElementById('root')!).render(
       </Router>
     </Provider>
   </StrictMode>,
-)
+);
