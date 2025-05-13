@@ -1,9 +1,5 @@
 import { Grid, Typography } from "@mui/material";
 import { DashboardContent } from "../theme/layouts/dashboard";
-import { WidgetSummary } from "../components/widgets/WidgetSummary";
-import { AnalyticsCurrentSubject } from "../theme/sections/dashboard/analytics-current-subject";
-import { AnalyticsTasks } from "../theme/sections/dashboard/analytics-tasks";
-import { _tasks } from "../theme/_mock";
 import { useGetTripsQuery } from "../features/trips/tripsApi";
 import Loader from "../components/Loader";
 import Swal from "sweetalert2";
@@ -86,14 +82,14 @@ export default function Dashboard() {
           </Grid>
 
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <WidgetSummary
-              title="Purchase orders"
-              percent={2.8}
-              total={1723315}
+            <NumericWidget
+              title="Soldi Spesi"
               color="warning"
+              trips={trips}
+              field={NumericWidgetType.euros}
               icon={
                 <img
-                  alt="Purchase orders"
+                  alt="New users"
                   src={
                     "/" +
                     import.meta.env.VITE_SUBFOLDER +
@@ -101,31 +97,18 @@ export default function Dashboard() {
                   }
                 />
               }
-              chart={{
-                categories: [
-                  "Jan",
-                  "Feb",
-                  "Mar",
-                  "Apr",
-                  "May",
-                  "Jun",
-                  "Jul",
-                  "Aug",
-                ],
-                series: [40, 70, 50, 28, 70, 75, 7, 64],
-              }}
             />
           </Grid>
 
           <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <WidgetSummary
-              title="Messages"
-              percent={3.6}
-              total={234}
+            <NumericWidget
+              title="Ore In Moto"
               color="error"
+              trips={trips}
+              field={NumericWidgetType.hours}
               icon={
                 <img
-                  alt="Messages"
+                  alt="New users"
                   src={
                     "/" +
                     import.meta.env.VITE_SUBFOLDER +
@@ -133,19 +116,6 @@ export default function Dashboard() {
                   }
                 />
               }
-              chart={{
-                categories: [
-                  "Jan",
-                  "Feb",
-                  "Mar",
-                  "Apr",
-                  "May",
-                  "Jun",
-                  "Jul",
-                  "Aug",
-                ],
-                series: [56, 30, 23, 54, 47, 40, 62, 73],
-              }}
             />
           </Grid>
 
@@ -161,37 +131,11 @@ export default function Dashboard() {
             <RatingChart trips={trips} />
           </Grid>
 
-          <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-            <AnalyticsCurrentSubject
-              title="Current subject"
-              chart={{
-                categories: [
-                  "English",
-                  "History",
-                  "Physics",
-                  "Geography",
-                  "Chinese",
-                  "Math",
-                ],
-                series: [
-                  { name: "Series 1", data: [80, 50, 30, 40, 100, 20] },
-                  { name: "Series 2", data: [20, 30, 40, 80, 20, 80] },
-                  { name: "Series 3", data: [44, 76, 78, 13, 43, 10] },
-                ],
-              }}
-            />
-          </Grid>
-
-
 
           <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-              <UltimiViaggi trips={trips} />
+            <UltimiViaggi trips={trips} />
           </Grid>
 
-
-          <Grid size={{ xs: 12, md: 6, lg: 8 }}>
-            <AnalyticsTasks title="Tasks" list={_tasks} />
-          </Grid>
         </Grid>
       </DashboardContent>
     </>

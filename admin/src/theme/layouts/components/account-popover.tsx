@@ -1,25 +1,32 @@
-import type { IconButtonProps } from '@mui/material/IconButton';
+import type { IconButtonProps } from "@mui/material/IconButton";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
-import Popover from '@mui/material/Popover';
-import Divider from '@mui/material/Divider';
-import MenuList from '@mui/material/MenuList';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuItem, { menuItemClasses } from '@mui/material/MenuItem';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import Popover from "@mui/material/Popover";
+import Divider from "@mui/material/Divider";
+import MenuList from "@mui/material/MenuList";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import MenuItem, { menuItemClasses } from "@mui/material/MenuItem";
 
-import { useRouter, usePathname } from '../../routes/hooks';
+import { useRouter, usePathname } from "../../routes/hooks";
 
-import { _myAccount } from '../../_mock';
-import { authApi, useLogoutMutation } from '../../../features/auth/authApi';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { authApi, useLogoutMutation } from "../../../features/auth/authApi";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 // ----------------------------------------------------------------------
+const _myAccount = {
+  displayName: "gattopio",
+  email: "gattopio",
+  photoURL:
+    "/" +
+    import.meta.env.VITE_SUBFOLDER +
+    "/assets/images/avatar/avatar-25.webp",
+};
 
 export type AccountPopoverProps = IconButtonProps & {
   data?: {
@@ -30,29 +37,38 @@ export type AccountPopoverProps = IconButtonProps & {
   }[];
 };
 
-export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps) {
+export function AccountPopover({
+  data = [],
+  sx,
+  ...other
+}: AccountPopoverProps) {
   const router = useRouter();
 
   const pathname = usePathname();
 
-  const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(null);
+  const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(
+    null
+  );
 
   const [logout, { isLoading }] = useLogoutMutation();
-      const dispatch = useDispatch();
-      const navigate = useNavigate();
-    
-      const handleLogout = async () => {
-        try {
-          await logout().unwrap();                  
-          dispatch(authApi.util.resetApiState()); 
-          navigate(`/${import.meta.env.VITE_SUBFOLDER}/404`);                   
-        } catch (error) {
-        }
-      };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleOpenPopover = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-    setOpenPopover(event.currentTarget);
-  }, []);
+  const handleLogout = async () => {
+    try {
+      await logout().unwrap();
+      dispatch(authApi.util.resetApiState());
+      navigate(`/${import.meta.env.VITE_SUBFOLDER}/404`);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) { /* empty */ }
+  };
+
+  const handleOpenPopover = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      setOpenPopover(event.currentTarget);
+    },
+    []
+  );
 
   const handleClosePopover = useCallback(() => {
     setOpenPopover(null);
@@ -71,7 +87,7 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
       <IconButton
         onClick={handleOpenPopover}
         sx={{
-          p: '2px',
+          p: "2px",
           width: 40,
           height: 40,
           background: (theme) =>
@@ -80,7 +96,11 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
         }}
         {...other}
       >
-        <Avatar src={_myAccount.photoURL} alt={_myAccount.displayName} sx={{ width: 1, height: 1 }}>
+        <Avatar
+          src={_myAccount.photoURL}
+          alt={_myAccount.displayName}
+          sx={{ width: 1, height: 1 }}
+        >
           {_myAccount.displayName.charAt(0).toUpperCase()}
         </Avatar>
       </IconButton>
@@ -89,8 +109,8 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
         open={!!openPopover}
         anchorEl={openPopover}
         onClose={handleClosePopover}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
         slotProps={{
           paper: {
             sx: { width: 200 },
@@ -102,30 +122,30 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
             {_myAccount?.displayName}
           </Typography>
 
-          <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+          <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
             {_myAccount?.email}
           </Typography>
         </Box>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={{ borderStyle: "dashed" }} />
 
         <MenuList
           disablePadding
           sx={{
             p: 1,
             gap: 0.5,
-            display: 'flex',
-            flexDirection: 'column',
+            display: "flex",
+            flexDirection: "column",
             [`& .${menuItemClasses.root}`]: {
               px: 1,
               gap: 2,
               borderRadius: 0.75,
-              color: 'text.secondary',
-              '&:hover': { color: 'text.primary' },
+              color: "text.secondary",
+              "&:hover": { color: "text.primary" },
               [`&.${menuItemClasses.selected}`]: {
-                color: 'text.primary',
-                bgcolor: 'action.selected',
-                fontWeight: 'fontWeightSemiBold',
+                color: "text.primary",
+                bgcolor: "action.selected",
+                fontWeight: "fontWeightSemiBold",
               },
             },
           }}
@@ -142,10 +162,17 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
           ))}
         </MenuList>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={{ borderStyle: "dashed" }} />
 
         <Box sx={{ p: 1 }}>
-          <Button disabled={isLoading} onClick={handleLogout} fullWidth color="error" size="medium" variant="text">
+          <Button
+            disabled={isLoading}
+            onClick={handleLogout}
+            fullWidth
+            color="error"
+            size="medium"
+            variant="text"
+          >
             Logout
           </Button>
         </Box>

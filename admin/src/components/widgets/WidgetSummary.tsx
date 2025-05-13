@@ -22,6 +22,7 @@ type Props = CardProps & {
   percent: number;
   color?: PaletteColorKey;
   icon: React.ReactNode;
+  unit?: string,
   chart: {
     series: number[];
     categories: string[];
@@ -36,6 +37,7 @@ export function WidgetSummary({
   total,
   chart,
   percent,
+  unit,
   color = 'primary',
   ...other
 }: Props) {
@@ -113,7 +115,7 @@ export function WidgetSummary({
         <Box sx={{ flexGrow: 1, minWidth: 112 }}>
           <Box sx={{ mb: 1, typography: 'subtitle2' }}>{title}</Box>
 
-          <Box sx={{ typography: 'h4' }}>{fShortenNumber(total)}</Box>
+          <Box sx={{ typography: 'h4' }}>{fShortenNumber(total)}{unit}</Box>
         </Box>
 
         <Chart
