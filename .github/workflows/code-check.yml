@@ -25,7 +25,7 @@ jobs:
       - name: Install and run Prettier + ESLint in ${{ matrix.project }}
         working-directory: ${{ matrix.project }}
         run: |
-          npm i
+          npm ci
           npm run format
           npm run lint
 
