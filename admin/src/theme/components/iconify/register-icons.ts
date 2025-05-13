@@ -1,13 +1,13 @@
-import type { IconifyJSON } from '@iconify/react';
+import type { IconifyJSON } from "@iconify/react";
 
-import { addCollection } from '@iconify/react';
+import { addCollection } from "@iconify/react";
 
-import allIcons from './icon-sets';
+import allIcons from "./icon-sets";
 
 // ----------------------------------------------------------------------
 
 export const iconSets = Object.entries(allIcons).reduce((acc, [key, value]) => {
-  const [prefix, iconName] = key.split(':');
+  const [prefix, iconName] = key.split(":");
   const existingPrefix = acc.find((item) => item.prefix === prefix);
 
   if (existingPrefix) {
@@ -40,8 +40,8 @@ export function registerIcons() {
   iconSets.forEach((iconSet) => {
     const iconSetConfig = {
       ...iconSet,
-      width: (iconSet.prefix === 'carbon' && 32) || 24,
-      height: (iconSet.prefix === 'carbon' && 32) || 24,
+      width: (iconSet.prefix === "carbon" && 32) || 24,
+      height: (iconSet.prefix === "carbon" && 32) || 24,
     };
 
     addCollection(iconSetConfig);

@@ -5,12 +5,16 @@ import "dayjs/locale/it";
 import { ReactNode } from "react";
 import { PaletteColorKey } from "../../theme/theme";
 
+const PREZZO_BENZINA = 1.7;
+
 dayjs.locale("it");
 
 // eslint-disable-next-line react-refresh/only-export-components
 export enum NumericWidgetType {
   km,
   liters,
+  euros,
+  hours,
 }
 
 function NumericWidget({
@@ -51,6 +55,21 @@ function NumericWidget({
             case NumericWidgetType.liters:
               monthMap.set(key, (monthMap.get(key) || 0) + trip.liters);
               break;
+
+            case NumericWidgetType.euros:
+              monthMap.set(
+                key,
+                (monthMap.get(key) || 0) + trip.liters * PREZZO_BENZINA,
+              );
+              break;
+
+            case NumericWidgetType.hours:
+              monthMap.set(
+                key,
+                (monthMap.get(key) || 0) +
+                  dayjs(trip.end).diff(trip.start, "hour", true),
+              );
+              break;
           }
         }
       }
@@ -76,14 +95,30 @@ function NumericWidget({
       ((valoreCorrente - valorePrecedente) / valorePrecedente) * 100;
   }
 
-  
+  let unit = "";
+  switch (field) {
+    case NumericWidgetType.km:
+      unit += "km";
+      break;
+    case NumericWidgetType.liters:
+      unit += "L";
+      break;
+    case NumericWidgetType.euros:
+      unit += "€";
+      break;
+    case NumericWidgetType.hours:
+      unit += "h";
+      break;
+  }
+
   return (
     <WidgetSummary
       title={title}
       color={color}
       percent={percentuale}
-      total={result.series.reduce((sum, value) => sum + value, 0) }
+      total={result.series.reduce((sum, value) => sum + value, 0)}
       icon={icon}
+      unit={unit}
       chart={result}
     />
   );

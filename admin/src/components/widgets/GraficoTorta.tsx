@@ -1,14 +1,14 @@
-import type { CardProps } from '@mui/material/Card';
-import type { ChartOptions } from '../../theme/components/chart';
+import type { CardProps } from "@mui/material/Card";
+import type { ChartOptions } from "../../theme/components/chart";
 
-import Card from '@mui/material/Card';
-import Divider from '@mui/material/Divider';
-import { useTheme } from '@mui/material/styles';
-import CardHeader from '@mui/material/CardHeader';
+import Card from "@mui/material/Card";
+import Divider from "@mui/material/Divider";
+import { useTheme } from "@mui/material/styles";
+import CardHeader from "@mui/material/CardHeader";
 
-import { fNumber } from '../../theme/utils/format-number';
+import { fNumber } from "../../theme/utils/format-number";
 
-import { Chart, useChart, ChartLegends } from '../../theme/components/chart';
+import { Chart, useChart, ChartLegends } from "../../theme/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -63,18 +63,18 @@ export function GraficoTorta({ title, subheader, chart, sx, ...other }: Props) {
         options={chartOptions}
         sx={{
           my: 6,
-          mx: 'auto',
+          mx: "auto",
           width: { xs: 240, xl: 260 },
           height: { xs: 240, xl: 260 },
         }}
       />
 
-      <Divider sx={{ borderStyle: 'dashed' }} />
+      <Divider sx={{ borderStyle: "dashed" }} />
 
       <ChartLegends
         labels={chartOptions?.labels}
         colors={chartOptions?.colors}
-        sx={{ p: 3, justifyContent: 'center' }}
+        sx={{ p: 3, justifyContent: "center" }}
       />
     </Card>
   );

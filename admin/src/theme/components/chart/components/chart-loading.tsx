@@ -1,20 +1,30 @@
-import type { BoxProps } from '@mui/material/Box';
+import type { BoxProps } from "@mui/material/Box";
 
-import { mergeClasses } from 'minimal-shared/utils';
+import { mergeClasses } from "minimal-shared/utils";
 
-import Box from '@mui/material/Box';
-import Skeleton from '@mui/material/Skeleton';
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
 
-import { chartClasses } from '../classes';
+import { chartClasses } from "../classes";
 
-import type { ChartProps } from '../types';
+import type { ChartProps } from "../types";
 
 // ----------------------------------------------------------------------
 
-export type ChartLoadingProps = BoxProps & Pick<ChartProps, 'type'>;
+export type ChartLoadingProps = BoxProps & Pick<ChartProps, "type">;
 
-export function ChartLoading({ sx, className, type, ...other }: ChartLoadingProps) {
-  const circularTypes: ChartProps['type'][] = ['donut', 'radialBar', 'pie', 'polarArea'];
+export function ChartLoading({
+  sx,
+  className,
+  type,
+  ...other
+}: ChartLoadingProps) {
+  const circularTypes: ChartProps["type"][] = [
+    "donut",
+    "radialBar",
+    "pie",
+    "polarArea",
+  ];
 
   return (
     <Box
@@ -26,12 +36,12 @@ export function ChartLoading({ sx, className, type, ...other }: ChartLoadingProp
           width: 1,
           zIndex: 9,
           height: 1,
-          p: 'inherit',
-          overflow: 'hidden',
-          alignItems: 'center',
-          position: 'absolute',
-          borderRadius: 'inherit',
-          justifyContent: 'center',
+          p: "inherit",
+          overflow: "hidden",
+          alignItems: "center",
+          position: "absolute",
+          borderRadius: "inherit",
+          justifyContent: "center",
         }),
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
@@ -42,8 +52,8 @@ export function ChartLoading({ sx, className, type, ...other }: ChartLoadingProp
         sx={{
           width: 1,
           height: 1,
-          borderRadius: 'inherit',
-          ...(circularTypes.includes(type) && { borderRadius: '50%' }),
+          borderRadius: "inherit",
+          ...(circularTypes.includes(type) && { borderRadius: "50%" }),
         }}
       />
     </Box>

@@ -1,34 +1,30 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import LoginRequest from './types';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import LoginRequest from "./types";
 
 export const authApi = createApi({
-  reducerPath: 'authApi',
+  reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_API_URL}`,
-    credentials: 'include', // Necessario per usare i cookie
+    credentials: "include", // Necessario per usare i cookie
   }),
   endpoints: (builder) => ({
     login: builder.mutation<void, LoginRequest>({
       query: (credentials) => ({
-        url: 'auth/login',
-        method: 'POST',
+        url: "auth/login",
+        method: "POST",
         body: credentials,
       }),
     }),
     logout: builder.mutation<void, void>({
       query: () => ({
-        url: 'auth/logout',
-        method: 'POST',
+        url: "auth/logout",
+        method: "POST",
       }),
     }),
     getMe: builder.query<string, void>({
-      query: () => 'auth/me',
+      query: () => "auth/me",
     }),
   }),
 });
 
-export const {
-  useLoginMutation,
-  useLogoutMutation,
-  useGetMeQuery,
-} = authApi;
+export const { useLoginMutation, useLogoutMutation, useGetMeQuery } = authApi;

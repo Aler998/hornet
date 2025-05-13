@@ -1,15 +1,16 @@
-import type {} from '@mui/lab/themeAugmentation';
-import type {} from '@mui/material/themeCssVarsAugmentation';
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+import type {} from "@mui/lab/themeAugmentation";
+import type {} from "@mui/material/themeCssVarsAugmentation";
 
-import type { FontStyleExtend } from './core/typography';
-import type { CustomShadows } from './core/custom-shadows';
+import type { FontStyleExtend } from "./core/typography";
+import type { CustomShadows } from "./core/custom-shadows";
 import type {
   GreyExtend,
   TypeTextExtend,
   CommonColorsExtend,
   PaletteColorExtend,
   TypeBackgroundExtend,
-} from './core/palette';
+} from "./core/palette";
 
 // ----------------------------------------------------------------------
 
@@ -23,7 +24,7 @@ import type {
  * https://mui.com/customization/palette/
  * @from {@link file://./core/palette.ts}
  */
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   // grey
   interface Color extends GreyExtend {}
   // text
@@ -42,12 +43,12 @@ declare module '@mui/material/styles' {
  * https://mui.com/customization/typography/
  * @from {@link file://./core/typography.ts}
  */
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   interface TypographyVariants extends FontStyleExtend {}
   interface TypographyVariantsOptions extends Partial<FontStyleExtend> {}
 }
 
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   /**
    * Custom shadows
    * @from {@link file://./core/custom-shadows.ts}
@@ -60,7 +61,7 @@ declare module '@mui/material/styles' {
   }
   interface ThemeVars {
     customShadows: CustomShadows;
-    typography: Theme['typography'];
-    transitions: Theme['transitions'];
+    typography: Theme["typography"];
+    transitions: Theme["transitions"];
   }
 }

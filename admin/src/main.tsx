@@ -1,12 +1,12 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
 
-import { store } from './store';
-import App from './app';
-import { ErrorBoundary } from './theme/routes/components';
-import { routesSection } from './routes';
+import { store } from "./store";
+import App from "./app";
+import { ErrorBoundary } from "./theme/routes/components";
+import { routesSection } from "./routes";
 
 const router = createBrowserRouter([
   {
@@ -20,13 +20,12 @@ const router = createBrowserRouter([
   },
 ]);
 
-const root = createRoot(document.getElementById('root')!);
+const root = createRoot(document.getElementById("root")!);
 
 root.render(
   <StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </StrictMode>
+  </StrictMode>,
 );
-

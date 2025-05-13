@@ -1,10 +1,10 @@
-import type { Shadows } from '@mui/material/styles';
+import type { Shadows } from "@mui/material/styles";
 
-import { varAlpha } from 'minimal-shared/utils';
+import { varAlpha } from "minimal-shared/utils";
 
-import { grey } from './palette';
+import { grey } from "./palette";
 
-import type { ThemeColorScheme } from '../types';
+import type { ThemeColorScheme } from "../types";
 
 // ----------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ function createShadows(colorChannel: string): Shadows {
   const color3 = varAlpha(colorChannel, 0.12);
 
   return [
-    'none',
+    "none",
     `0px 2px 1px -1px ${color1},0px 1px 1px 0px ${color2},0px 1px 3px 0px ${color3}`,
     `0px 3px 1px -2px ${color1},0px 2px 2px 0px ${color2},0px 1px 5px 0px ${color3}`,
     `0px 3px 3px -2px ${color1},0px 3px 4px 0px ${color2},0px 1px 8px 0px ${color3}`,
@@ -43,5 +43,5 @@ function createShadows(colorChannel: string): Shadows {
 }
 
 export const shadows: Partial<Record<ThemeColorScheme, Shadows>> = {
-  light: createShadows(grey['500Channel']),
+  light: createShadows(grey["500Channel"]),
 };

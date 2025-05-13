@@ -1,12 +1,12 @@
-import { Iconify } from '../components/iconify';
+import { Iconify } from "../components/iconify";
 
-import type { AccountPopoverProps } from './components/account-popover';
+import type { AccountPopoverProps } from "./components/account-popover";
 
 // ----------------------------------------------------------------------
 
-export const _account: AccountPopoverProps['data'] = [
+export const _account: AccountPopoverProps["data"] = [
   {
-    label: 'Home',
+    label: "Home",
     href: import.meta.env.VITE_SUBFOLDER,
     icon: <Iconify width={22} icon="solar:home-angle-bold-duotone" />,
   },

@@ -1,24 +1,24 @@
-import type { Theme, SxProps, Breakpoint } from '@mui/material/styles';
+import type { Theme, SxProps, Breakpoint } from "@mui/material/styles";
 
-import { useEffect } from 'react';
-import { varAlpha } from 'minimal-shared/utils';
+import { useEffect } from "react";
+import { varAlpha } from "minimal-shared/utils";
 
-import Box from '@mui/material/Box';
-import  Divider  from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import { useTheme } from '@mui/material/styles';
-import ListItemButton from '@mui/material/ListItemButton';
-import Drawer, { drawerClasses } from '@mui/material/Drawer';
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import { useTheme } from "@mui/material/styles";
+import ListItemButton from "@mui/material/ListItemButton";
+import Drawer, { drawerClasses } from "@mui/material/Drawer";
 
-import { usePathname } from '../../routes/hooks';
-import { RouterLink } from '../../routes/components';
+import { usePathname } from "../../routes/hooks";
+import { RouterLink } from "../../routes/components";
 
-import { Logo } from '../../components/logo';
-import { Scrollbar } from 'react-scrollbars-custom';
+import { Logo } from "../../components/logo";
+import { Scrollbar } from "react-scrollbars-custom";
 
-import { NavUpgrade } from '../components/nav-upgrade';
+import { NavUpgrade } from "../components/nav-upgrade";
 
-import type { NavItem } from '../nav-config-dashboard';
+import type { NavItem } from "../nav-config-dashboard";
 
 // ----------------------------------------------------------------------
 
@@ -47,19 +47,19 @@ export function NavDesktop({
         top: 0,
         left: 0,
         height: 1,
-        display: 'none',
-        position: 'fixed',
-        flexDirection: 'column',
-        zIndex: 'var(--layout-nav-zIndex)',
-        width: 'var(--layout-nav-vertical-width)',
-        borderRight: `1px solid ${varAlpha(theme.vars.palette.grey['500Channel'], 0.12)}`,
+        display: "none",
+        position: "fixed",
+        flexDirection: "column",
+        zIndex: "var(--layout-nav-zIndex)",
+        width: "var(--layout-nav-vertical-width)",
+        borderRight: `1px solid ${varAlpha(theme.vars.palette.grey["500Channel"], 0.12)}`,
         [theme.breakpoints.up(layoutQuery)]: {
-          display: 'flex',
+          display: "flex",
         },
         ...sx,
       }}
     >
-      <NavContent data={data} slots={slots}/>
+      <NavContent data={data} slots={slots} />
     </Box>
   );
 }
@@ -90,8 +90,8 @@ export function NavMobile({
         [`& .${drawerClasses.paper}`]: {
           pt: 2.5,
           px: 2.5,
-          overflow: 'unset',
-          width: 'var(--layout-nav-mobile-width)',
+          overflow: "unset",
+          width: "var(--layout-nav-mobile-width)",
           ...sx,
         },
       }}
@@ -108,7 +108,7 @@ export function NavContent({ data, slots, sx }: NavContentProps) {
 
   return (
     <>
-      <Logo sx={[{marginBottom: 2}]}/>
+      <Logo sx={[{ marginBottom: 2 }]} />
 
       {slots?.topArea}
 
@@ -119,10 +119,10 @@ export function NavContent({ data, slots, sx }: NavContentProps) {
           component="nav"
           sx={[
             {
-              display: 'flex',
-              flex: '1 1 auto',
-              flexDirection: 'column',
-              marginTop: 2
+              display: "flex",
+              flex: "1 1 auto",
+              flexDirection: "column",
+              marginTop: 2,
             },
             ...(Array.isArray(sx) ? sx : [sx]),
           ]}
@@ -131,8 +131,8 @@ export function NavContent({ data, slots, sx }: NavContentProps) {
             component="ul"
             sx={{
               gap: 0.5,
-              display: 'flex',
-              flexDirection: 'column',
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             {data.map((item) => {
@@ -151,16 +151,22 @@ export function NavContent({ data, slots, sx }: NavContentProps) {
                         gap: 2,
                         pr: 1.5,
                         borderRadius: 0.75,
-                        typography: 'body2',
-                        fontWeight: 'fontWeightMedium',
+                        typography: "body2",
+                        fontWeight: "fontWeightMedium",
                         color: theme.vars.palette.text.secondary,
                         minHeight: 44,
                         ...(isActived && {
-                          fontWeight: 'fontWeightSemiBold',
+                          fontWeight: "fontWeightSemiBold",
                           color: theme.vars.palette.primary.main,
-                          bgcolor: varAlpha(theme.vars.palette.primary.mainChannel, 0.08),
-                          '&:hover': {
-                            bgcolor: varAlpha(theme.vars.palette.primary.mainChannel, 0.16),
+                          bgcolor: varAlpha(
+                            theme.vars.palette.primary.mainChannel,
+                            0.08,
+                          ),
+                          "&:hover": {
+                            bgcolor: varAlpha(
+                              theme.vars.palette.primary.mainChannel,
+                              0.16,
+                            ),
                           },
                         }),
                       }),

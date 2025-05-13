@@ -1,18 +1,22 @@
-import type { CardProps } from '@mui/material/Card';
-import type { PaletteColorKey } from '../../theme/theme/core';
-import type { ChartOptions } from '../../theme/components/chart';
+import type { CardProps } from "@mui/material/Card";
+import type { PaletteColorKey } from "../../theme/theme/core";
+import type { ChartOptions } from "../../theme/components/chart";
 
-import { varAlpha } from 'minimal-shared/utils';
+import { varAlpha } from "minimal-shared/utils";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import { useTheme } from "@mui/material/styles";
 
-import { fNumber, fPercent, fShortenNumber } from '../../theme/utils/format-number';
+import {
+  fNumber,
+  fPercent,
+  fShortenNumber,
+} from "../../theme/utils/format-number";
 
-import { Iconify } from '../../theme/components/iconify';
-import { SvgColor } from '../../theme/components/svg-color';
-import { Chart, useChart } from '../../theme/components/chart';
+import { Iconify } from "../../theme/components/iconify";
+import { SvgColor } from "../../theme/components/svg-color";
+import { Chart, useChart } from "../../theme/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -22,6 +26,7 @@ type Props = CardProps & {
   percent: number;
   color?: PaletteColorKey;
   icon: React.ReactNode;
+  unit?: string;
   chart: {
     series: number[];
     categories: string[];
@@ -36,7 +41,8 @@ export function WidgetSummary({
   total,
   chart,
   percent,
-  color = 'primary',
+  unit,
+  color = "primary",
   ...other
 }: Props) {
   const theme = useTheme();
@@ -56,7 +62,10 @@ export function WidgetSummary({
       },
     },
     tooltip: {
-      y: { formatter: (value: number) => fNumber(value), title: { formatter: () => '' } },
+      y: {
+        formatter: (value: number) => fNumber(value),
+        title: { formatter: () => "" },
+      },
     },
     markers: {
       strokeWidth: 0,
@@ -70,14 +79,17 @@ export function WidgetSummary({
         top: 16,
         gap: 0.5,
         right: 16,
-        display: 'flex',
-        position: 'absolute',
-        alignItems: 'center',
+        display: "flex",
+        position: "absolute",
+        alignItems: "center",
       }}
     >
-      <Iconify width={20} icon={percent < 0 ? 'eva:trending-down-fill' : 'eva:trending-up-fill'} />
-      <Box component="span" sx={{ typography: 'subtitle2' }}>
-        {percent > 0 && '+'}
+      <Iconify
+        width={20}
+        icon={percent < 0 ? "eva:trending-down-fill" : "eva:trending-up-fill"}
+      />
+      <Box component="span" sx={{ typography: "subtitle2" }}>
+        {percent > 0 && "+"}
         {fPercent(percent)}
       </Box>
     </Box>
@@ -88,10 +100,10 @@ export function WidgetSummary({
       sx={[
         () => ({
           p: 3,
-          boxShadow: 'none',
-          position: 'relative',
+          boxShadow: "none",
+          position: "relative",
           color: `${color}.darker`,
-          backgroundColor: 'common.white',
+          backgroundColor: "common.white",
           backgroundImage: `linear-gradient(135deg, ${varAlpha(theme.vars.palette[color].lighterChannel, 0.48)}, ${varAlpha(theme.vars.palette[color].lightChannel, 0.48)})`,
         }),
         ...(Array.isArray(sx) ? sx : [sx]),
@@ -104,16 +116,19 @@ export function WidgetSummary({
 
       <Box
         sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'flex-end',
-          justifyContent: 'flex-end',
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "flex-end",
+          justifyContent: "flex-end",
         }}
       >
         <Box sx={{ flexGrow: 1, minWidth: 112 }}>
-          <Box sx={{ mb: 1, typography: 'subtitle2' }}>{title}</Box>
+          <Box sx={{ mb: 1, typography: "subtitle2" }}>{title}</Box>
 
-          <Box sx={{ typography: 'h4' }}>{fShortenNumber(total)}</Box>
+          <Box sx={{ typography: "h4" }}>
+            {fShortenNumber(total)}
+            {unit}
+          </Box>
         </Box>
 
         <Chart
@@ -125,7 +140,11 @@ export function WidgetSummary({
       </Box>
 
       <SvgColor
-        src={"/" + import.meta.env.VITE_SUBFOLDER +"/assets/background/shape-square.svg"}
+        src={
+          "/" +
+          import.meta.env.VITE_SUBFOLDER +
+          "/assets/background/shape-square.svg"
+        }
         sx={{
           top: 0,
           left: -20,
@@ -133,7 +152,7 @@ export function WidgetSummary({
           zIndex: -1,
           height: 240,
           opacity: 0.24,
-          position: 'absolute',
+          position: "absolute",
           color: `${color}.main`,
         }}
       />

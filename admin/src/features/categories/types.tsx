@@ -17,7 +17,6 @@ export interface UpdateCategoryDto extends Partial<CreateCategoryDto> {
   newSlug: string;
 }
 
-
 export type CategoryTableRowProps = {
   row: Category;
   selected: boolean;

@@ -1,15 +1,15 @@
-import type { Theme } from '@mui/material/styles';
+import type { Theme } from "@mui/material/styles";
 
-import { createTheme as createMuiTheme } from '@mui/material/styles';
+import { createTheme as createMuiTheme } from "@mui/material/styles";
 
-import { shadows } from './core/shadows';
-import { palette } from './core/palette';
-import { themeConfig } from './theme-config';
-import { components } from './core/components';
-import { typography } from './core/typography';
-import { customShadows } from './core/custom-shadows';
+import { shadows } from "./core/shadows";
+import { palette } from "./core/palette";
+import { themeConfig } from "./theme-config";
+import { components } from "./core/components";
+import { typography } from "./core/typography";
+import { customShadows } from "./core/custom-shadows";
 
-import type { ThemeOptions } from './types';
+import type { ThemeOptions } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -33,7 +33,9 @@ type CreateThemeProps = {
   themeOverrides?: ThemeOptions;
 };
 
-export function createTheme({ themeOverrides = {} }: CreateThemeProps = {}): Theme {
+export function createTheme({
+  themeOverrides = {},
+}: CreateThemeProps = {}): Theme {
   const theme = createMuiTheme(baseTheme, themeOverrides);
 
   return theme;

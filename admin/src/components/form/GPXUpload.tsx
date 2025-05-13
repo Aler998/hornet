@@ -57,7 +57,7 @@ const GPXUpload: React.FC<GPXUploadProps> = ({
 
     setForm({ ...form, tracks: filesArray });
     setTrackPreviews(
-      filesArray.map((file: File) => ({ uuid: uuidv4(), filename: file.name }))
+      filesArray.map((file: File) => ({ uuid: uuidv4(), filename: file.name })),
     );
   };
 

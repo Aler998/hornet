@@ -1,14 +1,18 @@
-import { Navigate } from 'react-router-dom';
-import { useGetMeQuery } from '../features/auth/authApi';
-import { JSX } from 'react';
-import Loader from './Loader';
+import { Navigate } from "react-router-dom";
+import { useGetMeQuery } from "../features/auth/authApi";
+import { JSX } from "react";
+import Loader from "./Loader";
 
-export const RedirectIfAuthenticated = ({ children }: { children: JSX.Element }) => {
+export const RedirectIfAuthenticated = ({
+  children,
+}: {
+  children: JSX.Element;
+}) => {
   const { data: user, isLoading } = useGetMeQuery();
-  const redirectTo = `/${import.meta.env.VITE_SUBFOLDER}/`
+  const redirectTo = `/${import.meta.env.VITE_SUBFOLDER}/`;
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
 
   if (user) {

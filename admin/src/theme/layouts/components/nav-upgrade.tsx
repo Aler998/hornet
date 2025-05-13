@@ -1,7 +1,7 @@
-import type { StackProps } from '@mui/material/Stack';
+import type { StackProps } from "@mui/material/Stack";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 // ----------------------------------------------------------------------
 
@@ -11,10 +11,10 @@ export function NavUpgrade({ sx, ...other }: StackProps) {
       sx={[
         {
           mb: 4,
-          display: 'flex',
-          textAlign: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
+          display: "flex",
+          textAlign: "center",
+          alignItems: "center",
+          flexDirection: "column",
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
@@ -25,17 +25,16 @@ export function NavUpgrade({ sx, ...other }: StackProps) {
         sx={[
           (theme) => ({
             background: `linear-gradient(to right, ${theme.vars.palette.secondary.main}, ${theme.vars.palette.warning.main})`,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            textFillColor: 'transparent',
-            color: 'transparent',
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            textFillColor: "transparent",
+            color: "transparent",
           }),
         ]}
       >
         Nav Upgrade
       </Typography>
-
     </Box>
   );
 }

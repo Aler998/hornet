@@ -1,8 +1,8 @@
-import type { Theme, CSSObject } from '@mui/material/styles';
+import type { Theme, CSSObject } from "@mui/material/styles";
 
-import { useRouteError, isRouteErrorResponse } from 'react-router';
+import { useRouteError, isRouteErrorResponse } from "react-router";
 
-import GlobalStyles from '@mui/material/GlobalStyles';
+import GlobalStyles from "@mui/material/GlobalStyles";
 
 // ----------------------------------------------------------------------
 
@@ -14,7 +14,9 @@ export function ErrorBoundary() {
       {inputGlobalStyles()}
 
       <div className={errorBoundaryClasses.root}>
-        <div className={errorBoundaryClasses.container}>{renderErrorMessage(error)}</div>
+        <div className={errorBoundaryClasses.container}>
+          {renderErrorMessage(error)}
+        </div>
       </div>
     </>
   );
@@ -34,6 +36,7 @@ function parseStackTrace(stack?: string) {
   };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function renderErrorMessage(error: any) {
   if (isRouteErrorResponse(error)) {
     return (
@@ -51,7 +54,9 @@ function renderErrorMessage(error: any) {
 
     return (
       <>
-        <h1 className={errorBoundaryClasses.title}>Unexpected Application Error!</h1>
+        <h1 className={errorBoundaryClasses.title}>
+          Unexpected Application Error!
+        </h1>
         <p className={errorBoundaryClasses.message}>
           {error.name}: {error.message}
         </p>
@@ -71,46 +76,46 @@ function renderErrorMessage(error: any) {
 // ----------------------------------------------------------------------
 
 const errorBoundaryClasses = {
-  root: 'error-boundary-root',
-  container: 'error-boundary-container',
-  title: 'error-boundary-title',
-  details: 'error-boundary-details',
-  message: 'error-boundary-message',
-  filePath: 'error-boundary-file-path',
+  root: "error-boundary-root",
+  container: "error-boundary-container",
+  title: "error-boundary-title",
+  details: "error-boundary-details",
+  message: "error-boundary-message",
+  filePath: "error-boundary-file-path",
 };
 
 const cssVars: CSSObject = {
-  '--info-color': '#2dd9da',
-  '--warning-color': '#e2aa53',
-  '--error-color': '#ff5555',
-  '--error-background': '#2a1e1e',
-  '--details-background': '#111111',
-  '--root-background': '#2c2c2e',
-  '--container-background': '#1c1c1e',
-  '--font-stack-monospace':
+  "--info-color": "#2dd9da",
+  "--warning-color": "#e2aa53",
+  "--error-color": "#ff5555",
+  "--error-background": "#2a1e1e",
+  "--details-background": "#111111",
+  "--root-background": "#2c2c2e",
+  "--container-background": "#1c1c1e",
+  "--font-stack-monospace":
     '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace',
-  '--font-stack-sans':
+  "--font-stack-sans":
     '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
 };
 
 const rootStyles = (): CSSObject => ({
-  display: 'flex',
-  flex: '1 1 auto',
-  alignItems: 'center',
-  padding: '10vh 15px 0',
-  flexDirection: 'column',
-  fontFamily: 'var(--font-stack-sans)',
+  display: "flex",
+  flex: "1 1 auto",
+  alignItems: "center",
+  padding: "10vh 15px 0",
+  flexDirection: "column",
+  fontFamily: "var(--font-stack-sans)",
 });
 
 const contentStyles = (): CSSObject => ({
   gap: 24,
   padding: 20,
-  width: '100%',
+  width: "100%",
   maxWidth: 960,
-  display: 'flex',
+  display: "flex",
   borderRadius: 8,
-  flexDirection: 'column',
-  backgroundColor: 'var(--container-background)',
+  flexDirection: "column",
+  backgroundColor: "var(--container-background)",
 });
 
 const titleStyles = (theme: Theme): CSSObject => ({
@@ -123,13 +128,13 @@ const titleStyles = (theme: Theme): CSSObject => ({
 const messageStyles = (theme: Theme): CSSObject => ({
   margin: 0,
   lineHeight: 1.5,
-  padding: '12px 16px',
-  whiteSpace: 'pre-wrap',
-  color: 'var(--error-color)',
+  padding: "12px 16px",
+  whiteSpace: "pre-wrap",
+  color: "var(--error-color)",
   fontSize: theme.typography.pxToRem(14),
-  fontFamily: 'var(--font-stack-monospace)',
-  backgroundColor: 'var(--error-background)',
-  borderLeft: '2px solid var(--error-color)',
+  fontFamily: "var(--font-stack-monospace)",
+  backgroundColor: "var(--error-background)",
+  borderLeft: "2px solid var(--error-color)",
   fontWeight: theme.typography.fontWeightBold,
 });
 
@@ -137,15 +142,15 @@ const detailsStyles = (): CSSObject => ({
   margin: 0,
   padding: 16,
   lineHeight: 1.5,
-  overflow: 'auto',
-  borderRadius: 'inherit',
-  color: 'var(--warning-color)',
-  backgroundColor: 'var(--details-background)',
+  overflow: "auto",
+  borderRadius: "inherit",
+  color: "var(--warning-color)",
+  backgroundColor: "var(--details-background)",
 });
 
 const filePathStyles = (): CSSObject => ({
   marginTop: 0,
-  color: 'var(--info-color)',
+  color: "var(--info-color)",
 });
 
 const inputGlobalStyles = () => (
@@ -154,8 +159,8 @@ const inputGlobalStyles = () => (
       body: {
         ...cssVars,
         margin: 0,
-        color: 'white',
-        backgroundColor: 'var(--root-background)',
+        color: "white",
+        backgroundColor: "var(--root-background)",
         [`& .${errorBoundaryClasses.root}`]: rootStyles(),
         [`& .${errorBoundaryClasses.container}`]: contentStyles(),
         [`& .${errorBoundaryClasses.title}`]: titleStyles(theme),

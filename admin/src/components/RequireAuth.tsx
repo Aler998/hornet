@@ -3,11 +3,10 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useGetMeQuery } from "../features/auth/authApi";
 import Loader from "./Loader";
 
-
 export const RequireAuth = ({ children }: { children: JSX.Element }) => {
   const { data: user, isLoading, isError } = useGetMeQuery();
   const location = useLocation();
-  const redirectTo = `/${import.meta.env.VITE_SUBFOLDER}/login`
+  const redirectTo = `/${import.meta.env.VITE_SUBFOLDER}/login`;
 
   if (isLoading) {
     return <Loader />;

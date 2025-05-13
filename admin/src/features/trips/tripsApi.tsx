@@ -1,30 +1,28 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-import type { Trip, CreateTripDto, UpdateTripDto } from './types';
-import { baseQueryWithErrorHandler } from '../ApiErrorHandler';
-
+import { createApi } from "@reduxjs/toolkit/query/react";
+import type { Trip, CreateTripDto, UpdateTripDto } from "./types";
+import { baseQueryWithErrorHandler } from "../ApiErrorHandler";
 
 export const tripsApi = createApi({
-  reducerPath: 'tripsApi',
+  reducerPath: "tripsApi",
   baseQuery: baseQueryWithErrorHandler,
-  tagTypes: ['Trips'],
+  tagTypes: ["Trips"],
   endpoints: (builder) => ({
     getTrips: builder.query<Trip[], void>({
-      query: () => 'trips',
-      providesTags: ['Trips'],
+      query: () => "trips",
+      providesTags: ["Trips"],
     }),
     getTrip: builder.query<Trip, string>({
       query: (id) => `trips/${id}`,
-      providesTags: (_result, _error, id) => [{ type: 'Trips', id }],
+      providesTags: (_result, _error, id) => [{ type: "Trips", id }],
     }),
     createTrip: builder.mutation<Trip, CreateTripDto>({
       query: (trip) => {
-
         const formData = new FormData();
         trip.images?.forEach((file) => {
-          formData.append('images', file);
+          formData.append("images", file);
         });
         trip.tracks?.forEach((file) => {
-          formData.append('tracks', file);
+          formData.append("tracks", file);
         });
 
         formData.append("category", trip.category);
@@ -41,23 +39,22 @@ export const tripsApi = createApi({
         formData.append("km", trip.km.toString());
         formData.append("velocity", trip.velocity.toString());
 
-        return ({
-          url: 'trips',
-          method: 'POST',
+        return {
+          url: "trips",
+          method: "POST",
           body: formData,
-        })
+        };
       },
-      invalidatesTags: ['Trips'],
+      invalidatesTags: ["Trips"],
     }),
     updateTrip: builder.mutation<Trip, UpdateTripDto>({
       query: ({ slug, ...rest }) => {
-
         const formData = new FormData();
         rest.images?.forEach((file) => {
-          formData.append('images', file);
+          formData.append("images", file);
         });
         rest.tracks?.forEach((file) => {
-          formData.append('tracks', file);
+          formData.append("tracks", file);
         });
 
         formData.append("category", rest.category);
@@ -76,41 +73,45 @@ export const tripsApi = createApi({
         formData.append("km", rest.km.toString());
         formData.append("velocity", rest.velocity.toString());
 
-        return ({
+        return {
           url: `trips/${slug}`,
-          method: 'PUT',
+          method: "PUT",
           body: formData,
-        })
+        };
       },
-      invalidatesTags: (_res, _err, { slug }) => [{ type: 'Trips', slug }],
+      invalidatesTags: (_res, _err, { slug }) => [{ type: "Trips", slug }],
     }),
     deleteTrip: builder.mutation<void, string>({
       query: (slug) => ({
         url: `trips/${slug}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
-      invalidatesTags: (_res, _err, slug) => [{ type: 'Trips', slug }],
+      invalidatesTags: (_res, _err, slug) => [{ type: "Trips", slug }],
     }),
-    deleteTripImage: builder.mutation<void, { slug: string, image: string }>({
+    deleteTripImage: builder.mutation<void, { slug: string; image: string }>({
       query: ({ slug, image }) => ({
         url: `trips/${slug}/images/${image}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
-      invalidatesTags: (_res, _err, slug, image) => [{ type: 'Trips', slug, image }],
+      invalidatesTags: (_res, _err, slug, image) => [
+        { type: "Trips", slug, image },
+      ],
     }),
-    deleteTripTrack: builder.mutation<void, { slug: string, track: string }>({
+    deleteTripTrack: builder.mutation<void, { slug: string; track: string }>({
       query: ({ slug, track }) => ({
         url: `trips/${slug}/tracks/${track}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
-      invalidatesTags: (_res, _err, slug, track) => [{ type: 'Trips', slug, track }],
+      invalidatesTags: (_res, _err, slug, track) => [
+        { type: "Trips", slug, track },
+      ],
     }),
-    downloadTrack: builder.query<Blob, { slug: string, track: string }>({
+    downloadTrack: builder.query<Blob, { slug: string; track: string }>({
       query: ({ slug, track }) => ({
         url: `trips/${slug}/tracks/${track}`,
         responseHandler: async (response) => response.blob(),
       }),
-    })
+    }),
   }),
 });
 
@@ -122,5 +123,5 @@ export const {
   useDeleteTripMutation,
   useDeleteTripImageMutation,
   useDeleteTripTrackMutation,
-  useLazyDownloadTrackQuery
+  useLazyDownloadTrackQuery,
 } = tripsApi;

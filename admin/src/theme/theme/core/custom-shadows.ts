@@ -1,8 +1,17 @@
-import { varAlpha } from 'minimal-shared/utils';
+import { varAlpha } from "minimal-shared/utils";
 
-import { grey, info, error, common, primary, success, warning, secondary } from './palette';
+import {
+  grey,
+  info,
+  error,
+  common,
+  primary,
+  success,
+  warning,
+  secondary,
+} from "./palette";
 
-import type { ThemeColorScheme } from '../types';
+import type { ThemeColorScheme } from "../types";
 
 // ----------------------------------------------------------------------
 
@@ -60,5 +69,5 @@ function createCustomShadows(colorChannel: string): CustomShadows {
 }
 
 export const customShadows: Partial<Record<ThemeColorScheme, CustomShadows>> = {
-  light: createCustomShadows(grey['500Channel']),
+  light: createCustomShadows(grey["500Channel"]),
 };
