@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import type {} from '@mui/lab/themeAugmentation';
 import type {} from '@mui/material/themeCssVarsAugmentation';
 

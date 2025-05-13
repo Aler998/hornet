@@ -6,6 +6,7 @@ import { CreateCategoryDto } from '../../features/categories/types';
 import slugify from 'slugify'
 import { DashboardContent } from '../../theme/layouts/dashboard';
 import Swal from 'sweetalert2';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { APIError } from '../../utils/interfaces/ApiError';
 
 export default function CreateEdit() {
@@ -63,6 +64,7 @@ export default function CreateEdit() {
         });
       }
       navigate(`/${import.meta.env.VITE_SUBFOLDER}/categories`);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: APIError | any) {
       if (error.status === 400) {
         Swal.fire({

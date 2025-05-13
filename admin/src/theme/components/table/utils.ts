@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const visuallyHidden = {
   border: 0,
   margin: -1,

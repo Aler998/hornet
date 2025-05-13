@@ -40,6 +40,7 @@ export function useTable() {
     }, []);
   
     const onChangePage = useCallback((event: unknown, newPage: number) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       event;
       setPage(newPage);
     }, []);

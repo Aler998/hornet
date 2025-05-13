@@ -15,6 +15,7 @@ type DefaultTableHeadProps = {
   numSelected: number;
   order: 'asc' | 'desc';
   onSort: (id: string) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   headLabel: Record<string, any>[];
   onSelectAllRows: (checked: boolean) => void;
 };

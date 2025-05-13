@@ -11,6 +11,7 @@ const GPXMap = ({ serverData }: { serverData: string }) => {
     const geojson = gpx(xml);
 
     const extractPolylineCoords = (geojson: FeatureCollection<Geometry, GeoJsonProperties>) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const coords: any[] = [];
         geojson.features.forEach(feature => {
             if (feature.geometry.type === 'LineString') {

@@ -114,6 +114,7 @@ export function AuthLayout({
        *************************************** */
       cssVars={{ '--layout-auth-content-width': '420px', ...cssVars }}
       sx={[
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         (_theme) => ({
           position: 'relative',
           '&::before': backgroundStyles(),

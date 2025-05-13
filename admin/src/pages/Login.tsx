@@ -19,6 +19,7 @@ export default function Login() {
         try {
             await login(form).unwrap()
                 .then(() => navigate(`/${import.meta.env.VITE_SUBFOLDER}`));
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
             Swal.fire({
                 icon: "error",

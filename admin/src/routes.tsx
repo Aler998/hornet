@@ -45,6 +45,7 @@ const renderFallback = () => (
   </Box>
 );
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const routesSection: RouteObject[] = [
   {
     element: (
