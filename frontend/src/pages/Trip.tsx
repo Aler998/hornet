@@ -43,11 +43,11 @@ function Trip() {
       <Layout template={templates.clear} isLoading={isLoading}>
         <div className="fixed inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[#000000] dark:bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] dark:bg-[size:20px_20px]"></div>
 
-        <div className="w-full h-screen max-h-screen overflow-hidden text-neutral-700 dark:text-white">
+        <div className="w-full h-svh max-h-screen overflow-hidden text-neutral-700 dark:text-white">
           <main>
             <AnimatePresence mode="wait">
               <motion.div
-                className="w-full h-[calc(100vh-var(--navbar-height))] flex flex-col justify-center items-center"
+                className="w-full h-[calc(100svh-var(--navbar-height))] flex flex-col justify-center items-center"
                 key={selectedTab.label ? selectedTab.label : "empty"}
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}

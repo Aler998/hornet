@@ -79,6 +79,6 @@ make dev
 - [ ] Aggiungere più informazioni sul singolo viaggio
 - [ ] aggiungere le categorie nel frontend
 - [ ] aggiungere posti visitati sul viaggio + heatmap/mappa posti visitati
-- [-] aggiungere lista di viaggi da fare
+- [ ] aggiungere lista di viaggi da fare
 - [X] velocità media sul viaggio + calcolo automatico litri
-- [-] velocità massima
+- [ ] velocità massima
