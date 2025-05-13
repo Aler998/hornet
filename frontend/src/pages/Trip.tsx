@@ -58,7 +58,7 @@ function Trip() {
               </motion.div>
             </AnimatePresence>
           </main>
-          <nav className="w-full h-[var(--navbar-height)] relative inset-shadow-sm inset-shadow-honda flex items-center justify-center">
+          <nav className="w-full fixed h-[var(--navbar-height)] inset-shadow-sm inset-shadow-honda flex items-center justify-center">
             <ul className="flex justify-center items-center list-none">
               {tabs.map((item) => (
                 <motion.li

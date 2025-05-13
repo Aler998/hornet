@@ -21,7 +21,7 @@ export function HomeContent({ trip }: { trip: Trip }) {
         <ThemeSwitcher />
       </div>
       <Logo classes="w-20 h-20" />
-      <h1 className="font-oswald text-6xl my-4 dark:text-honda">
+      <h1 className="font-oswald text-6xl my-4 dark:text-honda text-center">
         {trip.title}
       </h1>
       <Rating
