@@ -15,7 +15,7 @@ export const GalleryContent = ({ trip }: { trip: Trip }) => {
   return trip.images ? (
     <ImageGallery
       thumbnailPosition="top"
-      additionalClass="h-[calc(100vh-var(--navbar-height))] max-h-[calc(100vh-var(--navbar-height))] max-w-screen"
+      additionalClass="h-[calc(100svh-var(--navbar-height))] max-h-[calc(100svh-var(--navbar-height))] max-w-screen"
       items={trip.images.map((image) => ({
         original:
           import.meta.env.VITE_ASSETS_URL +
@@ -34,7 +34,7 @@ export const GalleryContent = ({ trip }: { trip: Trip }) => {
         thumbnailHeight: 100,
         thumbnailWidth: 100,
         thumbnailLoading: "eager",
-        originalClass: "h-[calc(100vh-var(--navbar-height)-118px)]",
+        originalClass: "h-[calc(100svh-var(--navbar-height)-118px)]",
       }))}
     ></ImageGallery>
   ) : (
