@@ -2,6 +2,7 @@ import { MdOutlineMap } from "react-icons/md";
 import { Trip } from "../../features/trips/types";
 import GPXMap from "../GPXMap";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const mapsNav = {
   label: "maps",
   nav: (

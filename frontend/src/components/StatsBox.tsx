@@ -43,7 +43,7 @@ function StatsBox({
   };
   return (
     <>
-      <table className="table-fixed border-2 border-honda border-solid border-collapse mt-4 font-oswald">
+      <table className="table-fixed border-2 border-honda border-solid border-collapse mt-4 font-oswald mb-4">
         <tbody>
           <tr>
             <td className="p-2 w-1/4 text-center text-honda font-semibold border-2 border-honda border-solid">

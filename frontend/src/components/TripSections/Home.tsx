@@ -4,7 +4,9 @@ import Rating from "../Rating";
 import StatsBox from "../StatsBox";
 import { Trip } from "../../features/trips/types";
 import { MdSpaceDashboard } from "react-icons/md";
+import ExportPdfButton from "../ExportButton";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const homeNav = {
   label: "details",
   nav: (
@@ -36,6 +38,11 @@ export function HomeContent({ trip }: { trip: Trip }) {
         liters={trip.liters}
         km={trip.km}
         velocity={trip.velocity}
+      />
+      <ExportPdfButton
+        immagini={trip.images.map(
+          (image) => import.meta.env.VITE_ASSETS_URL + image.path
+        )}
       />
     </>
   );
