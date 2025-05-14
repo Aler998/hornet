@@ -51,14 +51,14 @@ const GPXMap = ({
   const { gpduration, gpmovingtime, gpdistance } = extractTrackInfo(xml);
 
   const extractPolylineCoords = (
-    geojson: FeatureCollection<Geometry, GeoJsonProperties>
+    geojson: FeatureCollection<Geometry, GeoJsonProperties>,
   ) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const coords: any[] = [];
     geojson.features.forEach((feature) => {
       if (feature.geometry.type === "LineString") {
         coords.push(
-          feature.geometry.coordinates.map(([lon, lat]) => [lat, lon])
+          feature.geometry.coordinates.map(([lon, lat]) => [lat, lon]),
         );
       }
     });
@@ -69,7 +69,7 @@ const GPXMap = ({
 
   const wpts: Feature<GeoPoint, GeoJsonProperties>[] = geojson.features.filter(
     (feature): feature is Feature<GeoPoint, GeoJsonProperties> =>
-      feature.geometry !== null && feature.geometry.type === "Point"
+      feature.geometry !== null && feature.geometry.type === "Point",
   );
 
   // Calcola tutti i punti delle linee e waypoint
