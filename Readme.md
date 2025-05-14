@@ -83,3 +83,4 @@ make dev
 - [X] velocità media sul viaggio + calcolo automatico litri
 - [ ] velocità massima
 - [X] export pdf del viaggio
+- [ ] possibilità di caricare il tracciato su maps (se possibile)
