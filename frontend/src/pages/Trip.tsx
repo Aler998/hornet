@@ -47,6 +47,7 @@ function Trip() {
           <main>
             <AnimatePresence mode="wait">
               <motion.div
+                id={selectedTab.label ? selectedTab.label : ""}
                 className="w-full h-[calc(100svh-var(--navbar-height))] flex flex-col justify-center items-center"
                 key={selectedTab.label ? selectedTab.label : "empty"}
                 initial={{ y: 10, opacity: 0 }}

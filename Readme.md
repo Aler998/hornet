@@ -82,4 +82,4 @@ make dev
 - [ ] aggiungere lista di viaggi da fare
 - [X] velocità media sul viaggio + calcolo automatico litri
 - [ ] velocità massima
-- [ ] export pdf del viaggio
+- [X] export pdf del viaggio

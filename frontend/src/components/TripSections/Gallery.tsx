@@ -2,6 +2,7 @@ import ImageGallery from "react-image-gallery";
 import { Trip } from "../../features/trips/types";
 import { IoMdImages } from "react-icons/io";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const galleryNav = {
   label: "gallery",
   nav: (
