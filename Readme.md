@@ -85,3 +85,5 @@ make dev
 - [X] export pdf del viaggio
 - [ ] possibilità di caricare il tracciato su maps (se possibile)
 - [X] Supporto PWA
+- [ ] Esporre statistiche sul frontend
+- [ ] Menù basso sul frontend ( home, heatmap, cateogire)
