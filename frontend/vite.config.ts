@@ -11,7 +11,9 @@ export default defineConfig({
       registerType: "autoUpdate",
       manifest: false,
       workbox: {
-        globPatterns: ["**/*.{js,css,html,png,jpg,jpeg,svg,json,webmanifest,ico}"],
+        globPatterns: [
+          "**/*.{js,css,html,png,jpg,jpeg,svg,json,webmanifest,ico}",
+        ],
         navigateFallback: "/index.html",
         runtimeCaching: [
           {
