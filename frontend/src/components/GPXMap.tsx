@@ -50,6 +50,12 @@ const GPXMap = ({
   const geojson = gpx(xml);
   const { gpduration, gpmovingtime, gpdistance } = extractTrackInfo(xml);
 
+  const marker = L.icon({
+    iconUrl: "/icons/marker.svg",
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+  });
+
   const extractPolylineCoords = (
     geojson: FeatureCollection<Geometry, GeoJsonProperties>,
   ) => {
@@ -116,6 +122,7 @@ const GPXMap = ({
       ))}
       {wpts.map((wpt, index) => (
         <Marker
+          icon={marker}
           key={index}
           position={[wpt.geometry.coordinates[1], wpt.geometry.coordinates[0]]}
         >
