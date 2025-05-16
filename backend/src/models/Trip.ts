@@ -9,7 +9,6 @@ interface FileUploaded {
   filename: string;
 }
 
-
 interface ImageUploaded extends FileUploaded {
   folder: string;
   width: number;
@@ -36,15 +35,13 @@ const fileSchema = new Schema<FileUploaded>(
   { _id: false },
 );
 
-const placeSchema = new Schema<Place>(
-  {
-    place_id: { type: String, required: true },
-    lat: { type: String, required: true },
-    lon: { type: String, required: true },
-    name: { type: String, required: true },
-    display_name: { type: String, required: true },
-  }
-)
+const placeSchema = new Schema<Place>({
+  place_id: { type: String, required: true },
+  lat: { type: String, required: true },
+  lon: { type: String, required: true },
+  name: { type: String, required: true },
+  display_name: { type: String, required: true },
+});
 
 const imageSchema = new Schema<ImageUploaded>(
   {

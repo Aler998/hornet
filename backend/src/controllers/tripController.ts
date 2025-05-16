@@ -12,7 +12,7 @@ import { NotFoundError } from "../errors/NotFoundError";
 
 export const getAllTrips = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trips = await Trip.find().sort({ createdAt: -1 });
@@ -25,7 +25,7 @@ export const getAllTrips = async (
 
 export const getTripBySlug = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trip = await Trip.findOneWithDecodedTracks(req.params.slug);
@@ -44,7 +44,7 @@ export const getTripBySlug = async (
 
 export const createTrip = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trip = new Trip({
@@ -85,7 +85,7 @@ export const createTrip = async (
 
 export const updateTrip = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trip = await Trip.findOne({ slug: req.params.slug });
@@ -143,7 +143,7 @@ export const updateTrip = async (
 
 export const deleteTrip = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trip = await Trip.findOneBySlug(req.params.slug);
@@ -156,7 +156,7 @@ export const deleteTrip = async (
           return console.error("Errore:", err);
         }
         console.log("Cartella eliminata");
-      }
+      },
     );
 
     const deleted = await trip?.deleteOne();
@@ -170,7 +170,7 @@ export const deleteTrip = async (
 
 export const deleteTripImage = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trip = await Trip.findOne({ slug: req.params.slug });
@@ -213,7 +213,7 @@ export const deleteTripImage = async (
 
 export const deleteTripTrack = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const trip = await Trip.findOne({ slug: req.params.slug });
