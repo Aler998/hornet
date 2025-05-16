@@ -24,6 +24,13 @@ export const tripsApi = createApi({
         trip.tracks?.forEach((file) => {
           formData.append("tracks", file);
         });
+        trip.places?.forEach((place, index) => {
+          formData.append(`places[${index}][place_id]`, place.place_id);
+          formData.append(`places[${index}][lat]`, place.lat);
+          formData.append(`places[${index}][lon]`, place.lon);
+          formData.append(`places[${index}][name]`, place.name);
+          formData.append(`places[${index}][display_name]`, place.display_name);
+        });
 
         formData.append("category", trip.category);
         formData.append("slug", trip.slug);
@@ -55,6 +62,13 @@ export const tripsApi = createApi({
         });
         rest.tracks?.forEach((file) => {
           formData.append("tracks", file);
+        });
+        rest.places?.forEach((place, index) => {
+          formData.append(`places[${index}][place_id]`, place.place_id);
+          formData.append(`places[${index}][lat]`, place.lat);
+          formData.append(`places[${index}][lon]`, place.lon);
+          formData.append(`places[${index}][name]`, place.name);
+          formData.append(`places[${index}][display_name]`, place.display_name);
         });
 
         formData.append("category", rest.category);

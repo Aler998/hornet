@@ -58,6 +58,7 @@ export const createTrip = async (
       start: req.body.start,
       end: req.body.end,
       category: req.body.category,
+      places: req.body.places,
     });
 
     const files = req.files as {
@@ -104,6 +105,7 @@ export const updateTrip = async (
     trip.velocity = req.body.velocity;
     trip.liters = (req.body.km / 28.6).toString();
     trip.category = req.body.category;
+    trip.places = req.body.places;
 
     const files = req.files as {
       [fieldname: string]: Express.Multer.File[];

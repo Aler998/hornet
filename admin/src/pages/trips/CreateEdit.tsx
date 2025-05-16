@@ -29,6 +29,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { errorSwalOptions } from "../../utils/SwalOptions";
 import ImageUpload from "../../components/form/ImageUpload";
 import GPXUpload from "../../components/form/GPXUpload";
+import CityInput from "../../components/form/CityInput";
 
 export default function CreateEdit() {
   const { slug } = useParams<{ slug: string }>();
@@ -56,6 +57,7 @@ export default function CreateEdit() {
     end: dayjs(),
     images: [],
     tracks: [],
+    places: [],
   });
 
   useEffect(() => {
@@ -72,6 +74,7 @@ export default function CreateEdit() {
         end: dayjs(existingTrip.end),
         images: null,
         tracks: null,
+        places: [],
       });
     }
   }, [existingTrip]);
@@ -105,7 +108,7 @@ export default function CreateEdit() {
 
   const handleFormNumberChange = (
     value: number | number[] | null,
-    field: string,
+    field: string
   ) => {
     setForm({ ...form, [field]: value ? value : 0 });
   };
@@ -222,6 +225,7 @@ export default function CreateEdit() {
                     <TextField required {...params} label="Categoria" />
                   )}
                 />
+                <CityInput form={form} setForm={setForm} isEdit={isEdit} existingTrip={existingTrip} />
               </Stack>
             </Grid>
             <Grid size={{ xs: 12, sm: 12, md: 6 }}>

@@ -15,6 +15,7 @@ export interface Trip {
   images: UploadedFile[];
   tracks: UploadedFile[];
   decodedTracks?: string[];
+  places?: Place[];
 }
 
 export interface CreateTripDto {
@@ -29,6 +30,7 @@ export interface CreateTripDto {
   category: string;
   images: File[] | null;
   tracks: File[] | null;
+  places: Place[];
 }
 
 export interface UpdateTripDto extends CreateTripDto {
@@ -39,6 +41,14 @@ export interface UploadedFile {
   filename: string;
   path: string;
   uuid: string;
+}
+
+export interface Place {
+  place_id: string
+  lat: string;
+  lon: string;
+  name: string;
+  display_name: string;
 }
 
 export type TripTableRowProps = {
