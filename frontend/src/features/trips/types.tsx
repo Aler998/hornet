@@ -15,6 +15,7 @@ export interface Trip {
   images: UploadedImage[];
   tracks: UploadedFile[];
   decodedTracks?: string[];
+  places?: Place[]
 }
 
 export interface UploadedFile {
@@ -26,4 +27,12 @@ export interface UploadedImage extends UploadedFile {
   width: number;
   height: number;
   folder: string;
+}
+
+export interface Place {
+  place_id: string;
+  lon: string;
+  lat: string;
+  name: string;
+  display_name: string;
 }
