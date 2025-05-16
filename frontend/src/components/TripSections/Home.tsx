@@ -44,7 +44,7 @@ export function HomeContent({ trip }: { trip: Trip }) {
         <NavigateButton places={trip.places} />
         <ExportPdfButton
           immagini={trip.images.map(
-            (image) => import.meta.env.VITE_ASSETS_URL + image.path
+            (image) => import.meta.env.VITE_ASSETS_URL + image.path,
           )}
         />
       </div>

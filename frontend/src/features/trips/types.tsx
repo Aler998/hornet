@@ -15,7 +15,7 @@ export interface Trip {
   images: UploadedImage[];
   tracks: UploadedFile[];
   decodedTracks?: string[];
-  places?: Place[]
+  places?: Place[];
 }
 
 export interface UploadedFile {
