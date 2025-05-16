@@ -9,12 +9,20 @@ interface FileUploaded {
   filename: string;
 }
 
+
 interface ImageUploaded extends FileUploaded {
   folder: string;
   width: number;
   height: number;
 }
 
+interface Place {
+  place_id: string;
+  lat: string;
+  lon: string;
+  name: string;
+  display_name: string;
+}
 interface TripWithDecodedTracks extends Omit<ITrip, keyof Document> {
   decodedTracks: string[];
 }
@@ -27,6 +35,16 @@ const fileSchema = new Schema<FileUploaded>(
   },
   { _id: false },
 );
+
+const placeSchema = new Schema<Place>(
+  {
+    place_id: { type: String, required: true },
+    lat: { type: String, required: true },
+    lon: { type: String, required: true },
+    name: { type: String, required: true },
+    display_name: { type: String, required: true },
+  }
+)
 
 const imageSchema = new Schema<ImageUploaded>(
   {
@@ -53,6 +71,7 @@ interface ITrip extends Document {
   category: mongoose.Types.ObjectId;
   images: ImageUploaded[];
   tracks: FileUploaded[];
+  places: Place[];
 }
 
 interface ITripMethods {
@@ -82,6 +101,7 @@ const tripSchema = new Schema<ITrip, TripModel, ITripMethods>(
     },
     images: { type: [imageSchema], default: [] },
     tracks: { type: [fileSchema], default: [] },
+    places: { type: [placeSchema], default: [] },
   },
   {
     timestamps: true,
