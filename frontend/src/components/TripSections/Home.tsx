@@ -5,6 +5,7 @@ import StatsBox from "../StatsBox";
 import { Trip } from "../../features/trips/types";
 import { MdSpaceDashboard } from "react-icons/md";
 import ExportPdfButton from "../ExportButton";
+import NavigateButton from "../NavigateButton";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const homeNav = {
@@ -39,11 +40,14 @@ export function HomeContent({ trip }: { trip: Trip }) {
         km={trip.km}
         velocity={trip.velocity}
       />
-      <ExportPdfButton
-        immagini={trip.images.map(
-          (image) => import.meta.env.VITE_ASSETS_URL + image.path,
-        )}
-      />
+      <div className="flex justify-center items-center gap-4">
+        <NavigateButton places={trip.places} />
+        <ExportPdfButton
+          immagini={trip.images.map(
+            (image) => import.meta.env.VITE_ASSETS_URL + image.path,
+          )}
+        />
+      </div>
     </>
   );
 }
