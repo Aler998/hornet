@@ -83,7 +83,7 @@ make dev
 - [X] velocità media sul viaggio + calcolo automatico litri
 - [ ] velocità massima
 - [X] export pdf del viaggio
-- [ ] possibilità di caricare il tracciato su maps (se possibile)
+- [X] possibilità di caricare il tracciato su maps (se possibile)
 - [X] Supporto PWA
 - [ ] Esporre statistiche sul frontend
-- [ ] Menù basso sul frontend ( home, heatmap, cateogire)
+- [ ] Menù basso sul frontend ( home, heatmap, categorie, statistiche)
