@@ -44,7 +44,7 @@ export interface UploadedFile {
 }
 
 export interface Place {
-  place_id: string
+  place_id: string;
   lat: string;
   lon: string;
   name: string;

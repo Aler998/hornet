@@ -1,7 +1,11 @@
-import Layout, { templates } from "../components/Layout/Layout";
+import EmptyLayout from "../components/Layout/EmptyLayout";
 
 function NotFound() {
-  return <Layout template={templates.noLoader} title="404"></Layout>;
+  return (
+    <EmptyLayout title="404">
+      <></>
+    </EmptyLayout>
+  );
 }
 
 export default NotFound;
