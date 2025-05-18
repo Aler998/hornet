@@ -33,7 +33,6 @@ const CityInput: React.FC<CityInputProps> = ({
     ) {
       setSelectedOptions(existingTrip.places);
     }
-    
   }, [isEdit, existingTrip]);
 
   useEffect(() => {
