@@ -1,74 +1,82 @@
-import { ReactNode } from "react";
-import ThemeSwitcher from "../ThemeSwitcher";
-import Logo from "../Logo";
+import React, { Dispatch, ReactNode } from "react";
 import Loader from "../Loader/Loader";
+import { NavItem } from "../../utils/types";
+import * as motion from "motion/react-client";
+import { AnimatePresence } from "motion/react";
 
-export enum templates {
-  default,
-  clear,
-  noLoader,
+interface LayoutProps {
+  title: string;
+  tabs: NavItem[];
+  selectedTab: NavItem;
+  setSelectedTab: Dispatch<React.SetStateAction<NavItem>>;
+  isLoading?: boolean;
+  children: ReactNode;
 }
 
 function Layout({
   title,
-  isLoading = false,
-  template,
   children,
-}: {
-  title?: string;
-  isLoading?: boolean;
-  template: templates;
-  children?: ReactNode;
-}) {
-  switch (template) {
-    case templates.clear:
-      return (
-        <>
-          <title>{title}</title>
-          <Loader isLoading={isLoading} />
-          {children}
-        </>
-      );
-      break;
-    case templates.noLoader:
-      return (
-        <>
-          <title>{title}</title>
-          <div className="fixed inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[#000000] dark:bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] dark:bg-[size:20px_20px]"></div>
-          <div className="w-full min-w-screen py-8 px-4 flex justify-end align-center">
-            <ThemeSwitcher />
-          </div>
-          <div className="w-wull min-w-screen text-neutral-700 font-oswald">
-            <div className="w-full mx-auto max-w-full md:max-w-2/3 lg:max-w-1/3 flex flex-col items-center md-8 sm:mb-16">
-              <Logo classes="w-20 h-20" />
-              <h1 className="text-6xl my-4 dark:text-honda">{title}</h1>
-            </div>
-            <div className="max-w-3xl mx-auto px-4">{children}</div>
-          </div>
-        </>
-      );
-      break;
+  tabs,
+  selectedTab,
+  setSelectedTab,
+  isLoading = false,
+}: LayoutProps) {
+  return (
+    <>
+      <title>{title}</title>
+      {isLoading ? <Loader isLoading={isLoading} /> : ""}
 
-    default:
-      return (
-        <>
-          <title>{title}</title>
-          <Loader isLoading={isLoading} />
-          <div className="fixed inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[#000000] dark:bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] dark:bg-[size:20px_20px]"></div>
-          <div className="w-full min-w-screen py-8 px-4 flex justify-end align-center">
-            <ThemeSwitcher />
-          </div>
-          <div className="w-wull min-w-screen text-neutral-700 font-oswald">
-            <div className="w-full mx-auto max-w-full md:max-w-2/3 lg:max-w-1/3 flex flex-col items-center md-8 sm:mb-16">
-              <Logo classes="w-20 h-20" />
-              <h1 className="text-6xl my-4 dark:text-honda">{title}</h1>
-            </div>
-            <div className="max-w-3xl mx-auto px-4">{children}</div>
-          </div>
-        </>
-      );
-      break;
-  }
+      <div className="fixed inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[#000000] dark:bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] dark:bg-[size:20px_20px]"></div>
+      <div className="w-full h-svh max-h-screen overflow-hidden text-neutral-700 dark:text-white">
+        <main>
+          <AnimatePresence mode="wait">
+            <motion.div
+              id={selectedTab.label ? selectedTab.label : ""}
+              className="w-full h-[calc(100svh-var(--navbar-height))] flex flex-col justify-center items-center"
+              key={selectedTab.label ? selectedTab.label : "empty"}
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -10, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
+        </main>
+        <nav className="w-full fixed h-[var(--navbar-height)] inset-shadow-sm inset-shadow-honda flex items-center justify-center">
+          <ul className="flex justify-center items-center list-none">
+            {tabs.map((item) => (
+              <motion.li
+                key={item.label}
+                className="list-style-none relative pb-4"
+                initial={false}
+                animate={{
+                  color: item === selectedTab ? "#ea3323" : "#000",
+                }}
+                onClick={() => setSelectedTab(item)}
+              >
+                {item.nav}
+                {item === selectedTab ? (
+                  <motion.div
+                    style={underline}
+                    layoutId="underline"
+                    id="underline"
+                  />
+                ) : null}
+              </motion.li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </>
+  );
 }
-
+const underline: React.CSSProperties = {
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  right: 0,
+  height: 2,
+  background: "var(--honda)",
+};
 export default Layout;

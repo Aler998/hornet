@@ -1,16 +1,6 @@
 import ImageGallery from "react-image-gallery";
 import { Trip } from "../../features/trips/types";
-import { IoMdImages } from "react-icons/io";
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const galleryNav = {
-  label: "gallery",
-  nav: (
-    <span className="mx-2 flex items-center font-oswald font-semibold text-lg cursor-pointer">
-      <IoMdImages className="mr-2" /> Immagini
-    </span>
-  ),
-};
 
 export const GalleryContent = ({ trip }: { trip: Trip }) => {
   return trip.images ? (

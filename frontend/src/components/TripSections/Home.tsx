@@ -3,23 +3,12 @@ import Logo from "../Logo";
 import Rating from "../Rating";
 import StatsBox from "../StatsBox";
 import { Trip } from "../../features/trips/types";
-import { MdSpaceDashboard } from "react-icons/md";
 import ExportPdfButton from "../ExportButton";
 import NavigateButton from "../NavigateButton";
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const homeNav = {
-  label: "details",
-  nav: (
-    <span className="mx-2 flex items-center font-oswald font-semibold text-lg cursor-pointer">
-      <MdSpaceDashboard className="mr-2" /> Home
-    </span>
-  ),
-};
-
 export function HomeContent({ trip }: { trip: Trip }) {
   return (
-    <>
+    <div className="w-full h-full flex flex-col justify-center items-center">
       <div className="absolute top-8 right-4">
         <ThemeSwitcher />
       </div>
@@ -48,6 +37,6 @@ export function HomeContent({ trip }: { trip: Trip }) {
           )}
         />
       </div>
-    </>
+    </div>
   );
 }

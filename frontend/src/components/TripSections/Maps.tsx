@@ -1,16 +1,5 @@
-import { MdOutlineMap } from "react-icons/md";
 import { Trip } from "../../features/trips/types";
 import GPXMap from "../GPXMap";
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const mapsNav = {
-  label: "maps",
-  nav: (
-    <span className="mx-2 flex items-center font-oswald font-semibold text-lg cursor-pointer">
-      <MdOutlineMap className="mr-2" /> Mappe
-    </span>
-  ),
-};
 
 export const MapsContent = ({ trip }: { trip: Trip }) => {
   return trip.decodedTracks ? (
