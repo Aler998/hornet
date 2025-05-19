@@ -26,8 +26,8 @@ categoriesRoutes.get("/:slug", (req: Request, res: Response) =>
 
 categoriesRoutes.post(
   "/",
-  authMiddleware,
   doubleCsrfProtection,
+  authMiddleware,
   createCategoryValidator,
   validateResult,
   (req: Request, res: Response) => createCategory(req, res),
@@ -35,8 +35,8 @@ categoriesRoutes.post(
 
 categoriesRoutes.put(
   "/:slug",
-  authMiddleware,
   doubleCsrfProtection,
+  authMiddleware,
   updateCategoryValidator,
   validateResult,
   (req: Request, res: Response) => updateCategory(req, res),
@@ -44,8 +44,8 @@ categoriesRoutes.put(
 
 categoriesRoutes.delete(
   "/:slug",
-  authMiddleware,
   doubleCsrfProtection,
+  authMiddleware,
   (req: Request, res: Response) => deleteCategory(req, res),
 );
 
