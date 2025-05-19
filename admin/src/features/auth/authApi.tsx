@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import LoginRequest from "./types";
+import axios from "axios";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -14,6 +15,16 @@ export const authApi = createApi({
         method: "POST",
         body: credentials,
       }),
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          axios.get(`${import.meta.env.VITE_API_URL}/csrf-token`, {
+            withCredentials: true,
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      },
     }),
     logout: builder.mutation<void, void>({
       query: () => ({

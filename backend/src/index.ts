@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -12,6 +12,7 @@ import authRoutes from "./routes/auth";
 import tripRoutes from "./routes/trips";
 import categoriesRoutes from "./routes/categories";
 import rateLimit from "express-rate-limit";
+import { generateCsrfToken } from "./middleware/csrf-token";
 
 const app = express();
 
@@ -34,13 +35,28 @@ app.use(
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+const getCsrfTokenRoute = (req: Request, res: Response) => {
+  const csrfToken = generateCsrfToken(req, res);
+
+  res
+    .cookie("Host-me-x-csrf-token", csrfToken, {
+      httpOnly: false,
+      secure: process.env.NODE_ENV == "production" ? true : false,
+      sameSite: process.env.NODE_ENV == "production" ? "strict": "lax",
+      maxAge: 3600000,
+    })
+    .json({ csrfToken });
+};
+
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 if (process.env.NODE_ENV == "production") {
   app.use("/auth", authRoutes);
   app.use("/trips", tripRoutes);
   app.use("/categories", categoriesRoutes);
+  app.get("/csrf-token", getCsrfTokenRoute);
 } else {
   app.use(`/api`, apiRouter);
+  app.get("/api/csrf-token", getCsrfTokenRoute);
 }
 
 mongoose

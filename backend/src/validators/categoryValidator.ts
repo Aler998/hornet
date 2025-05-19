@@ -2,7 +2,7 @@ import { body } from "express-validator";
 import Category from "../models/Category";
 
 export const createCategoryValidator = [
-  body("title").notEmpty().withMessage("Il titolo è richiesto"),
+  body("title").isString().notEmpty().withMessage("Il titolo è richiesto"),
   body("slug")
     .isString()
     .withMessage("Lo slug è richiesto")
@@ -17,9 +17,9 @@ export const createCategoryValidator = [
 ];
 
 export const updateCategoryValidator = [
-  body("title").notEmpty().withMessage("Il titolo è richiesto"),
+  body("title").isString().notEmpty().withMessage("Il titolo è richiesto"),
 
-  body("newSlug").custom(async (value) => {
+  body("newSlug").isString().custom(async (value) => {
     if (value) {
       const category = await Category.findOne({ slug: value });
       if (category) {

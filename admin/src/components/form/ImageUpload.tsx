@@ -52,10 +52,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
     setForm({ ...form, images: filesArray });
     setPreviews(
-      filesArray.map((file) => ({
-        uuid: uuidv4(),
-        url: URL.createObjectURL(file),
-      })),
+      filesArray.map((file) => {
+        const sanitizedUrl = URL.createObjectURL(file);
+        return {
+          uuid: uuidv4(),
+          url: sanitizedUrl,
+        };
+      })
     );
   };
 

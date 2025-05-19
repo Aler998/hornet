@@ -12,6 +12,7 @@ import {
 } from "../validators/categoryValidator";
 import { validateResult } from "../middleware/validateResult";
 import authMiddleware from "../middleware/auth";
+import { doubleCsrfProtection } from "../middleware/csrf-token";
 
 const categoriesRoutes: Router = express.Router();
 
@@ -26,6 +27,7 @@ categoriesRoutes.get("/:slug", (req: Request, res: Response) =>
 categoriesRoutes.post(
   "/",
   authMiddleware,
+  doubleCsrfProtection,
   createCategoryValidator,
   validateResult,
   (req: Request, res: Response) => createCategory(req, res),
@@ -34,6 +36,7 @@ categoriesRoutes.post(
 categoriesRoutes.put(
   "/:slug",
   authMiddleware,
+  doubleCsrfProtection,
   updateCategoryValidator,
   validateResult,
   (req: Request, res: Response) => updateCategory(req, res),
@@ -42,6 +45,7 @@ categoriesRoutes.put(
 categoriesRoutes.delete(
   "/:slug",
   authMiddleware,
+  doubleCsrfProtection,
   (req: Request, res: Response) => deleteCategory(req, res),
 );
 
