@@ -33,7 +33,9 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin master
+          BRANCH_NAME=${GITHUB_REF_NAME}
+          git fetch origin
+          git reset --hard origin/$BRANCH_NAME
           git add .
           git diff --cached --quiet || git commit -m "chore: auto-format code"
           git push
