@@ -6,7 +6,7 @@ import { readFile } from "fs/promises";
 export const jsonDataFile = path.join(
   __dirname,
   "../../",
-  "prezzi-benzina.json"
+  "prezzi-benzina.json",
 );
 
 type PrezzoInfo = {
@@ -24,7 +24,7 @@ type Distributore = {
 };
 
 export const fetchAndCombineCSVData = async (
-  outputPath: string
+  outputPath: string,
 ): Promise<void> => {
   const anagraficaUrl =
     "https://www.mimit.gov.it/images/exportCSV/anagrafica_impianti_attivi.csv";
@@ -79,7 +79,7 @@ export const fetchAndCombineCSVData = async (
 
 export function getPriceByStationId(
   data: Record<string, Distributore>,
-  id: number
+  id: number,
 ): string {
   const station = data[id];
   const prezzo = station.prezzi["benzina"];
