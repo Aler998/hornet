@@ -46,9 +46,16 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     previews.forEach((imagePreview) => URL.revokeObjectURL(imagePreview.url));
 
     // const filesArray = Array.from(e.target.files);
-    const filesArray = Array.from(e.target.files).filter((file) =>
-      file.type.startsWith("image/")
-    );
+    // const filesArray = Array.from(e.target.files).filter((file) =>
+    //   file.type.startsWith("image/")
+    // );
+    const filesArray = Array.from(e.target.files).filter((file) => {
+      if (!file.type.startsWith("image/")) {
+        console.warn(`Skipped file with invalid type: ${file.type}`);
+        return false;
+      }
+      return true;
+    });
 
     setForm({ ...form, images: filesArray });
     setPreviews(
