@@ -45,7 +45,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
     previews.forEach((imagePreview) => URL.revokeObjectURL(imagePreview.url));
 
-    const filesArray = Array.from(e.target.files);
+    // const filesArray = Array.from(e.target.files);
+    const filesArray = Array.from(e.target.files).filter((file) =>
+      file.type.startsWith("image/")
+    );
 
     setForm({ ...form, images: filesArray });
     setPreviews(

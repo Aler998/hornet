@@ -3,7 +3,7 @@ import Category, { ICategory } from "../models/Category";
 
 export const getAllCategories = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const categories: ICategory[] = await Category.find();
@@ -16,7 +16,7 @@ export const getAllCategories = async (
 
 export const getCategoryBySlug = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const category: ICategory | null = await Category.findOne({
@@ -36,7 +36,7 @@ export const getCategoryBySlug = async (
 
 export const createCategory = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const category: ICategory = new Category(req.body);
@@ -57,13 +57,14 @@ export const createCategory = async (
 
 export const updateCategory = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
+    const slug = req.params.slug;
     const updatedCategory: ICategory | null = await Category.findOneAndUpdate(
-      { slug: req.params.slug },
+      { slug: { $eq: slug } },
       { title: req.body.title, slug: req.body.newSlug },
-      { new: true },
+      { new: true }
     );
 
     if (!updatedCategory) {
@@ -86,7 +87,7 @@ export const updateCategory = async (
 
 export const deleteCategory = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const deletedCategory: ICategory | null = await Category.findOneAndDelete({

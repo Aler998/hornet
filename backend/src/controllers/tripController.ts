@@ -15,7 +15,7 @@ const CONSUMO_MOTO = 28.6;
 
 export const getAllTrips = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const trips = await Trip.find().sort({ createdAt: -1 });
@@ -28,7 +28,7 @@ export const getAllTrips = async (
 
 export const getTripBySlug = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const trip = await Trip.findOneWithDecodedTracks(req.params.slug);
@@ -47,7 +47,7 @@ export const getTripBySlug = async (
 
 export const createTrip = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const trip = new Trip({
@@ -73,24 +73,28 @@ export const createTrip = async (
     const images = files["images"] || null;
     const tracks = files["tracks"] || null;
 
-    moveFilesIfExists(images, tracks, trip);
-    await trip.save();
+    const result: boolean = moveFilesIfExists(images, tracks, trip);
+    if (result) {
+      await trip.save();
 
-    trip.images.map(async (image) => {
-      await CloneImage(image, CloneType.thumbnail);
-      await CloneImage(image, CloneType.hd);
-    });
+      trip.images.map(async (image) => {
+        await CloneImage(image, CloneType.thumbnail);
+        await CloneImage(image, CloneType.hd);
+      });
 
-    res.status(201).json(trip);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      res.status(201).json(trip);
+    } else {
+      res.status(500).json({ message: "Errore salvataggio files" });
+    }
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: "Errore del server" });
   }
 };
 
 export const updateTrip = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const trip = await Trip.findOne({ slug: req.params.slug });
@@ -126,15 +130,20 @@ export const updateTrip = async (
     const images = files["images"] || null;
     const tracks = files["tracks"] || null;
 
-    moveFilesIfExists(images, tracks, trip);
-    trip.images.map(async (image) => {
-      await CloneImage(image, CloneType.thumbnail);
-      await CloneImage(image, CloneType.hd);
-    });
+    const result: boolean = moveFilesIfExists(images, tracks, trip);
 
-    await trip.save();
+    if (result) {
+      trip.images.map(async (image) => {
+        await CloneImage(image, CloneType.thumbnail);
+        await CloneImage(image, CloneType.hd);
+      });
+      await trip.save();
 
-    res.json(trip);
+      res.json(trip);
+    } else {
+      res.status(500).json({ message: "Errore salvataggio files" });
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     if (err.code === 11000) {
@@ -155,24 +164,26 @@ export const updateTrip = async (
 
 export const deleteTrip = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const trip = await Trip.findOneBySlug(req.params.slug);
 
-    fs.rm(
-      path.join(__dirname, "..", "..", "uploads", req.params.slug),
-      { recursive: true, force: true },
-      (err) => {
-        if (err) {
-          return console.error("Errore:", err);
+    if (trip) {
+      fs.rm(
+        path.join(__dirname, "..", "..", "uploads", trip?.slug),
+        { recursive: true, force: true },
+        (err) => {
+          if (err) {
+            return console.error("Errore:", err);
+          }
+          console.log("Cartella eliminata");
         }
-        console.log("Cartella eliminata");
-      },
-    );
+      );
 
-    const deleted = await trip?.deleteOne();
-    if (!deleted) res.status(404).json({ error: "Trip not found" });
+      const deleted = await trip?.deleteOne();
+      if (!deleted) res.status(404).json({ error: "Trip not found" });
+    }
     res.status(204).send();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
@@ -182,7 +193,7 @@ export const deleteTrip = async (
 
 export const deleteTripImage = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const trip = await Trip.findOne({ slug: req.params.slug });
@@ -225,7 +236,7 @@ export const deleteTripImage = async (
 
 export const deleteTripTrack = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const trip = await Trip.findOne({ slug: req.params.slug });

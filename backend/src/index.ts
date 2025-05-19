@@ -11,8 +11,16 @@ import apiRouter from "./routes/api";
 import authRoutes from "./routes/auth";
 import tripRoutes from "./routes/trips";
 import categoriesRoutes from "./routes/categories";
+import rateLimit from "express-rate-limit";
 
 const app = express();
+
+const RateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // max 100 requests per windowMs
+});
+
+app.use(RateLimiter);
 
 const corsArray = process.env.CORS_ORIGINS?.split(",") || [];
 
@@ -20,7 +28,7 @@ app.use(
   cors({
     origin: corsArray,
     credentials: true,
-  }),
+  })
 );
 
 app.use(bodyParser.json());
