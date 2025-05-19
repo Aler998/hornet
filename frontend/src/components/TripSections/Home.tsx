@@ -5,6 +5,7 @@ import StatsBox from "../StatsBox";
 import { Trip } from "../../features/trips/types";
 import ExportPdfButton from "../ExportButton";
 import NavigateButton from "../NavigateButton";
+import InfoButton from "../InfoButton";
 
 export function HomeContent({ trip }: { trip: Trip }) {
   return (
@@ -21,15 +22,15 @@ export function HomeContent({ trip }: { trip: Trip }) {
         placeItems="place-items-center"
         dimensions="w-8 h-8"
       />
-      <p className="font-oswald font-semibold p-2">{trip.description}</p>
+      <p className="font-oswald font-semibold p-2 dark:text-honda text-center">{trip.description}</p>
       <StatsBox
-        start={trip.start}
-        end={trip.end}
+        time={trip.time}
         liters={trip.liters}
         km={trip.km}
         velocity={trip.velocity}
       />
       <div className="flex justify-center items-center gap-4">
+        <InfoButton trip={trip} />
         <NavigateButton places={trip.places} />
         <ExportPdfButton
           immagini={trip.images.map(

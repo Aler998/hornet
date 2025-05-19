@@ -26,7 +26,7 @@ import { Label } from "../../theme/components/label";
 import { useGetCategoriesQuery } from "../../features/categories/categoriesApi";
 
 import dayjs, { Dayjs } from "dayjs";
-import { errorSwalOptions } from "../../utils/SwalOptions";
+import { errorSwalOptions } from "../../utils/swal-options";
 import ImageUpload from "../../components/form/ImageUpload";
 import GPXUpload from "../../components/form/GPXUpload";
 import CityInput from "../../components/form/CityInput";
@@ -52,6 +52,7 @@ export default function CreateEdit() {
     km: 50,
     velocity: 50,
     slug: "",
+    time: "",
     category: "",
     start: dayjs(),
     end: dayjs(),
@@ -69,6 +70,7 @@ export default function CreateEdit() {
         km: existingTrip.km ?? 50,
         velocity: existingTrip.velocity ?? 50,
         slug: existingTrip.slug,
+        time: existingTrip.time,
         category: existingTrip.category,
         start: dayjs(existingTrip.start),
         end: dayjs(existingTrip.end),
@@ -108,7 +110,7 @@ export default function CreateEdit() {
 
   const handleFormNumberChange = (
     value: number | number[] | null,
-    field: string,
+    field: string
   ) => {
     setForm({ ...form, [field]: value ? value : 0 });
   };
@@ -255,6 +257,20 @@ export default function CreateEdit() {
                     onChange={(value: Dayjs | null) =>
                       setForm({ ...form, end: dayjs(value) })
                     }
+                  />
+                </Stack>
+                <Stack spacing={2}>
+                  <Label sx={{ marginBottom: 0.5 }}>Tempo di percorrenza</Label>
+                  <TextField
+                    id="time"
+                    name="time"
+                    label="Minuti di percorrenza"
+                    variant="outlined"
+                    type="number"
+                    value={form.time}
+                    onChange={handleFormChange}
+                    rows={3}
+                    fullWidth
                   />
                 </Stack>
                 <Stack spacing={2}>

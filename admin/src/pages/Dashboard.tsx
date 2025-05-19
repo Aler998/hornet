@@ -3,7 +3,7 @@ import { DashboardContent } from "../theme/layouts/dashboard";
 import { useGetTripsQuery } from "../features/trips/tripsApi";
 import Loader from "../components/Loader";
 import Swal from "sweetalert2";
-import { errorSwalOptions } from "../utils/SwalOptions";
+import { errorSwalOptions } from "../utils/swal-options";
 import { useGetCategoriesQuery } from "../features/categories/categoriesApi";
 import ViaggiPerCategoria from "../components/stats/ViaggiPerCategoria";
 import NumericWidget, {

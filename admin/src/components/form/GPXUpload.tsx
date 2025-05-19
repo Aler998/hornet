@@ -1,9 +1,9 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { VisuallyHiddenInput } from "../../utils/VisuallyHiddenInput";
+import { VisuallyHiddenInput } from "../../utils/visually-hidden-input";
 import Swal from "sweetalert2";
-import { deleteSwalOptions } from "../../utils/SwalOptions";
+import { deleteSwalOptions } from "../../utils/swal-options";
 import { useDeleteTripTrackMutation } from "../../features/trips/tripsApi";
 import { ChangeEvent, useState } from "react";
 import { CreateTripDto, Trip } from "../../features/trips/types";

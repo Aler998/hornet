@@ -10,6 +10,8 @@ import {
 } from "../services/TripService";
 import { NotFoundError } from "../errors/NotFoundError";
 
+const CONSUMO_MOTO = 28.6;
+
 export const getAllTrips = async (
   req: Request,
   res: Response,
@@ -52,9 +54,10 @@ export const createTrip = async (
       slug: req.body.slug,
       description: req.body.description,
       rating: req.body.rating,
+      time: req.body.time,
       km: req.body.km,
       velocity: req.body.velocity,
-      liters: (req.body.km / 28.6).toString(),
+      liters: (req.body.km / CONSUMO_MOTO).toString(),
       start: req.body.start,
       end: req.body.end,
       category: req.body.category,
@@ -101,9 +104,10 @@ export const updateTrip = async (
     trip.end = req.body.end;
     trip.description = req.body.description;
     trip.rating = req.body.rating;
+    trip.time = req.body.time;
     trip.km = req.body.km;
     trip.velocity = req.body.velocity;
-    trip.liters = (req.body.km / 28.6).toString();
+    trip.liters = (req.body.km / CONSUMO_MOTO).toString();
     trip.category = req.body.category;
     trip.places = req.body.places;
 

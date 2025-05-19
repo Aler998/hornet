@@ -63,6 +63,7 @@ interface ITrip extends Document {
   km?: string;
   velocity?: string;
   liters?: string;
+  time?: string;
   start: Date;
   end: Date;
   category: mongoose.Types.ObjectId;
@@ -89,6 +90,7 @@ const tripSchema = new Schema<ITrip, TripModel, ITripMethods>(
     km: { type: Number, required: true },
     velocity: { type: Number, required: true },
     liters: { type: Number, required: true },
+    time: { type: Number, required: true },
     start: { type: Date, required: true },
     end: { type: Date, required: true },
     category: {
