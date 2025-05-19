@@ -30,6 +30,7 @@ import { errorSwalOptions } from "../../utils/swal-options";
 import ImageUpload from "../../components/form/ImageUpload";
 import GPXUpload from "../../components/form/GPXUpload";
 import CityInput from "../../components/form/CityInput";
+import Loader from "../../components/Loader";
 
 export default function CreateEdit() {
   const { slug } = useParams<{ slug: string }>();
@@ -41,8 +42,8 @@ export default function CreateEdit() {
     isError: tripIsError,
     error: tripError,
   } = useGetTripQuery(slug!, { skip: !isEdit });
-  const [createTrip] = useCreateTripMutation();
-  const [updateTrip] = useUpdateTripMutation();
+  const [createTrip, { isLoading: createLoading }] = useCreateTripMutation();
+  const [updateTrip, { isLoading: updateLoading }] = useUpdateTripMutation();
   const navigate = useNavigate();
 
   const [form, setForm] = useState<CreateTripDto>({
@@ -91,6 +92,8 @@ export default function CreateEdit() {
       navigate(`/${import.meta.env.VITE_SUBFOLDER}/404`);
     }
   }, [tripIsError, error, navigate, tripError]);
+
+  if (createLoading || updateLoading) return <Loader />;
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({

@@ -7,6 +7,7 @@ export interface Trip {
   rating: number;
   liters: number;
   km: number;
+  cost: number;
   time: number;
   velocity: number;
   slug: string;
