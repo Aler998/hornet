@@ -9,6 +9,7 @@ export interface Trip {
   velocity: number;
   liters: number;
   slug: string;
+  time: string;
   start: Dayjs;
   end: Dayjs;
   category: string;
@@ -25,6 +26,7 @@ export interface CreateTripDto {
   km: number;
   velocity: number;
   slug: string;
+  time: string;
   start: Dayjs;
   end: Dayjs;
   category: string;
@@ -58,3 +60,9 @@ export type TripTableRowProps = {
   onDelete: () => void;
   onEdit: () => void;
 };
+
+export function isUpdateTripDto(
+  trip: CreateTripDto | UpdateTripDto
+): trip is UpdateTripDto {
+  return "newSlug" in trip;
+}

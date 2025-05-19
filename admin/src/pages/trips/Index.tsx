@@ -36,7 +36,8 @@ import duration from "dayjs/plugin/duration";
 import { Label } from "../../theme/components/label";
 import { useGetCategoriesQuery } from "../../features/categories/categoriesApi";
 import Loader from "../../components/Loader";
-import { deleteSwalOptions } from "../../utils/SwalOptions";
+import { deleteSwalOptions } from "../../utils/swal-options";
+import { formatMinutes } from "../../utils/format-date";
 
 dayjs.extend(duration);
 
@@ -123,7 +124,7 @@ export default function Index() {
                       onSelectAllRows={(checked) =>
                         table.onSelectAllRows(
                           checked,
-                          trips ? trips.map((trip) => trip.slug) : [],
+                          trips ? trips.map((trip) => trip.slug) : []
                         )
                       }
                       headLabel={[
@@ -140,7 +141,7 @@ export default function Index() {
                       {dataFiltered
                         ?.slice(
                           table.page * table.rowsPerPage,
-                          table.page * table.rowsPerPage + table.rowsPerPage,
+                          table.page * table.rowsPerPage + table.rowsPerPage
                         )
                         .map((row) => (
                           <DefaultTableRow
@@ -149,12 +150,12 @@ export default function Index() {
                             onSelectRow={() => table.onSelectRow(row.slug)}
                             onShow={() =>
                               navigate(
-                                `/${import.meta.env.VITE_SUBFOLDER}/trips/${row.slug}/show`,
+                                `/${import.meta.env.VITE_SUBFOLDER}/trips/${row.slug}/show`
                               )
                             }
                             onEdit={() =>
                               navigate(
-                                `/${import.meta.env.VITE_SUBFOLDER}/trips/${row.slug}/edit`,
+                                `/${import.meta.env.VITE_SUBFOLDER}/trips/${row.slug}/edit`
                               )
                             }
                             onDelete={() => confirmDelete(row.slug)}
@@ -189,19 +190,14 @@ export default function Index() {
                               </TableCell>
                               <TableCell>
                                 <Label color={"success"}>
-                                  {dayjs(row.end).diff(
-                                    row.start,
-                                    "minute",
-                                    false,
-                                  )}{" "}
-                                  min
+                                  {formatMinutes(parseInt(row.time))}
                                 </Label>
                               </TableCell>
                               <TableCell>
                                 <Label>
                                   {
                                     categories?.find(
-                                      (c) => c._id === row.category,
+                                      (c) => c._id === row.category
                                     )?.title
                                   }
                                 </Label>
@@ -215,7 +211,7 @@ export default function Index() {
                         emptyRows={emptyRows(
                           table.page,
                           table.rowsPerPage,
-                          trips ? trips.length : 0,
+                          trips ? trips.length : 0
                         )}
                       />
 

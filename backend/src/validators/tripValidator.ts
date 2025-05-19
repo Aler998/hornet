@@ -16,8 +16,18 @@ export const createTripValidator = [
     }),
 
   body("rating").notEmpty().isNumeric(),
-  body("km").notEmpty().isNumeric(),
-  body("velocity").notEmpty().isNumeric(),
+  body("time")
+    .notEmpty()
+    .isNumeric()
+    .withMessage("Il numero inserito per i minuti di percorrenza non è valido"),
+  body("km")
+    .notEmpty()
+    .isNumeric()
+    .withMessage("Il numero inserito per i minuti di percorrenza non è valido"),
+  body("velocity")
+    .notEmpty()
+    .isNumeric()
+    .withMessage("La velocità inserita non è valida"),
 
   body("start").isISO8601().withMessage("La data di partenza non è valida"),
   body("end").isISO8601().withMessage("La data di arrivo non è valida"),
@@ -37,6 +47,10 @@ export const updateTripValidator = [
 
   body("rating").notEmpty().isNumeric().withMessage("Dare un voto al viaggio"),
 
+  body("time")
+    .notEmpty()
+    .isNumeric()
+    .withMessage("Il numero inserito per i minuti di percorrenza non è valido"),
   body("km")
     .notEmpty()
     .isNumeric()

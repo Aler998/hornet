@@ -1,6 +1,47 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import type { Trip, CreateTripDto, UpdateTripDto } from "./types";
+import {
+  type Trip,
+  type CreateTripDto,
+  type UpdateTripDto,
+  isUpdateTripDto,
+} from "./types";
 import { baseQueryWithErrorHandler } from "../ApiErrorHandler";
+
+const buildFormData = (trip: CreateTripDto | UpdateTripDto): FormData => {
+  const formData = new FormData();
+  if (isUpdateTripDto(trip) && trip.newSlug) {
+    formData.append("newSlug", trip.newSlug);
+  }
+  trip.images?.forEach((file) => {
+    formData.append("images", file);
+  });
+  trip.tracks?.forEach((file) => {
+    formData.append("tracks", file);
+  });
+  trip.places?.forEach((place, index) => {
+    formData.append(`places[${index}][place_id]`, place.place_id);
+    formData.append(`places[${index}][lat]`, place.lat);
+    formData.append(`places[${index}][lon]`, place.lon);
+    formData.append(`places[${index}][name]`, place.name);
+    formData.append(`places[${index}][display_name]`, place.display_name);
+  });
+
+  formData.append("category", trip.category);
+  formData.append("slug", trip.slug);
+  formData.append("title", trip.title);
+  if (trip.start) {
+    formData.append("start", trip.start.format());
+  }
+  if (trip.end) {
+    formData.append("end", trip.end.format());
+  }
+  formData.append("time", trip.time);
+  formData.append("description", trip.description);
+  formData.append("rating", trip.rating.toString());
+  formData.append("km", trip.km.toString());
+  formData.append("velocity", trip.velocity.toString());
+  return formData;
+};
 
 export const tripsApi = createApi({
   reducerPath: "tripsApi",
@@ -17,34 +58,7 @@ export const tripsApi = createApi({
     }),
     createTrip: builder.mutation<Trip, CreateTripDto>({
       query: (trip) => {
-        const formData = new FormData();
-        trip.images?.forEach((file) => {
-          formData.append("images", file);
-        });
-        trip.tracks?.forEach((file) => {
-          formData.append("tracks", file);
-        });
-        trip.places?.forEach((place, index) => {
-          formData.append(`places[${index}][place_id]`, place.place_id);
-          formData.append(`places[${index}][lat]`, place.lat);
-          formData.append(`places[${index}][lon]`, place.lon);
-          formData.append(`places[${index}][name]`, place.name);
-          formData.append(`places[${index}][display_name]`, place.display_name);
-        });
-
-        formData.append("category", trip.category);
-        formData.append("slug", trip.slug);
-        formData.append("title", trip.title);
-        if (trip.start) {
-          formData.append("start", trip.start.format());
-        }
-        if (trip.end) {
-          formData.append("end", trip.end.format());
-        }
-        formData.append("description", trip.description);
-        formData.append("rating", trip.rating.toString());
-        formData.append("km", trip.km.toString());
-        formData.append("velocity", trip.velocity.toString());
+        const formData = buildFormData(trip);
 
         return {
           url: "trips",
@@ -56,36 +70,7 @@ export const tripsApi = createApi({
     }),
     updateTrip: builder.mutation<Trip, UpdateTripDto>({
       query: ({ slug, ...rest }) => {
-        const formData = new FormData();
-        rest.images?.forEach((file) => {
-          formData.append("images", file);
-        });
-        rest.tracks?.forEach((file) => {
-          formData.append("tracks", file);
-        });
-        rest.places?.forEach((place, index) => {
-          formData.append(`places[${index}][place_id]`, place.place_id);
-          formData.append(`places[${index}][lat]`, place.lat);
-          formData.append(`places[${index}][lon]`, place.lon);
-          formData.append(`places[${index}][name]`, place.name);
-          formData.append(`places[${index}][display_name]`, place.display_name);
-        });
-
-        formData.append("category", rest.category);
-        formData.append("title", rest.title);
-        if (rest.newSlug) {
-          formData.append("newSlug", rest.newSlug);
-        }
-        if (rest.start) {
-          formData.append("start", rest.start.format());
-        }
-        if (rest.end) {
-          formData.append("end", rest.end.format());
-        }
-        formData.append("description", rest.description);
-        formData.append("rating", rest.rating.toString());
-        formData.append("km", rest.km.toString());
-        formData.append("velocity", rest.velocity.toString());
+        const formData = buildFormData({ slug, ...rest });
 
         return {
           url: `trips/${slug}`,

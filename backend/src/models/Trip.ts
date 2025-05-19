@@ -32,7 +32,7 @@ const fileSchema = new Schema<FileUploaded>(
     uuid: { type: String, required: true },
     filename: { type: String, required: true },
   },
-  { _id: false },
+  { _id: false }
 );
 
 const placeSchema = new Schema<Place>({
@@ -52,7 +52,7 @@ const imageSchema = new Schema<ImageUploaded>(
     width: { type: Number, required: true },
     height: { type: Number, required: true },
   },
-  { _id: false },
+  { _id: false }
 );
 
 interface ITrip extends Document {
@@ -63,6 +63,7 @@ interface ITrip extends Document {
   km?: string;
   velocity?: string;
   liters?: string;
+  time?: string;
   start: Date;
   end: Date;
   category: mongoose.Types.ObjectId;
@@ -89,6 +90,7 @@ const tripSchema = new Schema<ITrip, TripModel, ITripMethods>(
     km: { type: Number, required: true },
     velocity: { type: Number, required: true },
     liters: { type: Number, required: true },
+    time: { type: Number, required: true },
     start: { type: Date, required: true },
     end: { type: Date, required: true },
     category: {
@@ -102,7 +104,7 @@ const tripSchema = new Schema<ITrip, TripModel, ITripMethods>(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 tripSchema.method("getDecodedTracks", async function (): Promise<string[]> {
@@ -117,7 +119,7 @@ tripSchema.method("getDecodedTracks", async function (): Promise<string[]> {
       } catch (err) {
         return null;
       }
-    }),
+    })
   );
 
   return results.filter(Boolean) as string[];
@@ -127,14 +129,14 @@ tripSchema.static(
   "findOneBySlug",
   async function (this: TripModel, slug: string): Promise<ITrip | null> {
     return await this.findOne({ slug: slug });
-  },
+  }
 );
 
 tripSchema.static(
   "findOneWithDecodedTracks",
   async function (
     this: TripModel,
-    slug: string,
+    slug: string
   ): Promise<TripWithDecodedTracks | null> {
     const trip = await this.findOne({ slug: slug });
 
@@ -148,7 +150,7 @@ tripSchema.static(
       ...trip.toObject(),
       decodedTracks,
     };
-  },
+  }
 );
 
 const Trip = mongoose.model<ITrip, TripModel>("Trip", tripSchema);

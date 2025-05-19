@@ -2,45 +2,19 @@ import { RxLapTimer } from "react-icons/rx";
 import { MdLocalGasStation } from "react-icons/md";
 import { GiPathDistance } from "react-icons/gi";
 import { BiTachometer } from "react-icons/bi";
-import dayjs, { Dayjs } from "dayjs";
-import duration from "dayjs/plugin/duration";
-
-// Abilita il plugin duration
-dayjs.extend(duration);
+import { formatMinutes } from "../utils/format-date";
 
 function StatsBox({
-  start,
-  end,
+  time,
   liters,
   km,
   velocity,
 }: {
-  start: Dayjs | null;
-  end: Dayjs | null;
+  time: number;
   liters?: number;
   km?: number;
   velocity?: number;
 }) {
-  const renderTime = () => {
-    if (start && end) {
-      // Differenza in millisecondi
-      const diffMs = dayjs(end).diff(dayjs(start));
-
-      // Converti in durata
-      const dur = dayjs.duration(diffMs);
-
-      // Estrai ore e minuti
-      const ore = Math.floor(dur.asHours());
-      const minuti = dur.minutes();
-      return (
-        <p>
-          {ore}h{minuti}min
-        </p>
-      );
-    } else {
-      return <p></p>;
-    }
-  };
   return (
     <>
       <table className="table-fixed border-2 border-honda border-solid border-collapse mt-4 font-oswald mb-4">
@@ -48,7 +22,7 @@ function StatsBox({
           <tr>
             <td className="p-2 w-1/4 text-center text-honda font-semibold border-2 border-honda border-solid">
               <RxLapTimer color="#ea3323" />
-              {renderTime()}
+              <p>{formatMinutes(time)}</p>
             </td>
             {km ? (
               <td className="p-2 w-1/4 text-center text-honda font-semibold border-2 border-honda border-solid">
