@@ -7,6 +7,10 @@ jobs:
   format-and-lint:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      pull-requests: write
+
     strategy:
       matrix:
         project: [admin, frontend, backend]

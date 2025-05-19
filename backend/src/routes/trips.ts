@@ -15,14 +15,17 @@ import {
 } from "../validators/tripValidator";
 import { validateResult } from "../middleware/validateResult";
 import authMiddleware from "../middleware/auth";
+import { doubleCsrfProtection } from "../middleware/csrf-token";
 
 const tripRoutes: Router = express.Router();
 
 tripRoutes.get("/", (req: Request, res: Response) => getAllTrips(req, res));
 
 tripRoutes.get("/:slug", (req: Request, res: Response) =>
-  getTripBySlug(req, res),
+  getTripBySlug(req, res)
 );
+
+tripRoutes.use(doubleCsrfProtection)
 
 tripRoutes.post(
   "/",
@@ -33,7 +36,7 @@ tripRoutes.post(
   ]),
   createTripValidator,
   validateResult,
-  (req: Request, res: Response) => createTrip(req, res),
+  (req: Request, res: Response) => createTrip(req, res)
 );
 
 tripRoutes.put(
@@ -45,22 +48,24 @@ tripRoutes.put(
   ]),
   updateTripValidator,
   validateResult,
-  (req: Request, res: Response) => updateTrip(req, res),
+  (req: Request, res: Response) => updateTrip(req, res)
 );
 
-tripRoutes.delete("/:slug", authMiddleware, (req: Request, res: Response) =>
-  deleteTrip(req, res),
+tripRoutes.delete(
+  "/:slug",
+  authMiddleware,
+  (req: Request, res: Response) => deleteTrip(req, res)
 );
 
 tripRoutes.delete(
   "/:slug/images/:image",
   authMiddleware,
-  (req: Request, res: Response) => deleteTripImage(req, res),
+  (req: Request, res: Response) => deleteTripImage(req, res)
 );
 tripRoutes.delete(
   "/:slug/tracks/:track",
   authMiddleware,
-  (req: Request, res: Response) => deleteTripTrack(req, res),
+  (req: Request, res: Response) => deleteTripTrack(req, res)
 );
 
 export default tripRoutes;
