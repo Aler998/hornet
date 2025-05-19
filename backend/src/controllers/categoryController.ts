@@ -61,9 +61,14 @@ export const updateCategory = async (
 ): Promise<void> => {
   try {
     const slug = req.params.slug;
+    const { title, newSlug } = req.body;
+    if (typeof title !== "string" || typeof newSlug !== "string") {
+      res.status(400).json({ error: "Invalid input data" });
+      return;
+    }
     const updatedCategory: ICategory | null = await Category.findOneAndUpdate(
       { slug: { $eq: slug } },
-      { title: req.body.title, slug: req.body.newSlug },
+      { $set: { title, slug: newSlug } },
       { new: true }
     );
 
