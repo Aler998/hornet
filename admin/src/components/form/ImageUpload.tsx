@@ -17,15 +17,6 @@ import { CreateTripDto, Trip } from "../../features/trips/types";
 import { uuidv4 } from "minimal-shared/utils";
 import Swal from "sweetalert2";
 import { deleteSwalOptions } from "../../utils/swal-options";
-
-const isValidImageUrl = (url: string): boolean => {
-  try {
-    const parsedUrl = new URL(url);
-    return parsedUrl.protocol === "blob:";
-  } catch {
-    return false;
-  }
-};
 import { useDeleteTripImageMutation } from "../../features/trips/tripsApi";
 
 interface ImagePreview {
@@ -54,31 +45,14 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
     previews.forEach((imagePreview) => URL.revokeObjectURL(imagePreview.url));
 
-    // const filesArray = Array.from(e.target.files);
-    // const filesArray = Array.from(e.target.files).filter((file) =>
-    //   file.type.startsWith("image/")
-    // );
-    const filesArray = Array.from(e.target.files).filter((file) => {
-      if (!file.type.startsWith("image/")) {
-        console.warn(`Skipped file with invalid type: ${file.type}`);
-        return false;
-      }
-      return true;
-    });
+    const filesArray = Array.from(e.target.files);
 
     setForm({ ...form, images: filesArray });
     setPreviews(
-      filesArray.map((file) => {
-        const sanitizedUrl = URL.createObjectURL(file);
-        if (!isValidImageUrl(sanitizedUrl)) {
-          console.warn(`Invalid image URL: ${sanitizedUrl}`);
-          return null;
-        }
-        return {
-          uuid: uuidv4(),
-          url: sanitizedUrl,
-        };
-      }).filter(Boolean)
+      filesArray.map((file) => ({
+        uuid: uuidv4(),
+        url: URL.createObjectURL(file),
+      })),
     );
   };
 
