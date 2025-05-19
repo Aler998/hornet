@@ -9,6 +9,7 @@ import {
   removeImage,
 } from "../services/TripService";
 import { NotFoundError } from "../errors/NotFoundError";
+import { getCurrentBenzinaPrice } from "../services/FetchCostoBenzina";
 
 const CONSUMO_MOTO = 28.6;
 
@@ -57,7 +58,8 @@ export const createTrip = async (
       time: req.body.time,
       km: req.body.km,
       velocity: req.body.velocity,
-      liters: (req.body.km / CONSUMO_MOTO).toString(),
+      liters: req.body.km / CONSUMO_MOTO,
+      cost: (req.body.km / CONSUMO_MOTO) * (await getCurrentBenzinaPrice()),
       start: req.body.start,
       end: req.body.end,
       category: req.body.category,
@@ -98,6 +100,13 @@ export const updateTrip = async (
     }
 
     if (req.body.newSlug) trip.slug = req.body.newSlug;
+    if (trip.km != req.body.km) {
+      trip.liters = (req.body.km / CONSUMO_MOTO).toString();
+      trip.cost = (
+        (req.body.km / CONSUMO_MOTO) *
+        (await getCurrentBenzinaPrice())
+      ).toString();
+    }
 
     trip.title = req.body.title;
     trip.start = req.body.start;
@@ -107,7 +116,6 @@ export const updateTrip = async (
     trip.time = req.body.time;
     trip.km = req.body.km;
     trip.velocity = req.body.velocity;
-    trip.liters = (req.body.km / CONSUMO_MOTO).toString();
     trip.category = req.body.category;
     trip.places = req.body.places;
 

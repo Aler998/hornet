@@ -55,7 +55,7 @@ function InfoButton({ trip }: { trip: Trip }) {
             <p>Costo</p>
             <span>
               <MdOutlineEuro className="mr-2" color="#ea3323" />
-              {(Math.round(trip.liters * 1.6 * 100) / 100).toFixed(2)}L
+              {(Math.round(trip.cost * 100) / 100).toFixed(2)}€
             </span>
           </li>
         </ul>
