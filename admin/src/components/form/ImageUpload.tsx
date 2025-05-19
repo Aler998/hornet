@@ -17,6 +17,15 @@ import { CreateTripDto, Trip } from "../../features/trips/types";
 import { uuidv4 } from "minimal-shared/utils";
 import Swal from "sweetalert2";
 import { deleteSwalOptions } from "../../utils/swal-options";
+
+const isValidImageUrl = (url: string): boolean => {
+  try {
+    const parsedUrl = new URL(url);
+    return parsedUrl.protocol === "blob:";
+  } catch {
+    return false;
+  }
+};
 import { useDeleteTripImageMutation } from "../../features/trips/tripsApi";
 
 interface ImagePreview {
@@ -61,11 +70,15 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     setPreviews(
       filesArray.map((file) => {
         const sanitizedUrl = URL.createObjectURL(file);
+        if (!isValidImageUrl(sanitizedUrl)) {
+          console.warn(`Invalid image URL: ${sanitizedUrl}`);
+          return null;
+        }
         return {
           uuid: uuidv4(),
           url: sanitizedUrl,
         };
-      })
+      }).filter(Boolean)
     );
   };
 
