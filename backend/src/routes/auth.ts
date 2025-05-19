@@ -31,18 +31,20 @@ authRoutes.post("/login", (req: Request, res: Response) => {
   return;
 });
 
+authRoutes.get("/me", authMiddleware, (req: Request, res: Response) => {
+  res.json({ email: req.user?.username });
+  return;
+});
+
+authRoutes.use(doubleCsrfProtection)
 authRoutes.post(
   "/logout",
-  doubleCsrfProtection,
   (_req: Request, res: Response) => {
     res.clearCookie("token").clearCookie("Host-me-x-csrf-token");
     res.json({ message: "Logout riuscito" });
   }
 );
 
-authRoutes.get("/me", authMiddleware, (req: Request, res: Response) => {
-  res.json({ email: req.user?.username });
-  return;
-});
+
 
 export default authRoutes;

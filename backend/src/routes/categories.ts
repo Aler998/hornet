@@ -17,36 +17,35 @@ import { doubleCsrfProtection } from "../middleware/csrf-token";
 const categoriesRoutes: Router = express.Router();
 
 categoriesRoutes.get("/", (req: Request, res: Response) =>
-  getAllCategories(req, res),
+  getAllCategories(req, res)
 );
 
 categoriesRoutes.get("/:slug", (req: Request, res: Response) =>
-  getCategoryBySlug(req, res),
+  getCategoryBySlug(req, res)
 );
+
+categoriesRoutes.use(doubleCsrfProtection);
 
 categoriesRoutes.post(
   "/",
-  doubleCsrfProtection,
   authMiddleware,
   createCategoryValidator,
   validateResult,
-  (req: Request, res: Response) => createCategory(req, res),
+  (req: Request, res: Response) => createCategory(req, res)
 );
 
 categoriesRoutes.put(
   "/:slug",
-  doubleCsrfProtection,
   authMiddleware,
   updateCategoryValidator,
   validateResult,
-  (req: Request, res: Response) => updateCategory(req, res),
+  (req: Request, res: Response) => updateCategory(req, res)
 );
 
 categoriesRoutes.delete(
   "/:slug",
-  doubleCsrfProtection,
   authMiddleware,
-  (req: Request, res: Response) => deleteCategory(req, res),
+  (req: Request, res: Response) => deleteCategory(req, res)
 );
 
 export default categoriesRoutes;

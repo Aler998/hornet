@@ -25,9 +25,10 @@ tripRoutes.get("/:slug", (req: Request, res: Response) =>
   getTripBySlug(req, res)
 );
 
+tripRoutes.use(doubleCsrfProtection)
+
 tripRoutes.post(
   "/",
-  doubleCsrfProtection,
   authMiddleware,
   upload.fields([
     { name: "images", maxCount: 10 },
@@ -40,7 +41,6 @@ tripRoutes.post(
 
 tripRoutes.put(
   "/:slug",
-  doubleCsrfProtection,
   authMiddleware,
   upload.fields([
     { name: "images", maxCount: 10 },
@@ -53,20 +53,17 @@ tripRoutes.put(
 
 tripRoutes.delete(
   "/:slug",
-  doubleCsrfProtection,
   authMiddleware,
   (req: Request, res: Response) => deleteTrip(req, res)
 );
 
 tripRoutes.delete(
   "/:slug/images/:image",
-  doubleCsrfProtection,
   authMiddleware,
   (req: Request, res: Response) => deleteTripImage(req, res)
 );
 tripRoutes.delete(
   "/:slug/tracks/:track",
-  doubleCsrfProtection,
   authMiddleware,
   (req: Request, res: Response) => deleteTripTrack(req, res)
 );
