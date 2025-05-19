@@ -11,20 +11,27 @@ interface File {
   path: string;
 }
 
+const ROOT = "/app/uploads/";
+
 export const moveFilesIfExists = (
   images: File[] | null,
   tracks: File[] | null,
-  trip: ITrip,
-): ITrip => {
+  trip: ITrip
+): boolean => {
   if (images && images.length > 0) {
-    const finalPath = path.join(
+    let finalPath = path.join(
       __dirname,
       "..",
       "..",
       "uploads",
       trip.slug,
-      "images",
+      "images"
     );
+
+    finalPath = fs.realpathSync(path.resolve(ROOT, finalPath));
+    if (!finalPath.startsWith(ROOT)) {
+      return false;
+    }
     fs.mkdirSync(finalPath, { recursive: true });
 
     trip.images = [
@@ -33,7 +40,7 @@ export const moveFilesIfExists = (
         const ext = path.extname(file.originalname);
         const finalName = `${path.basename(
           file.originalname,
-          ext,
+          ext
         )}-${Date.now()}${ext}`;
         const destPath = path.join(finalPath, finalName);
 
@@ -60,7 +67,7 @@ export const moveFilesIfExists = (
       "..",
       "uploads",
       trip.slug,
-      "tracks",
+      "tracks"
     );
     fs.mkdirSync(finalPath, { recursive: true });
 
@@ -69,7 +76,7 @@ export const moveFilesIfExists = (
       ...tracks.map((file) => {
         const ext = path.extname(file.originalname);
         const finalName = `${slugify(
-          path.basename(file.originalname, ext),
+          path.basename(file.originalname, ext)
         )}-${Date.now()}${ext}`;
         const destPath = path.join(finalPath, finalName);
 
@@ -84,7 +91,7 @@ export const moveFilesIfExists = (
     ];
   }
 
-  return trip;
+  return true;
 };
 
 export enum CloneType {
@@ -121,13 +128,13 @@ export const CloneImage = async (image: ImageUploaded, type: CloneType) => {
         "..",
         image.folder,
         type == CloneType.thumbnail ? "thumbnail" : "hd",
-        image.filename,
-      ),
+        image.filename
+      )
     );
 };
 
 export const removeImage = (
-  image: ImageUploaded,
+  image: ImageUploaded
 ): NodeJS.ErrnoException | null => {
   fs.unlink(image.path, (err) => {
     if (err) {
@@ -140,7 +147,7 @@ export const removeImage = (
       if (err) {
         return err;
       }
-    },
+    }
   );
   fs.unlink(
     path.join(__dirname, "..", "..", image.folder, "hd", image.filename),
@@ -148,7 +155,7 @@ export const removeImage = (
       if (err) {
         return err;
       }
-    },
+    }
   );
 
   return null;
