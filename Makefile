@@ -1,5 +1,6 @@
 COMPOSE_DEV=docker-compose -f compose.dev.yaml --env-file .env.dev 
-COMPOSE_PROD=docker-compose -f compose.prod.yaml --env-file .env.prod
+COMPOSE_PROD=sudo docker-compose -f compose.prod.yaml --env-file .env.prod
+COMPOSE_RASP=docker-compose -f compose.rasp.yaml --env-file .env.prod
 
 dev:
 	$(COMPOSE_DEV) up --build -d
@@ -18,3 +19,12 @@ prod-down:
 
 logs-prod:
 	$(COMPOSE_PROD) logs -f
+
+rasp:
+	$(COMPOSE_RASP) up -d --build
+
+rasp-down:
+	$(COMPOSE_RASP) down
+
+logs-rasp:
+	$(COMPOSE_RASP) logs -f
