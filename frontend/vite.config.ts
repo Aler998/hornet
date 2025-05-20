@@ -15,6 +15,7 @@ export default defineConfig({
           "**/*.{js,css,html,png,jpg,jpeg,svg,json,webmanifest,ico}",
         ],
         navigateFallback: "/index.html",
+        navigateFallbackDenylist: [/^\/admin/],
         runtimeCaching: [
           {
             urlPattern: /\/api\//,
