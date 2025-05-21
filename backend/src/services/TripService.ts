@@ -11,15 +11,13 @@ interface File {
   path: string;
 }
 
-const ROOT = "/app/uploads/";
-
 export const moveFilesIfExists = (
   images: File[] | null,
   tracks: File[] | null,
   trip: ITrip
 ): boolean => {
   if (images && images.length > 0) {
-    let finalPath = path.join(
+    const finalPath = path.join(
       __dirname,
       "..",
       "..",
@@ -28,10 +26,6 @@ export const moveFilesIfExists = (
       "images"
     );
 
-    finalPath = fs.realpathSync(path.resolve(ROOT, finalPath));
-    if (!finalPath.startsWith(ROOT)) {
-      return false;
-    }
     fs.mkdirSync(finalPath, { recursive: true });
 
     trip.images = [
@@ -61,7 +55,7 @@ export const moveFilesIfExists = (
   }
 
   if (tracks && tracks.length > 0) {
-    let finalPath = path.join(
+    const finalPath = path.join(
       __dirname,
       "..",
       "..",
@@ -69,10 +63,7 @@ export const moveFilesIfExists = (
       trip.slug,
       "tracks"
     );
-    finalPath = fs.realpathSync(path.resolve(ROOT, finalPath));
-    if (!finalPath.startsWith(ROOT)) {
-      return false;
-    }
+
     fs.mkdirSync(finalPath, { recursive: true });
 
     trip.tracks = [
