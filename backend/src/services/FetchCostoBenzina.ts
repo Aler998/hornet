@@ -31,8 +31,8 @@ export const fetchAndCombineCSVData = async (
   const prezziUrl =
     "https://www.mimit.gov.it/images/exportCSV/prezzo_alle_8.csv";
 
-  return await axios.get(anagraficaUrl).then(async (anagrafica) => {
-    await axios.get(prezziUrl).then((prezzi) => {
+  return await axios.get(anagraficaUrl, { timeout: 60000 }).then(async (anagrafica) => {
+    await axios.get(prezziUrl, { timeout: 60000 }).then((prezzi) => {
       const anagraficaRows = anagrafica.data.split("\n");
       const prezziRows = prezzi.data.split("\n");
       const result: Record<string, Distributore> = {};
