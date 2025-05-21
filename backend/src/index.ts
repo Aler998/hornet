@@ -17,7 +17,7 @@ import todosRoutes from "./routes/todos";
 import cron from "node-cron";
 import { checkAndFetchFile } from "./services/FetchCostoBenzina";
 
-cron.schedule("*/2 * * * *", () => {
+cron.schedule("1 1 * * *", () => {
   console.log("Azione ogni 2 minuti");
 
   try {
