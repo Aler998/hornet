@@ -30,7 +30,17 @@ export const navData = [
   {
     title: "Categorie",
     path: `${import.meta.env.VITE_SUBFOLDER}/categories`,
-    icon: icon("ic-cart"),
+    icon: icon("ic-lock"),
+    info: (
+      <Label color="error" variant="inverted">
+        +3
+      </Label>
+    ),
+  },
+  {
+    title: "Todo",
+    path: `${import.meta.env.VITE_SUBFOLDER}/todos`,
+    icon: icon("ic-blog"),
     info: (
       <Label color="error" variant="inverted">
         +3
