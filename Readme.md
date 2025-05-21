@@ -78,12 +78,13 @@ make dev
 - [X] Popolare dati dashboard
 - [ ] Aggiungere più informazioni sul singolo viaggio
 - [ ] aggiungere le categorie nel frontend
-- [ ] aggiungere posti visitati sul viaggio + heatmap/mappa posti visitati
-- [ ] aggiungere lista di viaggi da fare
+- [X] aggiungere posti visitati sul viaggio + heatmap/mappa posti visitati
+- [X] aggiungere lista di viaggi da fare
 - [X] velocità media sul viaggio + calcolo automatico litri
 - [ ] velocità massima
 - [X] export pdf del viaggio
 - [X] possibilità di caricare il tracciato su maps (se possibile)
 - [X] Supporto PWA
 - [ ] Esporre statistiche sul frontend
-- [ ] Menù basso sul frontend ( home, heatmap, categorie, statistiche)
+- [X] Menù basso sul frontend ( home, heatmap, categorie, statistiche)
+- [ ] Meta OG per condivisione
