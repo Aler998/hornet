@@ -4,16 +4,23 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { NavItem } from "../utils/types";
 import Home from "../components/HomeSections/Home";
-import { heatmapNav, homeNav } from "../components/NavItems";
+import { heatmapNav, homeNav, todoNav } from "../components/NavItems";
 import { Trip as ITrip } from "../features/trips/types";
 import HeatmapContent from "../components/HomeSections/Map";
+import TodoContent from "../components/HomeSections/Todo";
 
 function Index() {
   const { data: trips, isLoading, isError, error } = useGetTripsQuery();
-  const tabs: NavItem[] = [homeNav, heatmapNav];
+  const tabs: NavItem[] = [homeNav, heatmapNav, todoNav];
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true)
 
   const [selectedTab, setSelectedTab] = useState<NavItem>(tabs[0]);
+
+  useEffect(() => {
+    setLoading(isLoading)
+  }, [isLoading])
+  
 
   useEffect(() => {
     if (isError && error && typeof error === "object" && "status" in error) {
@@ -32,8 +39,8 @@ function Index() {
             places={trips.flatMap((trip) => (trip.places ? trip.places : []))}
           />
         );
-      // case "maps":
-      //   return <MapsContent trip={trip} />;
+      case "todos":
+        return <TodoContent setLoading={setLoading}/>;
       default:
         return <p>Unknown status</p>;
     }
@@ -44,7 +51,7 @@ function Index() {
       tabs={tabs}
       selectedTab={selectedTab}
       setSelectedTab={setSelectedTab}
-      isLoading={isLoading}
+      isLoading={loading}
       title="I nostri viaggi"
     >
       {trips ? renderTab(selectedTab.label, trips) : ""}
