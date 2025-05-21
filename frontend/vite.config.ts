@@ -12,7 +12,7 @@ export default defineConfig({
       manifest: false,
       workbox: {
         globPatterns: [
-          "**/*.{js,css,html,png,jpg,jpeg,svg,json,webmanifest,ico}",
+          "**/*.{js,css,html,png,jpg,jpeg,svg,json,ico}",
         ],
         navigateFallback: "/index.html",
         runtimeCaching: [
