@@ -29,7 +29,7 @@ COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/dist ./dist
 
 # Installa solo le dipendenze necessarie per la produzione
-RUN npm install --only=production
+RUN npm install --omit dev --include=optional sharp
 
 # Espone la porta per il server
 EXPOSE 3000
