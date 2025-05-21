@@ -14,6 +14,18 @@ import categoriesRoutes from "./routes/categories";
 import rateLimit from "express-rate-limit";
 import { generateCsrfToken } from "./middleware/csrf-token";
 import todosRoutes from "./routes/todos";
+import cron from "node-cron";
+import { checkAndFetchFile } from "./services/FetchCostoBenzina";
+
+cron.schedule("*/2 * * * *", () => {
+  console.log("Azione ogni 2 minuti");
+
+  try {
+    checkAndFetchFile();
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 const app = express();
 
@@ -43,7 +55,7 @@ const getCsrfTokenRoute = (req: Request, res: Response) => {
     .cookie("Host-me-x-csrf-token", csrfToken, {
       httpOnly: false,
       secure: process.env.NODE_ENV == "production" ? true : false,
-      sameSite: process.env.NODE_ENV == "production" ? "strict": "lax",
+      sameSite: process.env.NODE_ENV == "production" ? "strict" : "lax",
       maxAge: 3600000,
     })
     .json({ csrfToken });
