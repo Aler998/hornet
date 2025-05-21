@@ -13,6 +13,7 @@ import tripRoutes from "./routes/trips";
 import categoriesRoutes from "./routes/categories";
 import rateLimit from "express-rate-limit";
 import { generateCsrfToken } from "./middleware/csrf-token";
+import todosRoutes from "./routes/todos";
 
 const app = express();
 
@@ -53,6 +54,7 @@ if (process.env.NODE_ENV == "production") {
   app.use("/auth", authRoutes);
   app.use("/trips", tripRoutes);
   app.use("/categories", categoriesRoutes);
+  app.use("/todos", todosRoutes);
   app.get("/csrf-token", getCsrfTokenRoute);
 } else {
   app.use(`/api`, apiRouter);
