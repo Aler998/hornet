@@ -21,6 +21,7 @@ export const CategoriesPage = lazy(() => import("./pages/categories/Index"));
 export const CategoriesCreateEditPage = lazy(
   () => import("./pages/categories/CreateEdit"),
 );
+export const TodosPage = lazy(() => import("./pages/todos/Index"));
 export const TripsPage = lazy(() => import("./pages/trips/Index"));
 export const TripsShowPage = lazy(() => import("./pages/trips/Show"));
 export const TripsCreateEditPage = lazy(
@@ -81,6 +82,10 @@ export const routesSection: RouteObject[] = [
       {
         path: `${import.meta.env.VITE_SUBFOLDER}/categories/:slug`,
         element: <CategoriesCreateEditPage />,
+      },
+      {
+        path: `${import.meta.env.VITE_SUBFOLDER}/todos`,
+        element: <TodosPage />,
       },
       {
         path: `${import.meta.env.VITE_SUBFOLDER}/trips`,
