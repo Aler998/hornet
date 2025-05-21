@@ -10,7 +10,7 @@ interface ITodo extends Document {
 const todoSchema = new Schema<ITodo>(
   {
     title: { type: String, required: true },
-    link: { type: String, required: true, unique: true },
+    link: { type: String, required: true},
     order: { type: Number, required: true },
     completed: { type: Boolean, required: true, default: false },
   },
