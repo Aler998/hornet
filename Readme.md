@@ -93,3 +93,4 @@ make dev
 - [ ] landing page utente tra home e viaggi
 - [ ] sistema di amicizia
 - [ ] uniformare gli stili
+- [ ] label dei pin nella mappa
