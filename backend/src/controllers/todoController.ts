@@ -76,7 +76,7 @@ export const updateTodo = async (
 
     res.json(updatedTodo);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     
     if (err instanceof Error) {
       if (err.name === "ValidationError") {

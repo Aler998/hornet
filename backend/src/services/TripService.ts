@@ -22,6 +22,7 @@ export const moveFilesIfExists = (
       "..",
       "..",
       "uploads",
+      trip.user.toString(),
       trip.slug,
       "images"
     );
@@ -44,8 +45,8 @@ export const moveFilesIfExists = (
 
         return {
           filename: finalName,
-          path: `/uploads/${trip.slug}/images/${finalName}`,
-          folder: `/uploads/${trip.slug}/images`,
+          path: `/uploads/${trip.user.toString()}/${trip.slug}/images/${finalName}`,
+          folder: `/uploads/${trip.user.toString()}/${trip.slug}/images`,
           uuid: uuidv4(),
           width: dimensions.width,
           height: dimensions.height,
@@ -60,6 +61,7 @@ export const moveFilesIfExists = (
       "..",
       "..",
       "uploads",
+      trip.user.toString(),
       trip.slug,
       "tracks"
     );
@@ -79,7 +81,7 @@ export const moveFilesIfExists = (
 
         return {
           filename: finalName,
-          path: `/uploads/${trip.slug}/tracks/${finalName}`,
+          path: `/uploads/${trip.user.toString()}/${trip.slug}/tracks/${finalName}`,
           uuid: uuidv4(),
         };
       }),

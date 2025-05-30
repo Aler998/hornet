@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import LoginRequest from "./types";
+import LoginRequest, { User } from "./types";
 import axios from "axios";
 
 export const authApi = createApi({
@@ -22,7 +22,7 @@ export const authApi = createApi({
             withCredentials: true,
           });
         } catch (err) {
-          console.log(err);
+          console.error(err);
         }
       },
     }),
@@ -32,7 +32,7 @@ export const authApi = createApi({
         method: "POST",
       }),
     }),
-    getMe: builder.query<string, void>({
+    getMe: builder.query<User, void>({
       query: () => "auth/me",
     }),
   }),
