@@ -2,9 +2,10 @@ import ThemeSwitcher from "../ThemeSwitcher";
 import Logo from "../Logo";
 import { Trip } from "../../features/trips/types";
 import Masonry from "react-masonry-css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Rating from "../Rating";
 import Scrollbar from "react-scrollbars-custom";
+import { MdHome } from "react-icons/md";
 
 function Home({ title, trips }: { title: string; trips: Trip[] }) {
   const breakpointColumnsObj = {
@@ -14,10 +15,16 @@ function Home({ title, trips }: { title: string; trips: Trip[] }) {
     500: 1,
   };
 
+  const navigate = useNavigate();
+
   return (
     <Scrollbar>
       <div className="w-full min-w-screen py-8 px-4 flex justify-end align-center">
         <ThemeSwitcher />
+        <MdHome
+          onClick={() => navigate("/")}
+          className="text-slate-400 w-5 h-5 ml-4"
+        />
       </div>
       <div className="w-wull min-w-screen text-neutral-700 font-oswald">
         <div className="w-full mx-auto max-w-full md:max-w-2/3 lg:max-w-1/3 flex flex-col items-center md-8 sm:mb-16">

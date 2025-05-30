@@ -33,7 +33,7 @@ export function NavUpgrade({ sx, ...other }: StackProps) {
           }),
         ]}
       >
-        Nav Upgrade
+        <a href="/me">Area Riservata</a>
       </Typography>
     </Box>
   );

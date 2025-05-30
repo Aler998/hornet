@@ -1,6 +1,6 @@
 COMPOSE_DEV=docker-compose -f compose.dev.yaml --env-file .env.dev 
 COMPOSE_PROD=sudo docker compose -f compose.prod.yaml --env-file .env.prod
-COMPOSE_RASP=sudo docker compose -f compose.rasp.yaml --env-file .env.prod
+COMPOSE_RASP=docker compose -f compose.rasp.yaml --env-file .env.prod
 
 dev:
 	$(COMPOSE_DEV) up --build -d

@@ -10,14 +10,16 @@ import "./global.css";
 import Trip from "./pages/Trip.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { RequireAuth } from "./components/RequireAuth.tsx";
+import Homepage from "./pages/Homepage.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <Router>
         <Routes>
+          <Route path="/" element={<Homepage />} />
           <Route
-            path="/"
+            path="/me"
             element={
               <RequireAuth>
                 <Index />
