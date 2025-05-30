@@ -94,3 +94,4 @@ make dev
 - [ ] sistema di amicizia
 - [ ] uniformare gli stili
 - [ ] label dei pin nella mappa
+- [ ] alla modifica di un trip vengono sovrascritte le località
