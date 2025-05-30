@@ -5,7 +5,7 @@ const Logo = ({ classes }: { classes: string }) => {
   return (
     <>
       <svg
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/me")}
         className={classes + " cursor-pointer"}
         version="1.1"
         id="Layer_1"

@@ -90,3 +90,6 @@ make dev
 - [X] Menù basso sul frontend ( home, heatmap, categorie, statistiche)
 - [X] Meta OG per condivisione
 - [ ] Aggiungere pubblico su trip
+- [ ] landing page utente tra home e viaggi
+- [ ] sistema di amicizia
+- [ ] uniformare gli stili
