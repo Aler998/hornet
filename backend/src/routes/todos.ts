@@ -14,9 +14,11 @@ import { createUpdateTodoValidator } from "../validators/todoValidator";
 
 const todosRoutes: Router = express.Router();
 
-todosRoutes.get("/", (req: Request, res: Response) => getAllTodos(req, res));
+todosRoutes.get("/", authMiddleware, (req: Request, res: Response) =>
+  getAllTodos(req, res)
+);
 
-todosRoutes.get("/:_id", (req: Request, res: Response) =>
+todosRoutes.get("/:_id", authMiddleware, (req: Request, res: Response) =>
   getTodoById(req, res)
 );
 
