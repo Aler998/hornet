@@ -13,7 +13,7 @@ const authRoutes: Router = express.Router();
 authRoutes.post("/login", async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
-  const user = await User.findOne({ username: username });
+  const user = await User.findOne({ username: { $eq: username } });
   if (user) {
     if (compareSync(password, user.password)) {      
       const token = jwt.sign(
