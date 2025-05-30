@@ -17,11 +17,11 @@ export default defineConfig({
         navigateFallback: "/index.html",
         navigateFallbackDenylist: [/^\/admin/],
         runtimeCaching: [
-          {
-            urlPattern: /\/api\//,
-            handler: "NetworkFirst",
-            options: { cacheName: "api-cache" },
-          },
+        //   {
+        //     urlPattern: /\/api\//,
+        //     handler: "NetworkFirst",
+        //     options: { cacheName: "api-cache" },
+        //   },
           {
             urlPattern: /\.(?:js|css|html|webmanifest)$/,
             handler: "CacheFirst",

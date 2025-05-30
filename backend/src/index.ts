@@ -16,7 +16,6 @@ import { generateCsrfToken } from "./middleware/csrf-token";
 import todosRoutes from "./routes/todos";
 import cron from "node-cron";
 import { checkAndFetchFile } from "./services/FetchCostoBenzina";
-import userSeed from "./seeds/userSeed";
 
 cron.schedule("1 1 * * *", () => {
   try {
@@ -76,14 +75,6 @@ mongoose
   .connect(process.env.MONGO_URI || "", {} as mongoose.ConnectOptions)
   .then(() => console.log("🟢 Connessione a MongoDB riuscita"))
   .catch((err) => console.error("🔴 Errore connessione MongoDB", err));
-
-
-userSeed().then(() => {
-  console.log("Seed completato");
-}).catch(err => {
-  console.error(err);
-  process.exit(1);
-});
 
 app.listen(3000, () => {
   console.log("🚀 Backend in ascolto su porta 3000");
