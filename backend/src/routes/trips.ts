@@ -19,13 +19,15 @@ import { doubleCsrfProtection } from "../middleware/csrf-token";
 
 const tripRoutes: Router = express.Router();
 
-tripRoutes.get("/", (req: Request, res: Response) => getAllTrips(req, res));
+tripRoutes.get("/", authMiddleware, (req: Request, res: Response) =>
+  getAllTrips(req, res)
+);
 
-tripRoutes.get("/:slug", (req: Request, res: Response) =>
+tripRoutes.get("/:slug", authMiddleware, (req: Request, res: Response) =>
   getTripBySlug(req, res)
 );
 
-tripRoutes.use(doubleCsrfProtection)
+tripRoutes.use(doubleCsrfProtection);
 
 tripRoutes.post(
   "/",
@@ -51,10 +53,8 @@ tripRoutes.put(
   (req: Request, res: Response) => updateTrip(req, res)
 );
 
-tripRoutes.delete(
-  "/:slug",
-  authMiddleware,
-  (req: Request, res: Response) => deleteTrip(req, res)
+tripRoutes.delete("/:slug", authMiddleware, (req: Request, res: Response) =>
+  deleteTrip(req, res)
 );
 
 tripRoutes.delete(

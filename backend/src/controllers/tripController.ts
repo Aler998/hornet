@@ -18,10 +18,11 @@ export const getAllTrips = async (
   res: Response
 ): Promise<void> => {
   try {
-    const trips = await Trip.find().sort({ createdAt: -1 });
+    const userId = req.user!.id;
+    const trips = await Trip.find({ user: userId }).sort({ createdAt: -1 });
     res.json(trips);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Errore del server" });
   }
 };
@@ -31,7 +32,7 @@ export const getTripBySlug = async (
   res: Response
 ): Promise<void> => {
   try {
-    const trip = await Trip.findOneWithDecodedTracks(req.params.slug);
+    const trip = await Trip.findOneWithDecodedTracks(req.user?.id || "", req.params.slug);
 
     if (!trip || trip == null)
       res.status(404).json({ error: "Trip not found" });
@@ -64,6 +65,7 @@ export const createTrip = async (
       end: req.body.end,
       category: req.body.category,
       places: req.body.places,
+      user: req.user?.id
     });
 
     const files = req.files as {
@@ -87,7 +89,7 @@ export const createTrip = async (
       res.status(500).json({ message: "Errore salvataggio files" });
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json({ message: "Errore del server" });
   }
 };
@@ -97,7 +99,8 @@ export const updateTrip = async (
   res: Response
 ): Promise<void> => {
   try {
-    const trip = await Trip.findOne({ slug: req.params.slug });
+    const user = req.user?.id;
+    const trip = await Trip.findOne({ user: user, slug: req.params.slug });
     if (!trip || trip == null) {
       res.status(404).json({ error: "Trip not found" });
       return;
@@ -158,6 +161,8 @@ export const updateTrip = async (
       return;
     }
 
+    console.error(err);
+    
     res.status(500).json({ message: "Errore del server" });
   }
 };
@@ -167,8 +172,8 @@ export const deleteTrip = async (
   res: Response
 ): Promise<void> => {
   try {
-    const trip = await Trip.findOneBySlug(req.params.slug);
-
+    const userId = req.user?.id || "";
+    const trip = await Trip.findOneBySlug(userId, req.params.slug);
     if (trip) {
       fs.rm(
         path.join(__dirname, "..", "..", "uploads", trip?.slug),
@@ -185,8 +190,10 @@ export const deleteTrip = async (
       if (!deleted) res.status(404).json({ error: "Trip not found" });
     }
     res.status(204).send();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   } catch (err) {
+    console.error(err);
+    
     res.status(500).json({ message: "Errore del server" });
   }
 };

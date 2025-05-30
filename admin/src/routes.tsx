@@ -13,19 +13,20 @@ import { AuthLayout } from "./theme/layouts/auth";
 import { DashboardLayout } from "./theme/layouts/dashboard";
 import { RedirectIfAuthenticated } from "./components/RedirectIfAuthenticated";
 import { RequireAuth } from "./components/RequireAuth";
+import { IsAdmin } from "./components/IsAdmin";
 
 // ----------------------------------------------------------------------
 
 export const DashboardPage = lazy(() => import("./pages/Dashboard"));
 export const CategoriesPage = lazy(() => import("./pages/categories/Index"));
 export const CategoriesCreateEditPage = lazy(
-  () => import("./pages/categories/CreateEdit"),
+  () => import("./pages/categories/CreateEdit")
 );
 export const TodosPage = lazy(() => import("./pages/todos/Index"));
 export const TripsPage = lazy(() => import("./pages/trips/Index"));
 export const TripsShowPage = lazy(() => import("./pages/trips/Show"));
 export const TripsCreateEditPage = lazy(
-  () => import("./pages/trips/CreateEdit"),
+  () => import("./pages/trips/CreateEdit")
 );
 // export const UserPage = lazy(() => import('./pages/user'));
 export const SignInPage = lazy(() => import("./pages/Login"));
@@ -71,18 +72,7 @@ export const routesSection: RouteObject[] = [
         path: `${import.meta.env.VITE_SUBFOLDER}`,
         element: <DashboardPage />,
       },
-      {
-        path: `${import.meta.env.VITE_SUBFOLDER}/categories`,
-        element: <CategoriesPage />,
-      },
-      {
-        path: `${import.meta.env.VITE_SUBFOLDER}/categories/create`,
-        element: <CategoriesCreateEditPage />,
-      },
-      {
-        path: `${import.meta.env.VITE_SUBFOLDER}/categories/:slug`,
-        element: <CategoriesCreateEditPage />,
-      },
+
       {
         path: `${import.meta.env.VITE_SUBFOLDER}/todos`,
         element: <TodosPage />,
@@ -102,6 +92,33 @@ export const routesSection: RouteObject[] = [
       {
         path: `${import.meta.env.VITE_SUBFOLDER}/trips/:slug/edit`,
         element: <TripsCreateEditPage />,
+      },
+    ],
+  },
+  {
+    element: (
+      <RequireAuth>
+        <IsAdmin>
+          <DashboardLayout>
+            <Suspense fallback={renderFallback()}>
+              <Outlet />
+            </Suspense>
+          </DashboardLayout>
+        </IsAdmin>
+      </RequireAuth>
+    ),
+    children: [
+      {
+        path: `${import.meta.env.VITE_SUBFOLDER}/categories`,
+        element: <CategoriesPage />,
+      },
+      {
+        path: `${import.meta.env.VITE_SUBFOLDER}/categories/create`,
+        element: <CategoriesCreateEditPage />,
+      },
+      {
+        path: `${import.meta.env.VITE_SUBFOLDER}/categories/:slug`,
+        element: <CategoriesCreateEditPage />,
       },
     ],
   },

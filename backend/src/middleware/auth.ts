@@ -6,7 +6,8 @@ dotenv.config();
 const SECRET = process.env.JWT_SECRET as string;
 
 interface UserPayload {
-  username: string;
+  id: string;
+  isAdmin: boolean
 }
 
 function authMiddleware(req: Request, res: Response, next: NextFunction): void {
@@ -22,8 +23,8 @@ function authMiddleware(req: Request, res: Response, next: NextFunction): void {
     req.user = decoded;
     next();
     return;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (err) {
+    console.error(err);
     res.status(403).json({ error: "Token non valido" });
     return;
   }

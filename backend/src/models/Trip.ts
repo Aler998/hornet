@@ -32,7 +32,7 @@ const fileSchema = new Schema<FileUploaded>(
     uuid: { type: String, required: true },
     filename: { type: String, required: true },
   },
-  { _id: false },
+  { _id: false }
 );
 
 const placeSchema = new Schema<Place>({
@@ -52,7 +52,7 @@ const imageSchema = new Schema<ImageUploaded>(
     width: { type: Number, required: true },
     height: { type: Number, required: true },
   },
-  { _id: false },
+  { _id: false }
 );
 
 interface ITrip extends Document {
@@ -68,6 +68,7 @@ interface ITrip extends Document {
   start: Date;
   end: Date;
   category: mongoose.Types.ObjectId;
+  user: mongoose.Types.ObjectId;
   images: ImageUploaded[];
   tracks: FileUploaded[];
   places: Place[];
@@ -78,8 +79,11 @@ interface ITripMethods {
 }
 
 interface TripModel extends Model<ITrip, object, ITripMethods> {
-  findOneWithDecodedTracks(slug: string): Promise<TripWithDecodedTracks | null>;
-  findOneBySlug(slug: string): Promise<ITrip | null>;
+  findOneWithDecodedTracks(
+    userId: string,
+    slug: string
+  ): Promise<TripWithDecodedTracks | null>;
+  findOneBySlug(userId: string, slug: string): Promise<ITrip | null>;
 }
 
 const tripSchema = new Schema<ITrip, TripModel, ITripMethods>(
@@ -100,13 +104,18 @@ const tripSchema = new Schema<ITrip, TripModel, ITripMethods>(
       ref: "Category",
       required: true,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     images: { type: [imageSchema], default: [] },
     tracks: { type: [fileSchema], default: [] },
     places: { type: [placeSchema], default: [] },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 tripSchema.method("getDecodedTracks", async function (): Promise<string[]> {
@@ -121,7 +130,7 @@ tripSchema.method("getDecodedTracks", async function (): Promise<string[]> {
       } catch (err) {
         return null;
       }
-    }),
+    })
   );
 
   return results.filter(Boolean) as string[];
@@ -129,18 +138,23 @@ tripSchema.method("getDecodedTracks", async function (): Promise<string[]> {
 
 tripSchema.static(
   "findOneBySlug",
-  async function (this: TripModel, slug: string): Promise<ITrip | null> {
-    return await this.findOne({ slug: slug });
-  },
+  async function (
+    this: TripModel,
+    userId: string,
+    slug: string
+  ): Promise<ITrip | null> {
+    return await this.findOne({ user: userId, slug: slug });
+  }
 );
 
 tripSchema.static(
   "findOneWithDecodedTracks",
   async function (
     this: TripModel,
-    slug: string,
+    userId: string,
+    slug: string
   ): Promise<TripWithDecodedTracks | null> {
-    const trip = await this.findOne({ slug: slug });
+    const trip = await this.findOne({ user: userId, slug: slug });
 
     if (!trip) {
       throw new NotFoundError(404, "Trip not found");
@@ -152,7 +166,7 @@ tripSchema.static(
       ...trip.toObject(),
       decodedTracks,
     };
-  },
+  }
 );
 
 const Trip = mongoose.model<ITrip, TripModel>("Trip", tripSchema);
