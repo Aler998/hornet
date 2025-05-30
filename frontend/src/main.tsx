@@ -9,17 +9,32 @@ import Index from "./pages/Index.tsx";
 import "./global.css";
 import Trip from "./pages/Trip.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import { RequireAuth } from "./components/RequireAuth.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/trip/:slug" element={<Trip />} />
+          <Route
+            path="/"
+            element={
+              <RequireAuth>
+                <Index />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/trip/:slug"
+            element={
+              <RequireAuth>
+                <Trip />
+              </RequireAuth>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </Provider>
-  </StrictMode>,
+  </StrictMode>
 );

@@ -77,6 +77,7 @@ make dev
 ### TODO
 - [X] Popolare dati dashboard
 - [ ] Aggiungere più informazioni sul singolo viaggio
+- [ ] altitudine massima
 - [ ] aggiungere le categorie nel frontend
 - [X] aggiungere posti visitati sul viaggio + heatmap/mappa posti visitati
 - [X] aggiungere lista di viaggi da fare
@@ -87,4 +88,5 @@ make dev
 - [X] Supporto PWA
 - [ ] Esporre statistiche sul frontend
 - [X] Menù basso sul frontend ( home, heatmap, categorie, statistiche)
-- [ ] Meta OG per condivisione
+- [X] Meta OG per condivisione
+- [ ] Aggiungere pubblico su trip

@@ -5,18 +5,24 @@ interface ITodo extends Document {
   link: string;
   order: number;
   completed: boolean;
+  user: Schema.Types.ObjectId
 }
 
 const todoSchema = new Schema<ITodo>(
   {
     title: { type: String, required: true },
-    link: { type: String, required: true},
+    link: { type: String, required: true },
     order: { type: Number, required: true },
     completed: { type: Boolean, required: true, default: false },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 const Todo = mongoose.model<ITodo>("Todo", todoSchema);

@@ -11,27 +11,22 @@ interface File {
   path: string;
 }
 
-const ROOT = "/app/uploads/";
-
 export const moveFilesIfExists = (
   images: File[] | null,
   tracks: File[] | null,
   trip: ITrip
 ): boolean => {
   if (images && images.length > 0) {
-    let finalPath = path.join(
+    const finalPath = path.join(
       __dirname,
       "..",
       "..",
       "uploads",
+      trip.user.toString(),
       trip.slug,
       "images"
     );
 
-    finalPath = fs.realpathSync(path.resolve(ROOT, finalPath));
-    if (!finalPath.startsWith(ROOT)) {
-      return false;
-    }
     fs.mkdirSync(finalPath, { recursive: true });
 
     trip.images = [
@@ -50,8 +45,8 @@ export const moveFilesIfExists = (
 
         return {
           filename: finalName,
-          path: `/uploads/${trip.slug}/images/${finalName}`,
-          folder: `/uploads/${trip.slug}/images`,
+          path: `/uploads/${trip.user.toString()}/${trip.slug}/images/${finalName}`,
+          folder: `/uploads/${trip.user.toString()}/${trip.slug}/images`,
           uuid: uuidv4(),
           width: dimensions.width,
           height: dimensions.height,
@@ -61,18 +56,16 @@ export const moveFilesIfExists = (
   }
 
   if (tracks && tracks.length > 0) {
-    let finalPath = path.join(
+    const finalPath = path.join(
       __dirname,
       "..",
       "..",
       "uploads",
+      trip.user.toString(),
       trip.slug,
       "tracks"
     );
-    finalPath = fs.realpathSync(path.resolve(ROOT, finalPath));
-    if (!finalPath.startsWith(ROOT)) {
-      return false;
-    }
+
     fs.mkdirSync(finalPath, { recursive: true });
 
     trip.tracks = [
@@ -88,7 +81,7 @@ export const moveFilesIfExists = (
 
         return {
           filename: finalName,
-          path: `/uploads/${trip.slug}/tracks/${finalName}`,
+          path: `/uploads/${trip.user.toString()}/${trip.slug}/tracks/${finalName}`,
           uuid: uuidv4(),
         };
       }),
