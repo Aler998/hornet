@@ -95,3 +95,4 @@ make dev
 - [ ] uniformare gli stili
 - [ ] label dei pin nella mappa
 - [ ] alla modifica di un trip vengono sovrascritte le località
+- [ ] nei todo aggiungere il link del navigatore e la durata a video
