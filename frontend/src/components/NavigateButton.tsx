@@ -25,7 +25,7 @@ const NavigateButton: FC<NavigateBtnProps> = ({ places }) => {
   return (
     <button
       onClick={generateUrl}
-      className="text-white bg-honda px-5 py-1 border-none cursor-pointer text-base flex items-center justify-center"
+      className="font-inter border-none cursor-pointer flex justify-center items-center bg-gray-200 rounded text-gray-600 px-4 py-3 text-sm no-underline hover:bg-gray-100 duration-500"
     >
       Naviga
       <IoNavigateCircle className="ml-2" />

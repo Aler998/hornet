@@ -32,7 +32,7 @@ function Index() {
   const renderTab = (tab: string, trips: ITrip[]) => {
     switch (tab) {
       case "details":
-        return <Home title="I Nostri Viaggi" trips={trips} />;
+        return <Home title="IlMotoDiario" trips={trips} />;
       case "heatmap":
         return (
           <HeatmapContent
@@ -52,7 +52,7 @@ function Index() {
       selectedTab={selectedTab}
       setSelectedTab={setSelectedTab}
       isLoading={loading}
-      title="I nostri viaggi"
+      title="IlMotoDiario"
     >
       {trips ? renderTab(selectedTab.label, trips) : ""}
     </Layout>

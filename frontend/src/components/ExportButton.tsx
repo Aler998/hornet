@@ -55,7 +55,7 @@ const ExportPdfButton: FC<ExportPdfProps> = ({ immagini }) => {
           canvas.width,
           canvas.height,
           MAX_WIDTH,
-          MAX_HEIGHT,
+          MAX_HEIGHT
         );
 
         if (x + drawWidth > A4_WIDTH - MARGIN) {
@@ -96,20 +96,22 @@ const ExportPdfButton: FC<ExportPdfProps> = ({ immagini }) => {
   };
 
   return (
-    <button
-      onClick={exportPDF}
-      className="text-white bg-honda px-5 py-1 border-none cursor-pointer text-base flex items-center justify-center"
-    >
-      Esporta
-      <IoMdDownload className="ml-2" />
-    </button>
+    <div className="mb-6 flex">
+      <button
+        onClick={exportPDF}
+        className="text-xs bg-transparent cursor-pointer text-gray-900 font-inter inline-flex border-solid rounded-full px-3 py-1 border border-gray-900 no-underline dark:text-white dark:border-white"
+      >
+        Esporta ⚡️
+        <IoMdDownload className="ml-2" />
+      </button>
+    </div>
   );
 };
 
 export default ExportPdfButton;
 
 const loadImageFromUrlToCanvas = async (
-  url: string,
+  url: string
 ): Promise<HTMLCanvasElement> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -135,7 +137,7 @@ function scaleToFit(
   originalWidth: number,
   originalHeight: number,
   maxWidth: number,
-  maxHeight: number,
+  maxHeight: number
 ) {
   const ratio = Math.min(maxWidth / originalWidth, maxHeight / originalHeight);
   return {

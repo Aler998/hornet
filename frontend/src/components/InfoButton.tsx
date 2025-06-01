@@ -86,7 +86,7 @@ function InfoButton({ trip }: { trip: Trip }) {
   return (
     <button
       onClick={openInfo}
-      className="text-white bg-honda px-5 py-1 border-none cursor-pointer text-base flex items-center justify-center"
+      className="font-inter border-none cursor-pointer flex justify-center items-center bg-gray-900 rounded text-white px-4 py-3 text-sm no-underline hover:bg-gray-600 duration-500"
     >
       Info
       <MdInfoOutline className="ml-2" />

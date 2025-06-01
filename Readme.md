@@ -92,6 +92,9 @@ make dev
 - [ ] Aggiungere pubblico su trip
 - [ ] landing page utente tra home e viaggi
 - [ ] sistema di amicizia
-- [ ] uniformare gli stili
+- [X] uniformare gli stili frontend
+- [ ] uniformare stile admin
+- [ ] dark mode
 - [ ] label dei pin nella mappa
 - [ ] alla modifica di un trip vengono sovrascritte le località
+- [ ] pulizia dei componenti e del codice

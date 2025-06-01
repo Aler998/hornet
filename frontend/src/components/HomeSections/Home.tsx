@@ -23,13 +23,17 @@ function Home({ title, trips }: { title: string; trips: Trip[] }) {
         <ThemeSwitcher />
         <MdHome
           onClick={() => navigate("/")}
-          className="text-slate-400 w-5 h-5 ml-4"
+          className="text-slate-400 w-5 h-5 ml-4 cursor-pointer"
         />
       </div>
-      <div className="w-wull min-w-screen text-neutral-700 font-oswald">
+      <div className="w-wull min-w-screen text-gray-900 font-oswald">
         <div className="w-full mx-auto max-w-full md:max-w-2/3 lg:max-w-1/3 flex flex-col items-center md-8 sm:mb-16">
-          <Logo classes="w-20 h-20" />
-          <h1 className="text-6xl my-4 dark:text-honda">{title}</h1>
+          <Logo classes="w-10 h-10" />
+          <h1 className="text-center text-3xl font-medium text-gray-900 dark:text-gray-50 sm:text-6xl font-inter">
+            <span className="font-inter animate-text-gradient inline-flex bg-gradient-to-r from-neutral-900 via-slate-500 to-neutral-500 bg-[200%_auto] bg-clip-text leading-tight text-transparent dark:from-neutral-100 dark:via-slate-400 dark:to-neutral-400">
+              {title}
+            </span>
+          </h1>
         </div>
         <div className="max-w-3xl mx-auto px-4">
           {trips ? (
@@ -58,7 +62,7 @@ function Home({ title, trips }: { title: string; trips: Trip[] }) {
                             }
                           />
                           <div className="absolute top-0 left-0 w-full text-white capitalize bg-gradient-to-b p-2 from-slate-700 to-white/0">
-                            <h5 className="">{trip.title}</h5>
+                            <h5 className="fonte-inter">{trip.title}</h5>
                           </div>
                           <div className="absolute bottom-0 left-0 w-full">
                             <Rating voto={trip.rating} />
@@ -104,7 +108,7 @@ function Home({ title, trips }: { title: string; trips: Trip[] }) {
                             </g>
                           </svg>
                           <div className="absolute top-0 left-0 w-full text-white capitalize bg-gradient-to-b p-2 from-slate-700 to-white/0">
-                            <h5 className="">{trip.title}</h5>
+                            <h5 className="font-inter">{trip.title}</h5>
                           </div>
                           <div className="absolute bottom-0 left-0 w-full">
                             <Rating voto={trip.rating} />

@@ -9,6 +9,10 @@ function getCookie(name: string): string | null {
   return parts.length === 2 ? (parts.pop()!.split(";").shift() ?? null) : null;
 }
 
+export const csrfToken = () : string => {
+  return getCookie("Host-me-x-csrf-token") ?? "";
+} 
+
 export const ApiErrorHandler = fetchBaseQuery({
   baseUrl: `${import.meta.env.VITE_API_URL}`,
   credentials: "include",

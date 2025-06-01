@@ -16,10 +16,10 @@ function EmptyLayout({
       <div className="w-full min-w-screen py-8 px-4 flex justify-end align-center">
         <ThemeSwitcher />
       </div>
-      <div className="w-wull min-w-screen text-neutral-700 font-oswald">
+      <div className="w-wull min-w-screen text-gray-900 font-oswald">
         <div className="w-full mx-auto max-w-full md:max-w-2/3 lg:max-w-1/3 flex flex-col items-center md-8 sm:mb-16">
           <Logo classes="w-20 h-20" />
-          <h1 className="text-6xl my-4 dark:text-honda">{title}</h1>
+          <h1 className="text-6xl my-4">{title}</h1>
         </div>
         <div className="max-w-3xl mx-auto px-4">{children}</div>
       </div>
