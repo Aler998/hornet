@@ -96,7 +96,7 @@ make dev
 - [ ] uniformare stile admin
 - [ ] dark mode
 - [ ] label dei pin nella mappa
-- [ ] alla modifica di un trip vengono sovrascritte le località
+- [X] alla modifica di un trip vengono sovrascritte le località
 - [ ] pulizia dei componenti e del codice
 - [X] nei todo aggiungere il link del navigatore e la durata a video
 - [ ] aggiungere nome applicazione nell'env

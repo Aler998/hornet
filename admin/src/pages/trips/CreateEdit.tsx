@@ -77,7 +77,7 @@ export default function CreateEdit() {
         end: dayjs(existingTrip.end),
         images: null,
         tracks: null,
-        places: [],
+        places: existingTrip.places ?? [],
       });
     }
   }, [existingTrip]);
