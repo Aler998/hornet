@@ -9,6 +9,8 @@ export interface Todo {
 export interface CreateTodoDto {
   title: string;
   link: string;
+  time: string;
+  nav: string;
 }
 
 export interface UpdateTodoDto extends Partial<CreateTodoDto> {

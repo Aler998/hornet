@@ -19,6 +19,7 @@ import { CreateTodoDto } from "../../features/todos/types";
 import Swal from "sweetalert2";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { APIError } from "../../utils/interfaces/ApiError";
+import { errorSwalOptions } from "../../utils/swal-options";
 
 function CreateForm({ afterCreate }: { afterCreate: () => void }) {
   const [open, setOpen] = React.useState(false);
@@ -26,6 +27,8 @@ function CreateForm({ afterCreate }: { afterCreate: () => void }) {
   const [form, setForm] = useState<CreateTodoDto>({
     title: "",
     link: "",
+    time: "",
+    nav: "",
   });
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +37,13 @@ function CreateForm({ afterCreate }: { afterCreate: () => void }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const regex = /^(\d+)h(\d+m)?$/;
+    if (!regex.test(form.time)) {
+      Swal.fire(errorSwalOptions("Inserire il tempo in un formato valido"));
+      return;
+    }
+
     try {
       await createTodo(form).unwrap();
       Swal.fire({
@@ -41,9 +51,9 @@ function CreateForm({ afterCreate }: { afterCreate: () => void }) {
         title: "Nuovo Todo",
         text: "Nuovo Todo creato",
       });
-      afterCreate()
-      setForm({title: "", link: ""})
-      setOpen(false)
+      afterCreate();
+      setForm({ title: "", link: "", time: "", nav: "" });
+      setOpen(false);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: APIError | any) {
       if (error.status === 400) {
@@ -110,6 +120,31 @@ function CreateForm({ afterCreate }: { afterCreate: () => void }) {
                                     label="Link Mappa"
                                     variant="outlined"
                                     value={form.link}
+                                    onChange={handleFormChange}
+                                    required
+                                    fullWidth
+                                  />
+                                </Grid>
+                                <Grid size={{ xs: 12, sm: 12, md: 4 }}>
+                                  <TextField
+                                    id="time"
+                                    name="time"
+                                    label="Tempo (2h30m)"
+                                    variant="outlined"
+                                    type="numeric"
+                                    value={form.time}
+                                    onChange={handleFormChange}
+                                    required
+                                    fullWidth
+                                  />
+                                </Grid>
+                                <Grid size={{ xs: 12, sm: 12, md: 8 }}>
+                                  <TextField
+                                    id="nav"
+                                    name="nav"
+                                    label="Link Navigatore"
+                                    variant="outlined"
+                                    value={form.nav}
                                     onChange={handleFormChange}
                                     required
                                     fullWidth
