@@ -1,4 +1,4 @@
-# 📍 hornet
+# 📍 IlMotoDiario
 
 Un'applicazione web per salvare e gestire i propri viaggi. Puoi caricare **mappe**, **foto** e altre informazioni utili per ogni viaggio che hai fatto. Ideale per motociclisti, escursionisti e viaggiatori!
 
@@ -99,3 +99,4 @@ make dev
 - [ ] alla modifica di un trip vengono sovrascritte le località
 - [ ] pulizia dei componenti e del codice
 - [ ] nei todo aggiungere il link del navigatore e la durata a video
+- [ ] aggiungere nome applicazione nell'env
