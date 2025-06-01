@@ -32,7 +32,10 @@ export const getTripBySlug = async (
   res: Response
 ): Promise<void> => {
   try {
-    const trip = await Trip.findOneWithDecodedTracks(req.user?.id || "", req.params.slug);
+    const trip = await Trip.findOneWithDecodedTracks(
+      req.user?.id || "",
+      req.params.slug
+    );
 
     if (!trip || trip == null)
       res.status(404).json({ error: "Trip not found" });
@@ -51,6 +54,16 @@ export const createTrip = async (
   res: Response
 ): Promise<void> => {
   try {
+    const alreadyExists = await Trip.findOne({
+      slug: { $eq: req.body.slug },
+      user: { $eq: req.user?.id },
+    });
+
+    if (alreadyExists) {
+      res.status(422).json({ message: [{ msg: "Slug già esistente" }] });
+      return;
+    }
+
     const trip = new Trip({
       title: req.body.title,
       slug: req.body.slug,
@@ -66,7 +79,7 @@ export const createTrip = async (
       end: req.body.end,
       category: req.body.category,
       places: req.body.places,
-      user: req.user?.id
+      user: req.user?.id,
     });
 
     const files = req.files as {
@@ -107,7 +120,19 @@ export const updateTrip = async (
       return;
     }
 
-    if (req.body.newSlug) trip.slug = req.body.newSlug;
+    if (req.body.newSlug) {
+      const alreadyExists = await Trip.findOne({
+        slug: { $eq: req.body.newSlug },
+        user: { $eq: req.user?.id },
+      });
+
+      if (alreadyExists) {
+        res.status(422).json({ message: [{ msg: "Slug già esistente" }] });
+        return;
+      }
+      trip.slug = req.body.newSlug;
+    }
+
     if (trip.km != req.body.km) {
       trip.liters = (req.body.km / CONSUMO_MOTO).toString();
       trip.cost = (
@@ -164,7 +189,7 @@ export const updateTrip = async (
     }
 
     console.error(err);
-    
+
     res.status(500).json({ message: "Errore del server" });
   }
 };
@@ -192,10 +217,9 @@ export const deleteTrip = async (
       if (!deleted) res.status(404).json({ error: "Trip not found" });
     }
     res.status(204).send();
-
   } catch (err) {
     console.error(err);
-    
+
     res.status(500).json({ message: "Errore del server" });
   }
 };

@@ -90,7 +90,7 @@ interface TripModel extends Model<ITrip, object, ITripMethods> {
 const tripSchema = new Schema<ITrip, TripModel, ITripMethods>(
   {
     title: { type: String, required: true },
-    slug: { type: String, required: true, unique: true },
+    slug: { type: String, required: true},
     description: { type: String, required: false },
     rating: { type: Number, required: true },
     km: { type: Number, required: true },
@@ -119,6 +119,8 @@ const tripSchema = new Schema<ITrip, TripModel, ITripMethods>(
     timestamps: true,
   }
 );
+
+tripSchema.index({ slug: 1, user: 1 }, { unique: true });
 
 tripSchema.method("getDecodedTracks", async function (): Promise<string[]> {
   const results = await Promise.all(
