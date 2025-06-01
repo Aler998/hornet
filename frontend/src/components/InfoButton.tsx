@@ -12,7 +12,7 @@ import { formatMinutes } from "../utils/format-date";
 function InfoButton({ trip }: { trip: Trip }) {
   const buildHtmlTitle = (): ReactNode => {
     return (
-      <strong className="w-full text-start font-oswald">
+      <strong className="w-full text-start font-oswald text-gray-600">
         {trip.title.toLocaleUpperCase()}
       </strong>
     );
@@ -26,35 +26,35 @@ function InfoButton({ trip }: { trip: Trip }) {
           <li className="mb-2">
             <p>Tempo di percorrenza</p>
             <span>
-              <RxLapTimer className="mr-2" color="#ea3323" />
+              <RxLapTimer className="mr-2 text-gray-900"  />
               {formatMinutes(trip.time)}
             </span>
           </li>
           <li className="mb-2">
             <p>Kilometri totali percorsi</p>
             <span>
-              <GiPathDistance className="mr-2" color="#ea3323" />
+              <GiPathDistance className="mr-2 text-gray-900"  />
               {trip.km}Km
             </span>
           </li>
           <li className="mb-2">
             <p>Velocità media</p>
             <span>
-              <BiTachometer className="mr-2" color="#ea3323" />
+              <BiTachometer className="mr-2 text-gray-900"  />
               {trip.velocity}Km/h
             </span>
           </li>
           <li className="mb-2">
             <p>Benzina Usata</p>
             <span>
-              <MdLocalGasStation className="mr-2" color="#ea3323" />
+              <MdLocalGasStation className="mr-2 text-gray-900"  />
               {(Math.round(trip.liters * 100) / 100).toFixed(2)}L
             </span>
           </li>
           <li className="mb-2">
             <p>Costo</p>
             <span>
-              <MdOutlineEuro className="mr-2" color="#ea3323" />
+              <MdOutlineEuro className="mr-2 text-gray-900"  />
               {(Math.round(trip.cost * 100) / 100).toFixed(2)}€
             </span>
           </li>
