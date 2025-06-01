@@ -28,6 +28,10 @@ export const createTripValidator = [
     .notEmpty()
     .isNumeric()
     .withMessage("La velocità inserita non è valida"),
+  body("maxAlt")
+    .notEmpty()
+    .isNumeric()
+    .withMessage("L'altitudine inserita non è valida"),
 
   body("start").isISO8601().withMessage("La data di partenza non è valida"),
   body("end").isISO8601().withMessage("La data di arrivo non è valida"),
@@ -59,6 +63,10 @@ export const updateTripValidator = [
     .notEmpty()
     .isNumeric()
     .withMessage("La velocità inserita non è valida"),
+    body("maxAlt")
+    .notEmpty()
+    .isNumeric()
+    .withMessage("L'altitudine inserita non è valida"),
   body("start").isISO8601().withMessage("La data di partenza non è valida"),
   body("end").isISO8601().withMessage("La data di arrivo non è valida"),
 ];

@@ -62,6 +62,7 @@ interface ITrip extends Document {
   rating?: string;
   km?: string;
   velocity?: string;
+  maxAlt?: string;
   cost?: string;
   liters?: string;
   time?: string;
@@ -94,6 +95,7 @@ const tripSchema = new Schema<ITrip, TripModel, ITripMethods>(
     rating: { type: Number, required: true },
     km: { type: Number, required: true },
     velocity: { type: Number, required: true },
+    maxAlt: { type: Number, required: true },
     cost: { type: Number, required: true },
     liters: { type: Number, required: true },
     time: { type: Number, required: true },

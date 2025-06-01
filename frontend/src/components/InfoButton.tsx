@@ -8,6 +8,7 @@ import { MdLocalGasStation } from "react-icons/md";
 import { GiPathDistance } from "react-icons/gi";
 import { BiTachometer } from "react-icons/bi";
 import { formatMinutes } from "../utils/format-date";
+import { LuMountainSnow } from "react-icons/lu";
 
 function InfoButton({ trip }: { trip: Trip }) {
   const buildHtmlTitle = (): ReactNode => {
@@ -42,6 +43,13 @@ function InfoButton({ trip }: { trip: Trip }) {
             <span>
               <BiTachometer className="mr-2 text-gray-900"  />
               {trip.velocity}Km/h
+            </span>
+          </li>
+          <li className="mb-2">
+            <p>Altitudine Massima</p>
+            <span>
+              <LuMountainSnow className="mr-2 text-gray-900"  />
+              {trip.maxAlt}m
             </span>
           </li>
           <li className="mb-2">

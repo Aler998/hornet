@@ -7,6 +7,7 @@ export interface Trip {
   rating: number;
   km: number;
   velocity: number;
+  maxAlt: number;
   liters: number;
   slug: string;
   time: string;
@@ -25,6 +26,7 @@ export interface CreateTripDto {
   rating: number;
   km: number;
   velocity: number;
+  maxAlt: number;
   slug: string;
   time: string;
   start: Dayjs;
