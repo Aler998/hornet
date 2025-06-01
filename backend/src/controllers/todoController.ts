@@ -7,7 +7,16 @@ export const getAllTodos = async (
 ): Promise<void> => {
   try {
     const userId = req.user!.id;
-    const todos: ITodo[] = await Todo.find({ user: userId }).sort({ order: 1 });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query: any = {
+      user: {$eq:userId}
+    };
+
+    if (req.query.completed !== undefined) {
+      query.completed = req.query.completed === 'true';
+    }
+    
+    const todos: ITodo[] = await Todo.find(query).sort({ order: 1 });
     res.json(todos);
   } catch (err) {
     console.error(err);
