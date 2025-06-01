@@ -8,7 +8,7 @@ function Rating({
   dimensions?: string;
 }) {
   const classes = `grid w-full ${placeItems} overflow-x-scroll rounded-lg p-2 lg:overflow-visible`;
-  const svgClasses = `${dimensions} text-honda cursor-pointer`;
+  const svgClasses = `${dimensions} text-gray-900 cursor-pointer`;
 
   const defaultStar = (
     <span>

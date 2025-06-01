@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import LoginRequest, { User } from "./types";
 import axios from "axios";
+import { csrfToken } from "../ApiErrorHandler";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -30,6 +31,9 @@ export const authApi = createApi({
       query: () => ({
         url: "auth/logout",
         method: "POST",
+        headers: {
+          "X-CSRF-Token": csrfToken(),
+        },
       }),
     }),
     getMe: builder.query<User, void>({

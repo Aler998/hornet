@@ -41,7 +41,7 @@ function Trip() {
   if (trip) {
     return (
       <Layout
-        title={trip.title}
+        title={`IlMotoDiario - ${trip.title}`}
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
         tabs={tabs}

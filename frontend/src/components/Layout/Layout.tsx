@@ -27,7 +27,7 @@ function Layout({
       {isLoading ? <Loader isLoading={isLoading} /> : ""}
 
       <div className="fixed inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[#000000] dark:bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] dark:bg-[size:20px_20px]"></div>
-      <div className="w-full h-svh max-h-screen overflow-hidden text-neutral-700 dark:text-white">
+      <div className="w-full h-svh max-h-screen overflow-hidden text-gray-900 dark:text-white">
         <main>
           <AnimatePresence mode="wait">
             <motion.div
@@ -43,7 +43,7 @@ function Layout({
             </motion.div>
           </AnimatePresence>
         </main>
-        <nav className="w-full fixed h-[var(--navbar-height)] inset-shadow-sm inset-shadow-honda flex items-center justify-center">
+        <nav className="w-full fixed h-[var(--navbar-height)] flex items-center justify-center">
           <ul className="flex justify-center items-center list-none">
             {tabs.map((item) => (
               <motion.li
@@ -51,7 +51,7 @@ function Layout({
                 className="list-style-none relative pb-4"
                 initial={false}
                 animate={{
-                  color: item === selectedTab ? "#ea3323" : "#000",
+                  color: item === selectedTab ? "#99a1af" : "#000",
                 }}
                 onClick={() => setSelectedTab(item)}
               >
@@ -77,6 +77,6 @@ const underline: React.CSSProperties = {
   left: 0,
   right: 0,
   height: 2,
-  background: "var(--honda)",
+  background: "var(--gray-secondary)",
 };
 export default Layout;

@@ -1,6 +1,6 @@
 {
-  "name": "Hornet di Ale",
-  "short_name": "Hornet",
+  "name": "IlMotoDiario",
+  "short_name": "IlMotoDiario",
   "icons": [
     {
       "src": "/favicon/pwa-192x192.png",
@@ -31,5 +31,5 @@
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF",
-  "description": "Applicazione per salvare e vedere i nostri viaggi"
+  "description": "Il tuo diario su due ruote"
 }
