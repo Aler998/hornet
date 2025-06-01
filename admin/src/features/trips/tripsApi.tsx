@@ -40,6 +40,7 @@ const buildFormData = (trip: CreateTripDto | UpdateTripDto): FormData => {
   formData.append("rating", trip.rating.toString());
   formData.append("km", trip.km.toString());
   formData.append("velocity", trip.velocity.toString());
+  formData.append("maxAlt", trip.maxAlt.toString());
   return formData;
 };
 

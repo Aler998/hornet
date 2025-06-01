@@ -52,6 +52,7 @@ export default function CreateEdit() {
     rating: 3,
     km: 50,
     velocity: 50,
+    maxAlt: 0,
     slug: "",
     time: "",
     category: "",
@@ -70,6 +71,7 @@ export default function CreateEdit() {
         rating: existingTrip.rating ?? 0,
         km: existingTrip.km ?? 50,
         velocity: existingTrip.velocity ?? 50,
+        maxAlt: existingTrip.maxAlt ?? 10,
         slug: existingTrip.slug,
         time: existingTrip.time,
         category: existingTrip.category,
@@ -300,6 +302,20 @@ export default function CreateEdit() {
                     defaultValue={50}
                     min={0}
                     max={150}
+                    aria-label="Default"
+                    valueLabelDisplay="auto"
+                  />
+                </Stack>
+                <Stack spacing={2}>
+                  <Label>Altitudine Massima</Label>
+                  <Slider
+                    value={form.maxAlt}
+                    onChange={(_e, value) =>
+                      handleFormNumberChange(value, "maxAlt")
+                    }
+                    defaultValue={50}
+                    min={0}
+                    max={3000}
                     aria-label="Default"
                     valueLabelDisplay="auto"
                   />

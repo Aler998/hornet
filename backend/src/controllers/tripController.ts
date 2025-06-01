@@ -59,6 +59,7 @@ export const createTrip = async (
       time: req.body.time,
       km: req.body.km,
       velocity: req.body.velocity,
+      maxAlt: req.body.maxAlt,
       liters: req.body.km / CONSUMO_MOTO,
       cost: (req.body.km / CONSUMO_MOTO) * (await getCurrentBenzinaPrice()),
       start: req.body.start,
@@ -123,6 +124,7 @@ export const updateTrip = async (
     trip.time = req.body.time;
     trip.km = req.body.km;
     trip.velocity = req.body.velocity;
+    trip.maxAlt = req.body.maxAlt;
     trip.category = req.body.category;
     trip.places = req.body.places;
 

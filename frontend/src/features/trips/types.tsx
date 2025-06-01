@@ -10,6 +10,7 @@ export interface Trip {
   cost: number;
   time: number;
   velocity: number;
+  maxAlt: number;
   slug: string;
   start: Dayjs | null;
   end: Dayjs | null;
