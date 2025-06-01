@@ -1,5 +1,4 @@
 import { body } from "express-validator";
-import Trip from "../models/Trip";
 
 export const createTripValidator = [
   body("title").notEmpty().withMessage("Il titolo è richiesto"),
@@ -7,13 +6,7 @@ export const createTripValidator = [
     .isString()
     .withMessage("Lo slug è richiesto")
     .isLength({ max: 50 })
-    .withMessage("La lunghezza massima dello slug è 50 caratteri")
-    .custom(async (value) => {
-      const trip = await Trip.findOne({ slug: value });
-      if (trip) {
-        throw new Error("Slug già esistente");
-      }
-    }),
+    .withMessage("La lunghezza massima dello slug è 50 caratteri"),
 
   body("rating").notEmpty().isNumeric(),
   body("time")
@@ -39,15 +32,6 @@ export const createTripValidator = [
 
 export const updateTripValidator = [
   body("title").notEmpty().withMessage("Il titolo è richiesto"),
-
-  body("newSlug").custom(async (value) => {
-    if (value) {
-      const trip = await Trip.findOne({ slug: value });
-      if (trip) {
-        throw new Error("Slug già esistente");
-      }
-    }
-  }),
 
   body("rating").notEmpty().isNumeric().withMessage("Dare un voto al viaggio"),
 

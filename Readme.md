@@ -76,8 +76,7 @@ make dev
 
 ### TODO
 - [X] Popolare dati dashboard
-- [ ] Aggiungere più informazioni sul singolo viaggio
-- [ ] altitudine massima
+- [X] altitudine massima
 - [ ] aggiungere le categorie nel frontend
 - [X] aggiungere posti visitati sul viaggio + heatmap/mappa posti visitati
 - [X] aggiungere lista di viaggi da fare
@@ -100,3 +99,5 @@ make dev
 - [ ] pulizia dei componenti e del codice
 - [X] nei todo aggiungere il link del navigatore e la durata a video
 - [ ] aggiungere nome applicazione nell'env
+- [ ] nella dashboard la lista degli ultimi viaggi se sono tanti è infinita
+- [X] trip slug legato all'utente
