@@ -1,7 +1,7 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Place } from "../../features/trips/types";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 function MapContent({ places }: { places: Place[] }) {
   const marker = L.icon({
@@ -26,7 +26,7 @@ function MapContent({ places }: { places: Place[] }) {
           key={index}
           position={[parseFloat(place.lat), parseFloat(place.lon)]}
         >
-          {/* <Popup>{place.label}</Popup> */}
+          <Popup>{place.display_name}</Popup>
         </Marker>
       ))}
     </MapContainer>

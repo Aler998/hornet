@@ -94,7 +94,7 @@ make dev
 - [X] uniformare gli stili frontend
 - [ ] uniformare stile admin
 - [ ] dark mode
-- [ ] label dei pin nella mappa
+- [X] label dei pin nella mappa
 - [X] alla modifica di un trip vengono sovrascritte le località
 - [ ] pulizia dei componenti e del codice
 - [X] nei todo aggiungere il link del navigatore e la durata a video
