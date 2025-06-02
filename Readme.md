@@ -99,5 +99,6 @@ make dev
 - [ ] pulizia dei componenti e del codice
 - [X] nei todo aggiungere il link del navigatore e la durata a video
 - [ ] aggiungere nome applicazione nell'env
-- [ ] nella dashboard la lista degli ultimi viaggi se sono tanti è infinita
+- [X] nella dashboard la lista degli ultimi viaggi se sono tanti è infinita
 - [X] trip slug legato all'utente
+- [ ] gestire paginazione dei viaggi

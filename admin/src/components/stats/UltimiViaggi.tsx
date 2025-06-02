@@ -28,6 +28,7 @@ function UltimiViaggi({ trips }: { trips?: Trip[] }) {
             time: `${dayjs(trip.start).format("ddd DD MMM YY HH::mm")} - ${dayjs(trip.end).format("ddd DD MMM YY HH::mm")}`,
           };
         })
+        .slice(0, 5)
     : [
         {
           id: `ultimi-viaggi`,
