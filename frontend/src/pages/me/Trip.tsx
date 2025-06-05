@@ -1,14 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetTripQuery } from "../features/trips/tripsApi";
+import { useGetTripQuery } from "../../features/trips/tripsApi";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { useEffect, useState } from "react";
-import { Trip as ITrip } from "../features/trips/types";
-import { HomeContent } from "../components/TripSections/Home";
-import { GalleryContent } from "../components/TripSections/Gallery";
-import { MapsContent } from "../components/TripSections/Maps";
-import Layout from "../components/Layout/Layout";
-import { NavItem } from "../utils/types";
-import { galleryNav, homeNav, mapsNav } from "../components/NavItems";
+import { Trip as ITrip } from "../../features/trips/types";
+import { HomeContent } from "../../components/TripSections/Home";
+import { GalleryContent } from "../../components/TripSections/Gallery";
+import { MapsContent } from "../../components/TripSections/Maps";
+import Layout from "../../components/Layout/TabsLayout";
+import { TabItem } from "../../utils/types";
+import { galleryNav, homeNav, mapsNav } from "../../components/Menu/NavItems";
 
 function Trip() {
   const { slug } = useParams<{ slug: string }>();
@@ -16,7 +16,7 @@ function Trip() {
   const navigate = useNavigate();
 
   const tabs = [homeNav, galleryNav, mapsNav];
-  const [selectedTab, setSelectedTab] = useState<NavItem>(tabs[0]);
+  const [selectedTab, setSelectedTab] = useState<TabItem>(tabs[0]);
 
   const renderTab = (tab: string, trip: ITrip) => {
     switch (tab) {

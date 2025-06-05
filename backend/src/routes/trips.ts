@@ -11,6 +11,7 @@ import {
 import upload from "../middleware/tmpStorage";
 import {
   createTripValidator,
+  getTripsValidator,
   updateTripValidator,
 } from "../validators/tripValidator";
 import { validateResult } from "../middleware/validateResult";
@@ -19,7 +20,7 @@ import { doubleCsrfProtection } from "../middleware/csrf-token";
 
 const tripRoutes: Router = express.Router();
 
-tripRoutes.get("/", authMiddleware, (req: Request, res: Response) =>
+tripRoutes.get("/", authMiddleware, getTripsValidator, (req: Request, res: Response) =>
   getAllTrips(req, res)
 );
 

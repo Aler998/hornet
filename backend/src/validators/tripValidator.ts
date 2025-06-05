@@ -1,4 +1,12 @@
-import { body } from "express-validator";
+import { body, query } from "express-validator";
+
+export const getTripsValidator = [
+  query("limit")
+    .optional()
+    .isInt({ min: 1, max: 100 })
+    .withMessage("limit deve essere un numero intero tra 1 e 100")
+    .toInt(),
+];
 
 export const createTripValidator = [
   body("title").notEmpty().withMessage("Il titolo è richiesto"),
@@ -47,7 +55,7 @@ export const updateTripValidator = [
     .notEmpty()
     .isNumeric()
     .withMessage("La velocità inserita non è valida"),
-    body("maxAlt")
+  body("maxAlt")
     .notEmpty()
     .isNumeric()
     .withMessage("L'altitudine inserita non è valida"),

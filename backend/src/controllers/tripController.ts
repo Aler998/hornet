@@ -19,7 +19,10 @@ export const getAllTrips = async (
 ): Promise<void> => {
   try {
     const userId = req.user!.id;
-    const trips = await Trip.find({ user: userId }).sort({ createdAt: -1 });
+    const limit = req.query.limit as unknown as number | undefined;
+    const trips = await Trip.find({ user: userId })
+      .sort({ createdAt: -1 })
+      .limit(limit ? limit : 1000);
     res.json(trips);
   } catch (err) {
     console.error(err);

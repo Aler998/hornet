@@ -1,14 +1,14 @@
 import React, { Dispatch, ReactNode } from "react";
 import Loader from "../Loader/Loader";
-import { NavItem } from "../../utils/types";
+import { TabItem } from "../../utils/types";
 import * as motion from "motion/react-client";
 import { AnimatePresence } from "motion/react";
 
 interface LayoutProps {
   title: string;
-  tabs: NavItem[];
-  selectedTab: NavItem;
-  setSelectedTab: Dispatch<React.SetStateAction<NavItem>>;
+  tabs: TabItem[];
+  selectedTab: TabItem;
+  setSelectedTab: Dispatch<React.SetStateAction<TabItem>>;
   isLoading?: boolean;
   children: ReactNode;
 }

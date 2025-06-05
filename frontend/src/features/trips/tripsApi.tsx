@@ -10,8 +10,8 @@ export const tripsApi = createApi({
   }),
   tagTypes: ["Trips"],
   endpoints: (builder) => ({
-    getTrips: builder.query<Trip[], void>({
-      query: () => "trips",
+    getTrips: builder.query<Trip[], { limit?: number }>({
+      query: ({ limit = 100 }) => `trips?limit=${limit}`,
       providesTags: ["Trips"],
     }),
     getTrip: builder.query<Trip, string>({
