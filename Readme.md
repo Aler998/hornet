@@ -101,6 +101,7 @@ make dev
 - [ ] aggiungere nome applicazione nell'env
 - [X] nella dashboard la lista degli ultimi viaggi se sono tanti è infinita
 - [X] trip slug legato all'utente
+- [ ] gestire paginazione dei viaggi
 - [ ] sezione le mie moto
 - [ ] consumi delle mie moto
 - [ ] immagine profilo e copertina
