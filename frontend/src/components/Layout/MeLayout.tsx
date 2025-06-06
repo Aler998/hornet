@@ -2,15 +2,18 @@ import { ReactNode, useState } from "react";
 import Menu from "../Menu/Menu";
 import MobileMenu from "../Menu/MobileMenu";
 import Loader from "../Loader/Loader";
+import { User } from "../../features/auth/types";
 
 function MeLayout({
   title,
   children,
   isLoading = false,
+  me,
 }: {
   title: string;
   children: ReactNode;
   isLoading: boolean;
+  me: User | undefined;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +25,7 @@ function MeLayout({
 
       <div className="relative w-full min-w-screen min-h-screen sm:pt-8">
         <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} />
-        <Menu isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Menu me={me} isOpen={isOpen} setIsOpen={setIsOpen} />
         <div className="max-w-5xl mx-auto px-4 sm:px-0">{children}</div>
       </div>
     </>

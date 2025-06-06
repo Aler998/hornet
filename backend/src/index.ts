@@ -16,6 +16,7 @@ import { generateCsrfToken } from "./middleware/csrf-token";
 import todosRoutes from "./routes/todos";
 import cron from "node-cron";
 import { checkAndFetchFile } from "./services/FetchCostoBenzina";
+import usersRoutes from "./routes/user";
 
 cron.schedule("1 1 * * *", () => {
   try {
@@ -28,7 +29,7 @@ cron.schedule("1 1 * * *", () => {
 const app = express();
 
 const RateLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 500 * 60 * 1000, // 500 minutes
   max: 100, // max 100 requests per windowMs
 });
 
@@ -65,6 +66,7 @@ if (process.env.NODE_ENV == "production") {
   app.use("/trips", tripRoutes);
   app.use("/categories", categoriesRoutes);
   app.use("/todos", todosRoutes);
+  app.use("/user", usersRoutes);
   app.get("/csrf-token", getCsrfTokenRoute);
 } else {
   app.use(`/api`, apiRouter);

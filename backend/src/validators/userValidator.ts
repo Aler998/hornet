@@ -1,6 +1,7 @@
 import { body } from "express-validator";
 
-export const createUpdateUserValidator = [
-  body("email").isString().notEmpty().withMessage("Email è richiesto"),
-  body("password").isString().withMessage("La password è richiesta"),
+export const updateUserValidator = [
+  body("username").isString().notEmpty().withMessage("Username è richiesto"),
+  body("name").isString().notEmpty().withMessage("Il Nome è richiesto"),
+  body("email").isEmail().notEmpty().withMessage("L'Email' è richiesta"),
 ];

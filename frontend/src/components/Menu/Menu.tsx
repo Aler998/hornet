@@ -5,13 +5,16 @@ import DesktopMenu from "./DesktopMenu";
 import * as motion from "motion/react-client";
 import { Dispatch } from "react";
 import { CgMenuRight } from "react-icons/cg";
+import { User } from "../../features/auth/types";
 
 function Menu({
   setIsOpen,
   isOpen,
+  me,
 }: {
   setIsOpen: Dispatch<React.SetStateAction<boolean>>;
   isOpen: boolean;
+  me: User | undefined;
 }) {
   const navigate = useNavigate();
   const buttonVariant = {
@@ -47,19 +50,30 @@ function Menu({
         variants={buttonVariant}
         className="absolute right-4 sm:hidden"
       >
-        <button onClick={() => setIsOpen(true)} className="cursor-pointer bg-transparent border-none">
-          <CgMenuRight  className="w-8 h-8 text-white"/>
+        <button
+          onClick={() => setIsOpen(true)}
+          className="cursor-pointer bg-transparent border-none"
+        >
+          <CgMenuRight className="w-8 h-8 text-white" />
         </button>
       </motion.div>
       <img
-        src="https://picsum.photos/1200/300?grayscale"
-        className="w-full h-44 sm:h-72 object-cover"
+        src={
+          me?.cover
+            ? `${import.meta.env.VITE_ASSETS_URL}${me.cover}`
+            : "https://picsum.photos/1200/300?grayscale"
+        }
+        className="w-full h-60 sm:h-72 object-cover"
       />
       <DesktopMenu />
-      <div className="absolute top-4 sm:top-auto left-1/2 flex flex-col items-center sm:absolute sm:bottom-0 left-1/2 -translate-x-1/2 sm:pb-4">
+      <div className="absolute top-1/2 sm:top-auto left-1/2 -translate-y-1/2 flex flex-col items-center sm:absolute sm:top-auto sm:translate-y-0 sm:bottom-0 left-1/2 -translate-x-1/2 sm:pb-4">
         <img
-          className="w-28 h-28 sm:w-32 sm:h-32 rounded-full border-solid border-white border-4"
-          src="https://picsum.photos/200"
+          className="w-28 h-28 sm:w-32 sm:h-32 rounded-full border-solid border-white border-4 object-cover"
+          src={
+            me?.profile
+              ? `${import.meta.env.VITE_ASSETS_URL}${me.profile}`
+              : "https://picsum.photos/200"
+          }
         />
         <h4 className="text-center text-xl mb-4 sm:mb-0 text-white sm:text-gray-900">
           gattopio

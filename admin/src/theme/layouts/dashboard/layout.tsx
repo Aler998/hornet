@@ -82,7 +82,7 @@ export function DashboardLayout({
           }}
         >
           {/** @slot Account drawer */}
-          <AccountPopover data={_account} />
+          <AccountPopover me={me} data={_account} />
         </Box>
       ),
     };

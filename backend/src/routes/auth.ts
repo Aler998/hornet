@@ -13,9 +13,9 @@ const authRoutes: Router = express.Router();
 authRoutes.post("/login", async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
-  const user = await User.findOne({ username: { $eq: username } });
+  const user = await User.findOne({ username: { $eq: username } }).select("+password");
   if (user) {
-    if (compareSync(password, user.password)) {      
+    if (compareSync(password, user.password)) {
       const token = jwt.sign(
         { id: user.id, isAdmin: user.isAdmin },
         process.env.JWT_SECRET as string,
@@ -42,8 +42,13 @@ authRoutes.post("/login", async (req: Request, res: Response) => {
   return;
 });
 
-authRoutes.get("/me", authMiddleware, (req: Request, res: Response) => {
-  res.json({ id: req.user?.id, isAdmin: req.user?.isAdmin });
+authRoutes.get("/me", authMiddleware, async (req: Request, res: Response) => {
+  const userDecoded = req.user;
+  if (!userDecoded) {
+    return;
+  }
+  const user = await User.find({ _id: { $eq: userDecoded.id } });
+  res.json(user);
   return;
 });
 

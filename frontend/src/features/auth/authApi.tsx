@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { User } from "./types";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -7,8 +8,9 @@ export const authApi = createApi({
     credentials: "include", // Necessario per usare i cookie
   }),
   endpoints: (builder) => ({
-    getMe: builder.query<string, void>({
+    getMe: builder.query<User, void>({
       query: () => "auth/me",
+      transformResponse: (response: User[]) => response[0],
     }),
   }),
 });
