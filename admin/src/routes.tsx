@@ -28,6 +28,7 @@ export const TripsShowPage = lazy(() => import("./pages/trips/Show"));
 export const TripsCreateEditPage = lazy(
   () => import("./pages/trips/CreateEdit")
 );
+export const ProfilePage = lazy(() => import("./pages/profile/Edit"));
 // export const UserPage = lazy(() => import('./pages/user'));
 export const SignInPage = lazy(() => import("./pages/Login"));
 // export const ProductsPage = lazy(() => import('./pages/products'));
@@ -130,6 +131,16 @@ export const routesSection: RouteObject[] = [
           <SignInPage />
         </AuthLayout>
       </RedirectIfAuthenticated>
+    ),
+  },
+  {
+    path: `${import.meta.env.VITE_SUBFOLDER}/profile`,
+    element: (
+      <RequireAuth>
+        <DashboardLayout>
+          <ProfilePage />
+        </DashboardLayout>
+      </RequireAuth>
     ),
   },
   {

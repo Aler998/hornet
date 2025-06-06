@@ -1,12 +1,27 @@
+import { useNavigate } from "react-router-dom";
 import MeLayout from "../../components/Layout/MeLayout";
 import { useGetTodosQuery } from "../../features/todos/todosApi";
 import { IoMdOpen } from "react-icons/io";
+import { useGetMeQuery } from "../../features/auth/authApi";
+import { useEffect } from "react";
 
 function Todos() {
   const { data, isLoading, isError } = useGetTodosQuery();
+  const { data: me, isLoading: meLoading, isError: meError } = useGetMeQuery();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isError || meError) {
+      navigate("/500");
+    }
+  }, [me, isError, data, meError, navigate]);
 
   return (
-    <MeLayout isLoading={isLoading} title="IlMotoDiario - Da Fare">
+    <MeLayout
+      me={me}
+      isLoading={isLoading || meLoading}
+      title="IlMotoDiario - Da Fare"
+    >
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 w-full h-[calc(100vh-var(--navbar-height))]">
         {!isError && data && data.length > 0 ? (
           data.map((todo, index) => (

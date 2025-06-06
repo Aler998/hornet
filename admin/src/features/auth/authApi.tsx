@@ -38,8 +38,13 @@ export const authApi = createApi({
     }),
     getMe: builder.query<User, void>({
       query: () => "auth/me",
-    }),
+      transformResponse: (response: User[]) => response[0],
+    })
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation, useGetMeQuery } = authApi;
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useGetMeQuery,
+} = authApi;
