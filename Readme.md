@@ -89,12 +89,12 @@ make dev
 - [X] Menù basso sul frontend ( home, heatmap, categorie, statistiche)
 - [X] Meta OG per condivisione
 - [ ] Aggiungere pubblico su trip
-- [ ] landing page utente tra home e viaggi
+- [X] landing page utente tra home e viaggi
 - [ ] sistema di amicizia
 - [X] uniformare gli stili frontend
 - [ ] uniformare stile admin
 - [ ] dark mode
-- [ ] label dei pin nella mappa
+- [X] label dei pin nella mappa
 - [X] alla modifica di un trip vengono sovrascritte le località
 - [ ] pulizia dei componenti e del codice
 - [X] nei todo aggiungere il link del navigatore e la durata a video
@@ -102,7 +102,7 @@ make dev
 - [X] nella dashboard la lista degli ultimi viaggi se sono tanti è infinita
 - [X] trip slug legato all'utente
 - [ ] gestire paginazione dei viaggi
-- [ ] sezione le mie moto
-- [ ] consumi delle mie moto
-- [ ] immagine profilo e copertina
+- [X] sezione le mie moto
+- [X] consumi delle mie moto
+- [X] immagine profilo e copertina
 - [ ] caricamento progressivo trips

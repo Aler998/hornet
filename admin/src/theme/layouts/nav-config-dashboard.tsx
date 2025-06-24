@@ -1,13 +1,9 @@
 import { Label } from "../components/label";
-import { SvgColor } from "../components/svg-color";
-
-// ----------------------------------------------------------------------
-
-const icon = (name: string) => (
-  <SvgColor
-    src={`/${import.meta.env.VITE_SUBFOLDER}/assets/icons/navbar/${name}.svg`}
-  />
-);
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import MapIcon from '@mui/icons-material/Map';
+import CategoryIcon from '@mui/icons-material/Category';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
 
 export type NavItem = {
   title: string;
@@ -20,19 +16,19 @@ export const getNavData = (isAdmin: boolean | undefined) => [
   {
     title: "Dashboard",
     path: import.meta.env.VITE_SUBFOLDER,
-    icon: icon("ic-analytics"),
+    icon: <DashboardIcon />,
   },
   {
     title: "Viaggi",
     path: `${import.meta.env.VITE_SUBFOLDER}/trips`,
-    icon: icon("ic-user"),
+    icon: <MapIcon />,
   },
   ...(isAdmin
     ? [
         {
           title: "Categorie",
           path: `${import.meta.env.VITE_SUBFOLDER}/categories`,
-          icon: icon("ic-lock"),
+          icon: <CategoryIcon />,
           info: (
             <Label color="error" variant="inverted">
               +3
@@ -44,7 +40,17 @@ export const getNavData = (isAdmin: boolean | undefined) => [
   {
     title: "Todo",
     path: `${import.meta.env.VITE_SUBFOLDER}/todos`,
-    icon: icon("ic-blog"),
+    icon: <FormatListBulletedIcon />,
+    info: (
+      <Label color="error" variant="inverted">
+        +3
+      </Label>
+    ),
+  },
+  {
+    title: "Le Mie Moto",
+    path: `${import.meta.env.VITE_SUBFOLDER}/motos`,
+    icon: <TwoWheelerIcon />,
     info: (
       <Label color="error" variant="inverted">
         +3

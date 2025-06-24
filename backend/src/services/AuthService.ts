@@ -4,7 +4,8 @@ import fs from "fs";
 export const moveImage = (
   userId: string,
   file: Express.Multer.File,
-  currentPath?: string
+  currentPath?: string,
+  concatPath?: string
 ) => {
   if (currentPath) {
     console.log(currentPath);
@@ -20,7 +21,8 @@ export const moveImage = (
     "..",
     "..",
     "uploads",
-    userId.toString()
+    userId.toString(),
+    concatPath ? concatPath : ""
   );
   fs.mkdirSync(finalPath, { recursive: true });
   const ext = path.extname(file.originalname);
@@ -32,5 +34,5 @@ export const moveImage = (
 
   fs.renameSync(file.path, destPath);
 
-  return `/uploads/${userId.toString()}/${finalName}`;
+  return concatPath ? `/uploads/${userId.toString()}/${concatPath}/${finalName}` : `/uploads/${userId.toString()}/${finalName}`;
 };
