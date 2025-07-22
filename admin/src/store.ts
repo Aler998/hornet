@@ -4,6 +4,7 @@ import { tripsApi } from "./features/trips/tripsApi";
 import { categoriesApi } from "./features/categories/categoriesApi";
 import { todosApi } from "./features/todos/todosApi";
 import { userApi } from "./features/auth/userApi";
+import { motosApi } from "./features/motos/motosApi";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     [tripsApi.reducerPath]: tripsApi.reducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,
     [todosApi.reducerPath]: todosApi.reducer,
+    [motosApi.reducerPath]: motosApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -19,6 +21,7 @@ export const store = configureStore({
       .concat(userApi.middleware)
       .concat(tripsApi.middleware)
       .concat(todosApi.middleware)
+      .concat(motosApi.middleware)
       .concat(categoriesApi.middleware),
 });
 

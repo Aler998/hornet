@@ -27,6 +27,7 @@ const buildFormData = (trip: CreateTripDto | UpdateTripDto): FormData => {
   });
 
   formData.append("category", trip.category);
+  formData.append("moto", trip.moto);
   formData.append("slug", trip.slug);
   formData.append("title", trip.title);
   if (trip.start) {

@@ -17,6 +17,7 @@ import todosRoutes from "./routes/todos";
 import cron from "node-cron";
 import { checkAndFetchFile } from "./services/FetchCostoBenzina";
 import usersRoutes from "./routes/user";
+import motosRoutes from "./routes/motos";
 
 cron.schedule("1 1 * * *", () => {
   try {
@@ -66,6 +67,7 @@ if (process.env.NODE_ENV == "production") {
   app.use("/trips", tripRoutes);
   app.use("/categories", categoriesRoutes);
   app.use("/todos", todosRoutes);
+  app.use("/moto", motosRoutes);
   app.use("/user", usersRoutes);
   app.get("/csrf-token", getCsrfTokenRoute);
 } else {
