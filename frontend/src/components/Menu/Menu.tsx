@@ -6,6 +6,7 @@ import * as motion from "motion/react-client";
 import { Dispatch } from "react";
 import { CgMenuRight } from "react-icons/cg";
 import { User } from "../../features/auth/types";
+import { Variants, Variant, cubicBezier } from "framer-motion";
 
 function Menu({
   setIsOpen,
@@ -17,23 +18,23 @@ function Menu({
   me: User | undefined;
 }) {
   const navigate = useNavigate();
-  const buttonVariant = {
+  const buttonVariant : Variants = {
     opened: {
-      top: -100,
+      top: "-100",
       transition: {
         delay: 0.15,
         duration: 1.1,
-        ease: [0.74, 0, 0.19, 1.02],
+        ease: cubicBezier(0.25, 0.1, 0.25, 1),
       },
-    },
+    } as Variant,
     closed: {
       top: "1rem",
       transition: {
         delay: 0.15,
         duration: 1.1,
-        ease: [0.74, 0, 0.19, 1.02],
+        ease: cubicBezier(0.25, 0.1, 0.25, 1),
       },
-    },
+    } as Variant,
   };
 
   return (

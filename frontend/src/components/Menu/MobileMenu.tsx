@@ -1,4 +1,4 @@
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence, Variants, Variant, cubicBezier, easeOut, easeInOut } from "motion/react";
 import * as motion from "motion/react-client";
 import { Link } from "react-router-dom";
 import { navItems } from "./NavItems";
@@ -14,56 +14,56 @@ function MobileMenu({
   isOpen: boolean;
   setIsOpen: Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const mobileMenuVariant = {
+  const mobileMenuVariant : Variants = {
     opened: {
       y: "0%",
       transition: {
         delay: 0.15,
         duration: 1.1,
-        ease: [0.74, 0, 0.19, 1.02],
+        ease: cubicBezier(0.74, 0, 0.19, 1.02),
       },
-    },
+    } as Variant,
     closed: {
       y: "-100%",
       transition: {
         delay: 0.35,
         duration: 0.63,
-        ease: [0.74, 0, 0.19, 1.02],
+        ease: cubicBezier(0.74, 0, 0.19, 1.02),
       },
-    },
+    } as Variant,
   };
-  const ulVariant = {
+  const ulVariant : Variants = {
     opened: {
       transition: {
         delayChildren: 1,
         staggerChildren: 0.18,
       },
-    },
+    } as Variant,
     closed: {
       transition: {
         staggerChildren: 0.06,
         staggerDirection: -1,
       },
-    },
+    } as Variant,
   };
 
-  const liVariant = {
+  const liVariant : Variants = {
     opened: {
       opacity: 1,
       y: "0%",
       transition: {
         duration: 0.65,
-        ease: "easeOut",
+        ease: easeOut,
       },
-    },
+    } as Variant,
     closed: {
       opacity: 0,
       y: "100%",
       transition: {
         duration: 0.25,
-        ease: "easeInOut",
+        ease: easeInOut,
       },
-    },
+    } as Variant,
   };
 
   return (
