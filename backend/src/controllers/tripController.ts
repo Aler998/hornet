@@ -10,8 +10,9 @@ import {
 } from "../services/TripService";
 import { NotFoundError } from "../errors/NotFoundError";
 import { getCurrentBenzinaPrice } from "../services/FetchCostoBenzina";
+import Moto from "../models/Moto";
 
-const CONSUMO_MOTO = 28.6;
+const CONSUMO_MOTO_DEFAULT = 25;
 
 export const getAllTrips = async (
   req: Request,
@@ -67,6 +68,11 @@ export const createTrip = async (
       return;
     }
 
+    const moto = await Moto.findOne({
+      _id: { $eq: req.body.moto },
+      user: { $eq: req.user?.id },
+    });    
+
     const trip = new Trip({
       title: req.body.title,
       slug: req.body.slug,
@@ -76,13 +82,14 @@ export const createTrip = async (
       km: req.body.km,
       velocity: req.body.velocity,
       maxAlt: req.body.maxAlt,
-      liters: req.body.km / CONSUMO_MOTO,
-      cost: (req.body.km / CONSUMO_MOTO) * (await getCurrentBenzinaPrice()),
+      liters: req.body.km / (moto ? parseFloat(moto.consumo) : CONSUMO_MOTO_DEFAULT),
+      cost: (req.body.km / (moto ? parseFloat(moto.consumo) : CONSUMO_MOTO_DEFAULT)) * (await getCurrentBenzinaPrice()),
       start: req.body.start,
       end: req.body.end,
       category: req.body.category,
       places: req.body.places,
       user: req.user?.id,
+      moto: req.body.moto
     });
 
     const files = req.files as {
@@ -136,10 +143,15 @@ export const updateTrip = async (
       trip.slug = req.body.newSlug;
     }
 
+    const moto = await Moto.findOne({
+      _id: { $eq: req.body.moto },
+      user: { $eq: req.user?.id },
+    });    
+
     if (trip.km != req.body.km) {
-      trip.liters = (req.body.km / CONSUMO_MOTO).toString();
+      trip.liters = (req.body.km / (moto ? parseFloat(moto.consumo) : CONSUMO_MOTO_DEFAULT)).toString();
       trip.cost = (
-        (req.body.km / CONSUMO_MOTO) *
+        (req.body.km / (moto ? parseFloat(moto.consumo) : CONSUMO_MOTO_DEFAULT)) *
         (await getCurrentBenzinaPrice())
       ).toString();
     }
@@ -154,6 +166,7 @@ export const updateTrip = async (
     trip.velocity = req.body.velocity;
     trip.maxAlt = req.body.maxAlt;
     trip.category = req.body.category;
+    trip.moto = req.body.moto;
     trip.places = req.body.places;
 
     const files = req.files as {

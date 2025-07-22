@@ -28,6 +28,7 @@ export const TripsShowPage = lazy(() => import("./pages/trips/Show"));
 export const TripsCreateEditPage = lazy(
   () => import("./pages/trips/CreateEdit")
 );
+export const MotosPage = lazy(() => import("./pages/motos/Index"));
 export const MotosCreateEditPage = lazy(
   () => import("./pages/motos/CreateEdit")
 );
@@ -96,6 +97,10 @@ export const routesSection: RouteObject[] = [
       {
         path: `${import.meta.env.VITE_SUBFOLDER}/trips/:slug/edit`,
         element: <TripsCreateEditPage />,
+      },
+      {
+        path: `${import.meta.env.VITE_SUBFOLDER}/motos`,
+        element: <MotosPage />,
       },
       {
         path: `${import.meta.env.VITE_SUBFOLDER}/moto/create`,

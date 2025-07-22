@@ -13,6 +13,7 @@ export interface Trip {
   time: string;
   start: Dayjs;
   end: Dayjs;
+  moto: string;
   category: string;
   images: UploadedFile[];
   tracks: UploadedFile[];
@@ -31,6 +32,7 @@ export interface CreateTripDto {
   time: string;
   start: Dayjs;
   end: Dayjs;
+  moto: string;
   category: string;
   images: File[] | null;
   tracks: File[] | null;

@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import {
   useCreateMotoMutation,
+  useDeleteMotoMutation,
   useGetMotoQuery,
   useUpdateMotoMutation,
 } from "../../features/motos/motosApi";
@@ -21,13 +22,13 @@ import Swal from "sweetalert2";
 import { APIError } from "../../utils/interfaces/ApiError";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { VisuallyHiddenInput } from "../../utils/visually-hidden-input";
-import { errorSwalOptions } from "../../utils/swal-options";
+import { deleteSwalOptions, errorSwalOptions } from "../../utils/swal-options";
 
 export default function CreateEdit() {
   const { _id } = useParams<{ _id: string }>();
   const isEdit = _id ? true : false;
-  console.log(isEdit);
-  
+  const [deleteMoto, { isSuccess: isDeleted }] = useDeleteMotoMutation();
+
   const {
     data: existingMoto,
     isError,
@@ -46,7 +47,6 @@ export default function CreateEdit() {
   });
 
   useEffect(() => {
-    
     if (existingMoto) {
       setForm({
         name: existingMoto.name,
@@ -58,10 +58,20 @@ export default function CreateEdit() {
   }, [existingMoto]);
 
   useEffect(() => {
-    if (isError && error && "status" in error && error.status === 404) {
+    if (
+      !isDeleted &&
+      isError &&
+      error &&
+      "status" in error &&
+      error.status === 404
+    ) {
       navigate(`/${import.meta.env.VITE_SUBFOLDER}/404`);
     }
-  }, [isError, error, navigate]);
+
+    if (isDeleted) {
+      navigate(`/${import.meta.env.VITE_SUBFOLDER}/motos`);
+    }
+  }, [isError, error, isDeleted, navigate]);
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -88,18 +98,18 @@ export default function CreateEdit() {
           name: form.name,
           segment: form.segment,
           consumo: form.consumo,
-          image: form.image
+          image: form.image,
         }).unwrap();
         Swal.fire({
           icon: "success",
-          title: "Categoria Modificata",
+          title: "Moto Modificata",
           text: `La moto ${existingMoto.name} è stata modificata`,
         });
       } else {
         await createMoto(form).unwrap();
         Swal.fire({
           icon: "success",
-          title: "Nuova Categoria",
+          title: "Nuova Moto",
           text: "Nuova moto creata",
         });
       }
@@ -115,6 +125,14 @@ export default function CreateEdit() {
       }
     }
   };
+
+  function confirmDelete(id: string): void {
+    Swal.fire(deleteSwalOptions).then((result) => {
+      if (result.isConfirmed) {
+        deleteMoto(id);
+      }
+    });
+  }
 
   return (
     <>
@@ -216,10 +234,29 @@ export default function CreateEdit() {
                 </Button>
               </Stack>
             </Grid>
-            <Grid>
-              <Button color="inherit" variant="contained" type="submit">
-                {isEdit ? "Salva Modifiche" : "Crea Categoria"}
-              </Button>
+            <Grid size={12}>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                marginBottom={2}
+              >
+                <Button color="inherit" variant="contained" type="submit">
+                  {isEdit ? "Salva Modifiche" : "Crea Moto"}
+                </Button>
+                {isEdit && existingMoto ? (
+                  <Button
+                    onClick={() => confirmDelete(existingMoto._id)}
+                    color="error"
+                    variant="contained"
+                    type="button"
+                  >
+                    Elimina Moto
+                  </Button>
+                ) : (
+                  ""
+                )}
+              </Box>
             </Grid>
           </Grid>
         </form>

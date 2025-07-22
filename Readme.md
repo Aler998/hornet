@@ -106,3 +106,4 @@ make dev
 - [X] consumi delle mie moto
 - [X] immagine profilo e copertina
 - [ ] caricamento progressivo trips
+- [ ] amici trovabili solo tramite id/link

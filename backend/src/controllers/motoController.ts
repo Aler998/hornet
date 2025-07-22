@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import Moto, { IMoto } from "../models/Moto";
 import { moveImage } from "../services/AuthService";
+import path from "path";
+import fs from "fs";
 
 export const getAllMotos = async (
   req: Request,
@@ -53,7 +55,6 @@ export const createMoto = async (
 
   try {
     const file = req.file;
-    console.log(file);
 
     const moto: IMoto = new Moto({
       ...req.body,
@@ -82,9 +83,6 @@ export const updateMoto = async (
 
     const file = req.file;
 
-    console.log(file);
-    
-
     const moto = await Moto.findOne({
       _id: { $eq: _id },
       user: { $eq: userId },
@@ -93,7 +91,9 @@ export const updateMoto = async (
     const updatedMoto: IMoto | null = await moto?.updateOne({
       $set: {
         ...req.body,
-        image: file ? moveImage(userId, file, moto.image ? moto.image : undefined, "moto") : moto.image,
+        image: file
+          ? moveImage(userId, file, moto.image ? moto.image : undefined, "moto")
+          : moto.image,
       },
     });
 
@@ -122,14 +122,35 @@ export const deleteMoto = async (
   try {
     const userId = req.user!.id;
     const { _id } = req.params;
-    const deletedMoto: IMoto | null = await Moto.findOneAndDelete({
+
+    const moto = await Moto.findOne({
       _id: { $eq: _id },
       user: { $eq: userId },
     });
 
-    if (!deletedMoto) {
+    if (!moto) {
       res.status(404).json({ error: "Moto not found" });
     }
+
+    if (moto?.image) {
+      const filePath = path.join(__dirname, "..", "..", moto.image);
+
+      if (!fs.existsSync(filePath)) {
+        res.status(404).json({ message: "Immagine non trovata" });
+        return;
+      }
+
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          return res.status(500).json({
+            message: "Errore nell'eliminazione dell'immagine",
+            error: err,
+          });
+        }
+      });
+    }
+
+    await moto?.deleteOne()
 
     res.status(204).send();
   } catch (err) {

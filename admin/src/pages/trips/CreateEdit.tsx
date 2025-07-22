@@ -31,10 +31,12 @@ import ImageUpload from "../../components/form/ImageUpload";
 import GPXUpload from "../../components/form/GPXUpload";
 import CityInput from "../../components/form/CityInput";
 import Loader from "../../components/Loader";
+import { useGetMotosQuery } from "../../features/motos/motosApi";
 
 export default function CreateEdit() {
   const { slug } = useParams<{ slug: string }>();
   const { data: categories, isLoading, error } = useGetCategoriesQuery();
+  const { data: motos, isLoading: getMotoLoading, error: getMotoError } = useGetMotosQuery();
 
   const isEdit = slug ? true : false;
   const {
@@ -55,6 +57,7 @@ export default function CreateEdit() {
     maxAlt: 0,
     slug: "",
     time: "",
+    moto: "",
     category: "",
     start: dayjs(),
     end: dayjs(),
@@ -74,6 +77,7 @@ export default function CreateEdit() {
         maxAlt: existingTrip.maxAlt ?? 10,
         slug: existingTrip.slug,
         time: existingTrip.time,
+        moto: existingTrip.moto,
         category: existingTrip.category,
         start: dayjs(existingTrip.start),
         end: dayjs(existingTrip.end),
@@ -230,6 +234,28 @@ export default function CreateEdit() {
                   }
                   renderInput={(params) => (
                     <TextField required {...params} label="Categoria" />
+                  )}
+                />
+                <Autocomplete
+                  disablePortal
+                  fullWidth
+                  disabled={getMotoLoading || Boolean(getMotoError)}
+                  options={motos ? motos : []}
+                  getOptionLabel={(option) => option.name}
+                  value={
+                    motos?.find((moto) => moto._id === form.moto) || null
+                  }
+                  onChange={(_event, newValue) => {
+                    setForm({
+                      ...form,
+                      moto: newValue ? newValue._id : "",
+                    });
+                  }}
+                  isOptionEqualToValue={(option, value) =>
+                    option._id === value._id
+                  }
+                  renderInput={(params) => (
+                    <TextField {...params} label="Moto Utilizzata" />
                   )}
                 />
                 <CityInput

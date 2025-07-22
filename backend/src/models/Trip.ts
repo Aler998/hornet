@@ -68,6 +68,7 @@ interface ITrip extends Document {
   time?: string;
   start: Date;
   end: Date;
+  moto: mongoose.Types.ObjectId;
   category: mongoose.Types.ObjectId;
   user: mongoose.Types.ObjectId;
   images: ImageUploaded[];
@@ -101,6 +102,11 @@ const tripSchema = new Schema<ITrip, TripModel, ITripMethods>(
     time: { type: Number, required: true },
     start: { type: Date, required: true },
     end: { type: Date, required: true },
+    moto: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Moto",
+      required: false,
+    },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",

@@ -26,7 +26,7 @@ export const motosApi = createApi({
         return {
           url: "moto",
           method: "POST",
-          body: moto,
+          body: formData,
         };
       },
       invalidatesTags: ["Motos"],
