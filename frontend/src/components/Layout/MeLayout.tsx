@@ -26,7 +26,14 @@ function MeLayout({
       <div className="relative w-full min-w-screen min-h-screen sm:pt-8">
         <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} />
         <Menu me={me} isOpen={isOpen} setIsOpen={setIsOpen} />
-        <div className="max-w-5xl mx-auto px-4 sm:px-0">{children}</div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-0">
+          <img
+            src="/images/casco.png"
+            className="w-5/6 md:w-[600px] -z-10 fixed -right-8 top-1/2 -translate-y-1/2"
+            alt="casco colorato"
+          />
+          {children}
+        </div>
       </div>
     </>
   );

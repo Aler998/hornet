@@ -10,7 +10,8 @@ import {
 } from "../services/TripService";
 import { NotFoundError } from "../errors/NotFoundError";
 import { getCurrentBenzinaPrice } from "../services/FetchCostoBenzina";
-import Moto from "../models/Moto";
+import Moto, { IMoto } from "../models/Moto";
+import mongoose from "mongoose";
 
 const CONSUMO_MOTO_DEFAULT = 25;
 
@@ -68,10 +69,17 @@ export const createTrip = async (
       return;
     }
 
-    const moto = await Moto.findOne({
-      _id: { $eq: req.body.moto },
-      user: { $eq: req.user?.id },
-    });    
+    let moto;
+
+    if (mongoose.Types.ObjectId.isValid(req.body.moto))
+    {
+      moto = await Moto.findOne({
+        _id: { $eq: req.body.moto },
+        user: { $eq: req.user?.id },
+      });    
+    } else {
+      moto = undefined
+    }
 
     const trip = new Trip({
       title: req.body.title,
@@ -89,7 +97,7 @@ export const createTrip = async (
       category: req.body.category,
       places: req.body.places,
       user: req.user?.id,
-      moto: req.body.moto
+      moto: moto?._id ?? null
     });
 
     const files = req.files as {
@@ -143,10 +151,10 @@ export const updateTrip = async (
       trip.slug = req.body.newSlug;
     }
 
-    const moto = await Moto.findOne({
-      _id: { $eq: req.body.moto },
-      user: { $eq: req.user?.id },
-    });    
+      const moto : IMoto | null = mongoose.Types.ObjectId.isValid(req.body.moto) ? await Moto.findOne({
+        _id: { $eq: req.body.moto },
+        user: { $eq: req.user?.id },
+      }) : null;    
 
     if (trip.km != req.body.km) {
       trip.liters = (req.body.km / (moto ? parseFloat(moto.consumo) : CONSUMO_MOTO_DEFAULT)).toString();
@@ -166,7 +174,7 @@ export const updateTrip = async (
     trip.velocity = req.body.velocity;
     trip.maxAlt = req.body.maxAlt;
     trip.category = req.body.category;
-    trip.moto = req.body.moto;
+    trip.moto = moto?._id ?? null;
     trip.places = req.body.places;
 
     const files = req.files as {

@@ -22,6 +22,7 @@ interface IMoto extends Document {
   consumo: string;
   km?: string;
   user: Schema.Types.ObjectId;
+  _id: mongoose.Types.ObjectId;
 }
 
 const motoSchema = new Schema<IMoto>(

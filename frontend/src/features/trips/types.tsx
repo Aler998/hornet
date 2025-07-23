@@ -14,6 +14,7 @@ export interface Trip {
   slug: string;
   start: Dayjs | null;
   end: Dayjs | null;
+  createdAt: Dayjs;
   category: string;
   images: UploadedImage[];
   tracks: UploadedFile[];

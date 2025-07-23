@@ -31,7 +31,7 @@ const app = express();
 
 const RateLimiter = rateLimit({
   windowMs: 500 * 60 * 1000, // 500 minutes
-  max: 100, // max 100 requests per windowMs
+  max: 600, // max 100 requests per windowMs
 });
 
 app.use(RateLimiter);
