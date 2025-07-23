@@ -16,6 +16,7 @@ export default defineConfig({
         ],
         navigateFallback: "/index.html",
         navigateFallbackDenylist: [/^\/admin/],
+        maximumFileSizeToCacheInBytes: 5 * 1024 ** 2,
         runtimeCaching: [
           {
             urlPattern: /\/api\//,
