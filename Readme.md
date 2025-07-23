@@ -107,3 +107,4 @@ make dev
 - [X] immagine profilo e copertina
 - [ ] caricamento progressivo trips
 - [ ] amici trovabili solo tramite id/link
+- [ ] aggiungere in homepage me gli ultimi viaggi degli amici
